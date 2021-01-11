@@ -1,0 +1,130 @@
+<html><head></head><body><h2>The Maldito Algorithm II (MDA 2).</h2>
+<br>
+<h3>Description:</h3>
+Upset that the Maldito Algorithm had frustrated him so long, the famous
+cryptographer could barely<br />
+contain his glee when he finally coded a terribly elegant solution. It was
+with great joy that he
+mocked the amateur and accused him of labelling him a lucky monkey. After
+some thought the amateur
+proposed a simple change to the algorithm as shown below.<br />
+Do you think that this change made the algorithm any more secure.<br />
+Lets see how you can get on with the new one .
+<h3>Examples - Shamelessly stolen from KPTA2 (again, with many thanks to <a href="http://www.bright-shadows.net/userstats.php?username=Phas">Phas</a>):</h3>
+<h4>Text #1:</h4>
+&nbsp;&nbsp;<i>The orbits of the planets are ellipses, with the Sun at one focus of the ellipse.</i><br>
+<h5>Encrypted Text #1:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | 74 0e 11 54 0a 17 12 08 15 16 45 1c 15 41 11 0d  |  t..T......E..A..  |
+  | 09 4c 00 09 4d 42 12 03 07 54 41 52 0d 48 45 4c  |  .L..MB...TAR.HEL  |
+  | 19 49 50 07 11 07 58 4f 12 0c 11 0e 43 07 07 45  |  .IP...XO....C..E  |
+  | 00 3b 1d 06 00 0d 18 49 1c 1d 00 4e 03 1b 06 1b  |  .;.....I...N....  |
+  | 12 4c 0e 0a 41 1a 0d 11 45 11 09 18 1a 04 00 11  |  .L..A...E.......  |
+  | 4b                                               |  K                 |
+  ·--------------------------------------------------·--------------------·</pre>
+<h5>Decrypted Text #1:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | 54 68 65 20 6f 72 62 69 74 73 20 6f 66 20 74 68  |  The orbits of th  |
+  | 65 20 70 6c 61 6e 65 74 73 20 61 72 65 20 65 6c  |  e planets are el  |
+  | 6c 69 70 73 65 73 2c 20 77 69 74 68 20 74 68 65  |  lipses, with the  |
+  | 20 53 75 6e 20 61 74 20 6f 6e 65 20 66 6f 63 75  |   Sun at one focu  |
+  | 73 20 6f 66 20 74 68 65 20 65 6c 6c 69 70 73 65  |  s of the ellipse  |
+  | 2e                                               |  .                 |
+  ·--------------------------------------------------·--------------------·</pre>
+<h4>Text #2:</h4>
+&nbsp;&nbsp;<i>The line joining the planet to the Sun sweeps out equal areas in equal times as the planet travels around the ellipse.</i><br>
+<h5>Encrypted Text #2:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | 3b 06 0b 4e 4c 01 06 45 00 06 01 07 00 1d 1a 13  |  ;..NL..E........  |
+  | 54 54 00 45 00 05 4c 16 19 00 11 53 1b 1b 54 11  |  TT.E..L....S..T.  |
+  | 1d 09 4c 32 14 0f 45 00 04 16 16 03 1a 49 4f 55  |  ..L2..E......IOU  |
+  | 54 51 04 10 14 00 0d 00 08 1b 00 04 16 45 49 4e  |  TQ...........EIN  |
+  | 53 11 05 01 15 18 45 04 08 0c 04 12 41 04 16 45  |  S.....E.....A..E  |
+  | 54 1a 13 56 1c 4c 13 1c 10 01 44 00 17 04 13 09  |  T..V.L....D.....  |
+  | 00 03 50 04 17 1b 55 09 44 54 1c 0d 45 45 45 09  |  ..P...U.DT..EEE.  |
+  | 4c 19 50 03 45 4b                                |  L.P.EK            |
+  ·--------------------------------------------------·--------------------·
+</pre>
+<h5>Decrypted Text #2:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | 54 68 65 20 6c 69 6e 65 20 6a 6f 69 6e 69 6e 67  |  The line joining  |
+  | 20 74 68 65 20 70 6c 61 6e 65 74 20 74 6f 20 74  |   the planet to t  |
+  | 68 65 20 53 75 6e 20 73 77 65 65 70 73 20 6f 75  |  he Sun sweeps ou  |
+  | 74 20 65 71 75 61 6c 20 61 72 65 61 73 20 69 6e  |  t equal areas in  |
+  | 20 65 71 75 61 6c 20 74 69 6d 65 73 20 61 73 20  |   equal times as   |
+  | 74 68 65 20 70 6c 61 6e 65 74 20 74 72 61 76 65  |  the planet trave  |
+  | 6c 73 20 61 72 6f 75 6e 64 20 74 68 65 20 65 6c  |  ls around the el  |
+  | 6c 69 70 73 65 2e                                |  lipse.            |
+  ·--------------------------------------------------·--------------------·</pre>
+<h4>Text #3:</h4>
+&nbsp;&nbsp;<i>The ratio of the squares of the
+revolutionary periods for two planets is equal to the ratio of the
+cubes of their semimajor axes.</i><br>
+<h5>Encrypted Text #3:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | 3b 48 0d 48 52 10 05 08 0e 41 0a 03 00 12 1c 00  |  ;H.HR....A......  |
+  | 45 01 03 07 13 00 13 05 56 03 0a 54 1b 09 1c 59  |  E.......V..T...Y  |
+  | 02 17 04 00 03 06 07 0f 09 08 13 00 0d 54 1f 15  |  .............T..  |
+  | 02 08 0e 05 16 45 15 06 1b 00 05 16 0e 41 50 03  |  .....E.......AP.  |
+  | 15 1a 00 11 01 52 1d 07 54 0a 1e 1a 0e 03 4f 54  |  .....R..T.....OT  |
+  | 07 48 54 1d 00 45 52 07 12 1d 1b 54 0a 03 52 07  |  .HT..ER....T..R.  |
+  | 05 08 4d 09 1f 08 17 01 52 0e 07 45 15 1a 00 1b  |  ..M.....R..E....  |
+  | 13 52 16 17 0c 1c 1c 12 4a 1c 52 53 10 0b 14 00  |  .R......J.RS....  |
+  | 0e                                               |  .                 |
+  ·--------------------------------------------------·--------------------·</pre>
+<h5>Decrypted Text #3:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | 54 68 65 20 72 61 74 69 6f 20 6f 66 20 74 68 65  |  The ratio of the  |
+  | 20 73 71 75 61 72 65 73 20 6f 66 20 74 68 65 20  |   squares of the   |
+  | 72 65 76 6f 6c 75 74 69 6f 6e 61 72 79 20 70 65  |  revolutionary pe  |
+  | 72 69 6f 64 73 20 66 6f 72 20 74 77 6f 20 70 6c  |  riods for two pl  |
+  | 61 6e 65 74 73 20 69 73 20 65 71 75 61 6c 20 74  |  anets is equal t  |
+  | 6f 20 74 68 65 20 72 61 74 69 6f 20 6f 66 20 74  |  o the ratio of t  |
+  | 68 65 20 63 75 62 65 73 20 6f 66 20 74 68 65 69  |  he cubes of thei  |
+  | 72 20 73 65 6d 69 6d 61 6a 6f 72 20 61 78 65 73  |  r semimajor axes  |
+  | 2e                                               |  .                 |
+  ·--------------------------------------------------·--------------------·</pre>
+<h3>Challenge:</h3>
+<h4>Decrypt this:</h4>
+<pre>  ·--------------------------------------------------·--------------------·
+  | 37 15 18 0a 1c 05 41 54 41 04 20 55 1d 07 54 41  |  7.....ATA. U..TA  |
+  | 04 35 26 50 58 45 54 0d 1d 07 54 5e 5a 5c 4d 1f  |  .5&amp;PXET...T^Z\M.  |
+  | 16 06 4d 4c 58 44 41 5c 48 5d 4e 50 51 4e 42 3b  |  ..MLXDA\H]NPQNB;  |
+  | 26 0d 13 5c 53 46 4b 55 4a 0f 5d 58 5f 1d 08 41  |  &amp;..\SFKUJ.]X_..A  |
+  | 4a 7c 00 0d 7e 5b 5f 40 13 0c 28 70 70 72 20 7f  |  J|..~[_@..(ppr   |
+  | 16 54 46 47 48 45 56 40 12 0f 30 4d 4d 04 11 2f  |  .TFGHEV@..0MM../  |
+  | 50 0a 0e 7a 79 2e 33 4c 46 53 31 7d 64 1b 1d 53  |  P..zy.3LFS1}d..S  |
+  | 54 29 09 5f 18 50 31 0c 45 26 49 10 74 1b 65 0a  |  T)._.P1.E&amp;I.t.e.  |
+  | 54 11 52 49 73 2c 61 55 4d 40 4e 11 57 12 41 08  |  T.RIs,aUM@N.W.A.  |
+  | 09 5f 5a 4a                                      |  ._ZJ              |
+  ·--------------------------------------------------·--------------------·</pre>
+<h3>Maldito Algorithm :</h3>
+<pre>
+Function Maldito ($text, $len)
+{
+      $diff = 10 ;
+      $ct="";
+      for ($x=0 ; $x &lt; $len; $x++)
+        {
+        if ($x+$diff &lt; $len-1)
+                {
+                $ct.=$text[$x] ^ $text[$x+$diff];
+                }
+        Else
+                {
+                $ct.=$text[$x] ^ $text[$diff];
+                }
+        if ((ord($text[$x]) % 2) == 0)
+                {
+                $diff++;
+                }
+        else
+                {
+                $diff--;
+                }
+        }
+return $ct;
+}
+</pre>
+<h4>Good luck everyone.</h4>
+  </body></html>

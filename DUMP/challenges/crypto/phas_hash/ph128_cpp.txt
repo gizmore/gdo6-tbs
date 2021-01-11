@@ -1,0 +1,48 @@
+void PH128(char *szInputString, char *szHashValue)
+{
+    /////////////////////////////////////////////////////////
+    // PH128 : PhasHash-128
+    // This function generates a 128 bit hash value from the
+    // Input String.
+    // 
+    // IMPORTANT: This algorithm has been designed by Phas to 
+    // be easily broken, so its security is not good and must 
+    // be used only for educational purposes
+    /////////////////////////////////////////////////////////
+    
+    // Set the initial hash value
+    DWORD dwHashValue[4] = {0xF345A2CB, 0xF62C7DBD, 0x6D3240D5, 0xA8175D7D};
+    
+    // Get the length of the Input String
+    DWORD len = strlen(szInputString);
+    
+    // If the input string is not a multiple of 4, fill with "*" untill next multiple of 4
+    while (len%4 > 0)
+    {
+        len++;
+        strcat(szInputString, "*");
+    }
+    
+    // Get the length of the input string XOR'd against all the chars in the string.
+    DWORD dwRndValue = len%256;
+    for(DWORD nCharIndex=0; nCharIndex < strlen(szInputString); nCharIndex++)
+        dwRndValue ^= szInputString[nCharIndex];
+
+    // Take the chars of the input string in groups of 4
+    for(DWORD dwFourCharsIdx = 0; dwFourCharsIdx < strlen(szInputString); dwFourCharsIdx += 4)
+    {
+        // Calculate a 32 bit number from the current 4 chars
+        DWORD dwFourCharsNumber = 0;
+        for(int k = 0; k < 4; k++)
+            dwFourCharsNumber = dwFourCharsNumber * 256 + szInputString[dwFourCharsIdx+k];
+
+        // XOR each part of the HASH value against the 32 bit number multiplied by the
+        // RndValue previously calculated
+        for(int nHashPart = 0; nHashPart < 4; nHashPart++)
+            dwHashValue[nHashPart] ^= dwFourCharsNumber*dwRndValue;
+    }
+    // Construct the resulting string value from the hexadecimal values of the hash
+    for(DWORD dwHashPart = 0; dwHashPart < 4; dwHashPart++)
+        IntToHex( dwHashValue[dwHashPart], szHashValue+8*dwHashPart, 8);
+	szHashValue[32] = 0;
+}

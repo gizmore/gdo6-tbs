@@ -1,0 +1,44 @@
+/* DONT EDIT THIS PART */
+
+input.stlBtn
+{
+background:A0A0B0;
+border=solid 2px BLACK;
+color="#FFAA00";
+}
+
+h3
+{
+color:#0099ff;
+font-family:verdana;
+}
+
+font.logo
+{
+color:red;
+position:absolute;
+filter:glow(strength=4, color=BLACK);
+font-family:arial black;
+font-size:30pt;
+}
+
+#about
+{
+background:#A0A0B0;
+border=solid 2px BLACK;
+color:#FFAA00;
+font-size:12pt;
+visibility:hidden;
+position:absolute;
+right=10;
+top=80;
+}
+
+input.abtBtn
+{
+background:#505060;
+border=solid 2px BLACK;
+color:FFAA00;
+font-size:12pt;
+font-family:verdana;
+}

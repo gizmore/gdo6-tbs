@@ -1,0 +1,14 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>/dev/null 15: &quot;Number crunching&quot;</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="theblacksheep">
+<link rel="stylesheet" type="text/css" href="/styles.css"></head><body class="usual"><div class="navline"><a href="/hackchallenge.php" title="Go to the challenge-list."><img src="/files/images/icons/list_small.gif" width="12" height="11" alt="icon" title="Go to the challenge-list." /><span>Challenges</span></a><img src="/files/images/misc/arrow_navline.gif" class="arrow" width="10" height="9" alt="-&gt;" title="" /><span>/dev/null</span><img src="/files/images/misc/arrow_navline.gif" class="arrow" width="10" height="9" alt="-&gt;" title="" /><a href="/challenges/crypto/numbercrunch/index.php" title="Challenge: &quot;Number crunching&quot;"><span>Number crunching</span></a></div><div class="module"><div class="chall_header"><table cellspacing="0"><tr><td class="info"><img class="grouppic" alt="a /dev/null-challenge" src="/files/images/groupmasters/13_all.gif" height="18" width="25" /><span>/dev/null 15: &quot;Number crunching&quot;</span></td><td class="links"><table cellspacing="0"><tr><td class="forum"><a href="/challvote.php?challid=278" title="See the rating of this challenge!"><img src="/files/images/icons/vote_stat_see_sl.gif" width="16" height="16" alt="vote icon" title="See the rating of this challenge!" /><span>Vote</span></a></td><td class="forum_space">&nbsp;</td><td class="forum"><a href="/forum/forum_showforum.php?forumid=48&amp;challenge_id=278" title="Visit the /dev/null-Forum to ask questions or to find hints for this challenge."><img src="/files/images/misc/challenge_forum_questions.gif" width="16" height="16" alt="forum icon" title="Visit the /dev/null-Forum to ask questions or to find hints for this challenge." /><span>Forum</span></a></td><td class="notdone">not&nbsp;done&nbsp;<a href="/challengestats.php?challengeid=278" title="40 users have solved this challenge so far.">[40]</a></td></tr></table></td></tr></table></div><div class="challenge_div">pow((65536 ^ x), 2) ^6<p class="challenge_mono_1" style="text-align:center;">MTg4OTg1NzA4MDcwNjI5Njg1NjExMzA1Njk2MjM2NzE0MzEzODcwMjA1NTExNDk1MD<br />
+cyNzQ0ODQ5MzYxNzkyMzg5NjI1NDU1NTg1OTY5NDE1NjA3NDMxNTg3MTI3OTQzMTY3<br />
+Nzk1NjY1MzMyMjIxMDY4NjM0NDIwNTcwOTI2NTcyMTQzNTI0ODAyODY0NTY1MDAyNj<br />
+QzOTYxOTc3NzIyOTkxNDgyMTAwNTQwOTQwMTIwMzU4ODI1MzE2ODM1NzQzNjkyMA==</p>
+<form action="/challenges/crypto/numbercrunch/index.php" method="get" style="margin-top:3mm;margin-bottom:1mm;padding:0px;">
+  <input type="text" value="enter solution" name="solution" size="20" class="challenge_edit" />
+  <input type="submit" value="Check it!" name="button_submit" style="margin-left:5mm;" class="challenge_submit" />
+</form></div></div></body></html>

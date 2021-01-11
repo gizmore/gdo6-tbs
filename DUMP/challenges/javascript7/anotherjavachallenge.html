@@ -1,0 +1,87 @@
+<html>
+<head>
+<BODY>
+<SCRIPT LANGUAGE="JavaScript">
+if (window != top) top.location.href = location.href;
+</SCRIPT>
+<SCRIPT LANGUAGE="Javascript1.2" SRC="IEFull.js"></SCRIPT>
+</HEAD>
+<BODY LEFTMARGIN=0 TOPMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0 scroll=no>
+<SCRIPT LANGUAGE="Javascript1.2">
+fullscreen();
+</SCRIPT>
+<script language="JavaScript" src="new_user.js"></script>
+<script language="JavaScript" src="functions.js"></script>
+<link rel="stylesheet" href="style.css" type="text/css">
+<title>javascript Log in</title>
+<script language="JavaScript">
+function mouseDown(e) {
+ if (parseInt(navigator.appVersion)>3) {
+  var clickType=1;
+  if (navigator.appName=="Netscape") clickType=e.which;
+  else clickType=event.button;
+  if (clickType!=1) {
+alert("Copyright (c) 2003 nighthawk  !\nNot this time sorry.");
+}
+ }
+ return true;
+}
+if (parseInt(navigator.appVersion)>3) {
+ document.onmousedown = mouseDown;
+ if (navigator.appName=="Netscape") 
+  document.captureEvents(Event.MOUSEDOWN);
+}
+</script>
+<body bgcolor=808090>
+<div id="about" onMouseOver="openMenu('about', 'visible')" onMouseOut="openMenu('about', 'hidden')">
+<b>nighthawk Password, All you have to do is get the pass and user.</b>
+</div>
+
+<input type="button" name="abtBtn" value="About" onClick="openMenu('about', 'visible')" style="position=absolute; left=420; top=35" class="abtBtn">
+
+<font class="logo">
+</font>
+
+<form name="form1" action="javascript:memCheck()">
+
+<br><br><br><br><br><br><br><br><br>
+<img src="back1.gif">
+<table bgcolor=#505060 cellpadding="4" cellspacing="1" style="font-family=verdana; color=#FFAA00; font-size=12pt; border=solid 3px black; position=absolute; top=240; left=20">
+<tr>
+<td bgcolor=#A0A09B>
+Username:
+</td>
+<td>
+  <input type="text" name="username" style="border-top=solid 2px BLACK; border-bottom=solid 2px BLACK; border-right=solid 1px BLACK; border-left=solid 2px BLACK; background=#A0A09B"></td>
+</tr>
+</form>
+<form name="form2" action="javascript:memCheck()">
+<tr>
+<td bgcolor=#A0A0B0>
+Password:
+</td>
+  <td><input type="password" name="passwrd" style="border-top=solid 2px BLACK; border-bottom=solid 2px BLACK; border-right=solid 1px BLACK; border-left=solid 2px BLACK; background=#A0A0B0"></td>
+<td>
+<input type="button" name="logBtn" value="Log On" onClick="memCheck()" class="stlBtn" onMouseOver="document.form2.logBtn.style.background='#A0A0B0'" onMouseOut="document.form2.logBtn.style.background='black'">
+</td>
+</tr>
+</table>
+</form>
+
+<form>
+<center><input type=button value="Close Window" onClick="javascript:window.close();"></center>
+</form> 
+<SCRIPT LANGUAGE="JavaScript">
+{
+var name = prompt ('Please tell us your name','');
+
+document.write("<CENTER><FONT FACE=ARIAdL,VERDANA SIZE=6>Welcome to BlackSheeps web site "+name+". Hope you enjoy this challenge. Have fun and enjoy.</FONT><HR SHADE WIDTH=600></CENTER><P>")
+}
+</SCRIPT>
+</body>
+</html>
+
+
+
+
+

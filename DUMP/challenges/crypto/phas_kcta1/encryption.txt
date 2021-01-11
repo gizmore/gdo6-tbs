@@ -1,0 +1,28 @@
+////////////////////////////////////////////////////////////
+// Encrypt
+//
+// * Param "key" is the key used to encrypt the plain text.
+// This key must be a number greater than 255
+//
+// * Param "pt" is a string containing the plain text to be
+// encrypted
+//
+// * Return value : a number that is unique for this key and 
+// this plain text
+//
+function Encrypt($key, $pt)
+{ 
+	// Initialize the result to 0
+	$n = 0;
+	// For each letter in the Plain Text...
+	for ($c = 0; $c < strlen($pt); $c++)
+	{
+		// Add the Ascii value of the letter to the result
+		$n = bcadd($n, ord($pt[$c]));
+		
+		// Multiply the result by the key
+		$n = bcmul($n, $key);
+	}
+	// return the number
+	return $n;
+}

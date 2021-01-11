@@ -1,0 +1,90 @@
+<html><head></head><body><h2>Secret algorithm (KPTA 2).</h2>
+<br>
+<h3>Description:</h3>
+This encryption method is based on using an algorithm that doesn't require a key. 
+The strength of this cryptosystem resides with the secrecy of the algorithm, not with the key.<br><br>
+That is a bad practise because once you know the method you can decrypt any text you want.<br>
+Your aim is to analyse some texts with their corresponding cipher texts and determine the algorithm.
+Once you know the algorithm decrypt the final text.<br>
+<h3>Examples:</h3>
+<h4>Text #1:</h4>
+&nbsp;&nbsp;<i>The orbits of the planets are ellipses, with the Sun at one focus of the ellipse.</i><br>
+<h5>Encrypted Text #1:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | b0 d3 a0 a1 e2 a7 87 a3 8f 9f d1 c7 25 8a 64 a9  |  °Ó&nbsp;¡â§&#8225;£&#65533;&#376;ÑÇ%&#352;d©  |
+  | 7c e7 51 ec 51 d8 4f c6 bd 8e f1 aa fb e4 cb f2  |  |çQìQØOÆ½&#381;ñªûäËò  |
+  | fe fc fa 08 e1 05 8b 06 c9 63 d9 68 ac 37 a5 c5  |  þüú.á.&#8249;.ÉcÙh¬7¥Å  |
+  | f5 bd ee b1 ad 8b ad d0 d7 ca d1 78 8a 7a b3 73  |  õ½î±¡&#8249;¡Ð×ÊÑx&#352;z³s  |
+  | c0 2b 92 15 d9 5a 30 58 60 26 64 31 1c 23 0a 0a  |  À+&#8217;.ÙZ0X`&amp;d1.#..  |
+  | 54                                               |  T                 |
+  ·--------------------------------------------------·--------------------·</pre>
+<h5>Decrypted Text #1:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | 54 68 65 20 6f 72 62 69 74 73 20 6f 66 20 74 68  |  The orbits of th  |
+  | 65 20 70 6c 61 6e 65 74 73 20 61 72 65 20 65 6c  |  e planets are el  |
+  | 6c 69 70 73 65 73 2c 20 77 69 74 68 20 74 68 65  |  lipses, with the  |
+  | 20 53 75 6e 20 61 74 20 6f 6e 65 20 66 6f 63 75  |   Sun at one focu  |
+  | 73 20 6f 66 20 74 68 65 20 65 6c 6c 69 70 73 65  |  s of the ellipse  |
+  | 2e                                               |  .                 |
+  ·--------------------------------------------------·--------------------·</pre>
+<h4>Text #2:</h4>
+&nbsp;&nbsp;<i>The line joining the planet to the Sun sweeps out equal areas in equal times as the planet travels around the ellipse.</i><br>
+<h5>Encrypted Text #2:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | e3 80 f3 f2 b2 ec c0 e8 90 99 98 88 62 84 70 b2  |  ã&#8364;óò²ìÀè&#65533;&#8482;&#732;&#710;b&#8222;p²  |
+  | 22 ed 43 f7 0b 9c 02 9e f8 8e e4 ed ad fd 97 b6  |  "íC÷.&#339;.&#382;ø&#381;äí¡ý&#8212;¶  |
+  | be b0 e6 34 cd 34 b6 68 a7 01 aa 03 94 5b ce be  |  ¾°æ4Í4¶h§.ª.&#8221;[Î¾  |
+  | da e1 a2 e2 ab 8d b3 ce c7 c6 dd 35 d2 6d ae 75  |  Úá¢â«&#65533;³ÎÇÆÝ5Òm®u  |
+  | 95 3b 9c 08 85 1e 3c 45 34 7a 31 7b 1f 31 18 5d  |  &#8226;;&#339;.&#8230;.&lt;E4z1{.1.]  |
+  | 59 4a a9 18 f4 3f ec 3f 92 35 cb 56 d0 4e 32 42  |  YJ©.ô?ì?&#8217;5ËVÐN2B  |
+  | 0e 56 40 60 5e 66 71 72 6e cd 37 c6 07 88 57 fe  |  .V@`^fqrnÍ7Æ.&#710;Wþ  |
+  | 42 f0 66 e4 7d 54                                |  Bðfä}T            |
+  ·--------------------------------------------------·--------------------·</pre>
+<h5>Decrypted Text #2:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | 54 68 65 20 6c 69 6e 65 20 6a 6f 69 6e 69 6e 67  |  The line joining  |
+  | 20 74 68 65 20 70 6c 61 6e 65 74 20 74 6f 20 74  |   the planet to t  |
+  | 68 65 20 53 75 6e 20 73 77 65 65 70 73 20 6f 75  |  he Sun sweeps ou  |
+  | 74 20 65 71 75 61 6c 20 61 72 65 61 73 20 69 6e  |  t equal areas in  |
+  | 20 65 71 75 61 6c 20 74 69 6d 65 73 20 61 73 20  |   equal times as   |
+  | 74 68 65 20 70 6c 61 6e 65 74 20 74 72 61 76 65  |  the planet trave  |
+  | 6c 73 20 61 72 6f 75 6e 64 20 74 68 65 20 65 6c  |  ls around the el  |
+  | 6c 69 70 73 65 2e                                |  lipse.            |
+  ·--------------------------------------------------·--------------------·</pre>
+<h4>Text #3:</h4>
+&nbsp;&nbsp;<i>The ratio of the squares of the
+revolutionary periods for two planets is equal to the ratio of the
+cubes of their semimajor axes.</i><br>
+<h5>Encrypted Text #3:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | 5f 3c 4f 4e 10 46 70 54 63 20 21 3e 9a 61 93 53  |  _&lt;ON.FpTc !&gt;&#353;a&#8220;S  |
+  | c3 0b bc 18 a5 30 a7 29 01 7d 05 0c 4c 1b 34 41  |  Ã.¼.¥0§).}..L.4A  |
+  | 53 5d 5d b3 53 b1 67 a3 74 d9 76 dd 40 8f 05 65  |  S]]³S±g£tÙvÝ@&#65533;.e  |
+  | 07 75 3c 69 26 41 75 47 5d 0e 04 fa 01 be 64 bd  |  .u&lt;i&amp;AuG]..ú.¾d½  |
+  | 1c b9 0a 9f 00 d7 bc c2 fa bc e3 af 8a a9 d3 c2  |  .¹.&#376;.×¼Âú¼ã¯&#352;©ÓÂ  |
+  | dd 86 74 8d 74 f3 33 ef 53 e9 58 91 0a 93 b9 d8  |  Ý&#8224;t&#65533;tó3ïSéX&#8216;.&#8220;¹Ø  |
+  | 90 de c8 ea d3 e6 e1 ff a7 4b a3 1a ca 0d d2 7e  |  &#65533;ÞÈêÓæáÿ§K£.Ê.Ò~  |
+  | dc 27 b2 26 b7 d9 a6 da 98 c4 88 e1 d4 f3 fc fa  |  Ü'²&amp;·Ù¦Ú&#732;Ä&#710;áÔóüú  |
+  | 54                                               |  T                 |
+  ·--------------------------------------------------·--------------------·</pre>
+<h5>Decrypted Text #3:</h5>
+<pre>  ·--------------------------------------------------·--------------------·
+  | 54 68 65 20 72 61 74 69 6f 20 6f 66 20 74 68 65  |  The ratio of the  |
+  | 20 73 71 75 61 72 65 73 20 6f 66 20 74 68 65 20  |   squares of the   |
+  | 72 65 76 6f 6c 75 74 69 6f 6e 61 72 79 20 70 65  |  revolutionary pe  |
+  | 72 69 6f 64 73 20 66 6f 72 20 74 77 6f 20 70 6c  |  riods for two pl  |
+  | 61 6e 65 74 73 20 69 73 20 65 71 75 61 6c 20 74  |  anets is equal t  |
+  | 6f 20 74 68 65 20 72 61 74 69 6f 20 6f 66 20 74  |  o the ratio of t  |
+  | 68 65 20 63 75 62 65 73 20 6f 66 20 74 68 65 69  |  he cubes of thei  |
+  | 72 20 73 65 6d 69 6d 61 6a 6f 72 20 61 78 65 73  |  r semimajor axes  |
+  | 2e                                               |  .                 |
+  ·--------------------------------------------------·--------------------·</pre>
+<h3>Challenge:</h3>
+<h4>Decrypt this:</h4>
+<pre>  ·--------------------------------------------------·--------------------·
+  | db f0 96 c5 8c dd fa c5 bd aa ac b0 14 cb 25 ef  |  Ûð&#8211;Å&#338;ÝúÅ½ª¬°.Ë%ï  |
+  | 33 ed 46 f6 43 c7 15 bd db a1 c9 85 c3 8f a0 d5  |  3íFöCÇ.½Û¡É&#8230;Ã&#65533;&nbsp;Õ  |
+  | c2 c1 d2 21 c8 65 e7 1e ce 68 e3 5b cd 56 c4 88  |  ÂÁÒ!Èeç.Îhã[ÍVÄ&#710;  |
+  | eb b1 e3 86 d2 f0 e1 d9 df d8 c3 38 e3 1a e4 39  |  ë±ã&#8224;ÒðáÙßØÃ8ã.ä9  |
+  | 9c 02 ba 32 a8 3a 4a 34 49                       |  &#339;.º2¨:J4I         |
+  ·--------------------------------------------------·--------------------·</pre></body></html>

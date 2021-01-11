@@ -1,0 +1,87 @@
+<H2>Simple encryption (KPTA 1).</H2>
+<BR>
+<b>Description:</b>
+<BR><BR>
+I have written a simple encryption algorithm. It uses a 160 bit key, divided into 20 subkeys. When you encrypt any input, the algorithm does the following:
+<BR><BR>
+<blockquote>
+(1) Assigns the value 0 (zero) to KeyA, then XOR each of the 20 subkeys against KeyA assigning each time the resulting 8 byte value to KeyA (KeyA = SK0 xor SK1 xor SK2 xor SK3.... xor SK18 xor SK19).<BR>
+(2) Calculates the remainder of KeyA divided by 20 and assigns it to nKeyPos (nKeyPos = KeyA modulus 20).<BR>
+(3) Selects the first byte of the input buffer.<BR>
+(4) Calculates the product of KeyA and the subkey at position nKeyPos (KeyA * SK[nKeyPos]).<BR>
+(5) The encrypted byte is the plain byte XOR'd by the lower 8 bits of the product obtained in (4) (encrypted byte = plain byte XOR ((KeyA * SK[nKeyPos]) AND FFh)).<BR>
+(6) Adds the encrypted byte to KeyA and assigns the lower 8 bits of this sum to KeyA (KeyA = (KeyA + encrypted byte) AND FFh).<BR>
+(7) Assigns nKeypos the value of the remainder of the encyrpted byte divided by 20 (nKeyPos=encrypted byte modulus 20).<BR>
+(8) If there are more plain bytes to be encrypted, selects the next byte and goes back to step (4).<BR>
+</blockquote>
+<BR>
+To make it easier to understand here is a implementation in C of this algorithm:<BR>
+<BR>
+<pre><font color="#000000"><b>void </b>Encrypt(<b>unsigned char </b>key[</font><font color="#0000FF">20</font><font color="#000000">],
+             <b>unsigned char </b>*pPlainBuffer,
+             <b>unsigned char </b>*pCipherBuffer,
+             <b>unsigned int </b>nLength)
+{
+    <b>int </b>nKeyPos = </font><font color="#0000FF">0</font><font color="#000000">;
+    <b>unsigned int </b>n;
+    <b>unsigned char </b>KeyA = </font><font color="#0000FF">0</font><font color="#000000">;
+
+    <b>if </b>((pPlainBuffer != NULL) &amp;&amp; (pCipherBuffer != NULL))
+    {
+        <b>for </b>(n = </font><font color="#0000FF">0</font><font color="#000000">; n &lt; </font><font color="#0000FF">20</font><font color="#000000">; n++)
+            KeyA ^= key[n];
+
+    	nKeyPos = KeyA % </font><font color="#0000FF">20</font><font color="#000000">;
+        <b>for </b>(n = </font><font color="#0000FF">0</font><font color="#000000">; n &lt; nLength; n++)
+        {
+            pCipherBuffer[n] = pPlainBuffer[n]^(key[nKeyPos]*KeyA);
+            KeyA += pCipherBuffer[n];
+            nKeyPos = pCipherBuffer[n] % </font><font color="#0000FF">20</font><font color="#000000">;
+        }
+    }
+}
+</font></pre>
+<BR>
+The decryption algorithm is similar except for step (5), that in decryption is:<BR><BR>
+    (5) The decrypted byte is the encrypted byte XOR'd by the lower 8 bits of the product obtained in (4) (decrypted byte = encrypted byte XOR ((KeyA * SK[nKeyPos]) AND FFh)).<BR>
+<BR><BR>
+In the C implementation of the Decrypt(...) function we only have to change this line:<BR>
+<pre>
+            pCipherBuffer[n] = pPlainBuffer[n]^(key[nKeyPos]*KeyA);
+</pre>
+for this one:<BR>
+<pre>
+            pPlainBuffer[n] = pCipherBuffer[n]^(key[nKeyPos]*KeyA);
+</pre>
+<BR><BR>            
+To test my algorithm I encrypted the following text using a random key:<BR><BR>
+
+<font color="#FF0000">To be, or not to be, that is the question. Whether 'tis nobler in the mind to suffer the slings and arrows of outrageous fortune, or to take arms against a sea of troubles and by opposing end them. To die: to sleep.<BR><BR>
+</font>
+...and I got these encrypted bytes:<BR><BR>
+
+<pre>
+0C 6F BF A2 87 B9 92 3F 8B E8 6E 6F 69 2C 0C 6F 2D E2 2D 6B D8 24 98 61
+43 B8 2B 6C 28 FB B4 8D 1F 0D 6E 25 F7 D0 31 A3 33 E0 2A 2B FD E9 9B 60
+25 F7 10 07 50 74 6B 18 94 DF 5D AA 65 81 2A E5 2B 74 F4 9C 65 BF D1 50
+1D 4E 10 74 4F F4 C8 DC 8B CE B5 59 EA EC A8 65 BF CF 28 84 6E A7 03 85
+95 2B 30 40 BD 0F 8A 61 1C 8B B8 F5 69 A0 8F D8 2C 95 89 EE 6C 37 0F 8E
+DF BC BF B5 FE ED 1F 8D 53 C8 2F 66 75 8E 37 23 FE 01 08 AD 82 61 33 69
+BE 60 D9 9B AA A9 FC 73 51 9E F9 95 9D 1E A1 F6 4F E2 64 8F 76 A1 CC B1
+AC 65 B0 C8 8E B9 74 80 42 21 AD B3 B4 DD 67 2E FD 20 67 13 15 75 FA 20
+74 08 45 F0 71 4E 7C 2B FD F0 9D 24 F2 7F 5C 6F 57 73 FB 37 C4 58 26
+</pre><BR>
+
+Can you read these following bytes that were encrypted with the same key?<BR><BR>
+
+<pre>
+0E CD DB E9 DB 20 76 DF CD 2B 87 93 51 E9 40 5D AF 07 13 36 23 70 74 C9
+78 5D 76 29 DF 67 BA 96 29 D4 68 C1 71 B4 C0 20 48 65 2F CD 03 83 7C 79
+86 F0 C1 5F 8D 25 2D E4 9D 6E A0 D2 6F 35 C8 19 44 44 2D 32 27 57 28 D3
+2A 8E 0A 34 69 4F 4A B2 D5 B2 9B 04 22 B0 DD E0 D1 B0 87 7C 71 B4 46 7A
+A9 3D D5 5E C6 78 5C 20 21 0D EC D9 B7 6F 0B B0 F8 06 BE 27
+</pre><BR><BR>
+<FONT size="2">
+<B>Note:</B> The key used is not a key from a dictionary, it is a random 160 bits key, having each subkey a value between 0 and 255.<BR><BR>
+<B>Acknowledge:</B> Thanks to <A HREF="http://www.bright-shadows.net/userstats.php?username=bb">bb</A> for wasting his time helping me to correct some English errors in this text.<BR> 
+</FONT>

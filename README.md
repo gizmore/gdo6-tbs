@@ -1,2 +1,84 @@
 # gdo6-tbs
-GDO6 revival implementation of bright-shadows.net
+
+Revival of the bright-shadows.net website as a gdo6 site module.
+
+Currently this site is available under http://tbs.wechall.net
+    
+Please note that this site is a gdo6 demo site with custom theme, not even classic.
+Some of the tests are advised to be run in a complete gdo6 test-suite.
+If you want to contribute, please try to install this gdo6 driven site on your dev machine.
+gdo6 is rather new, so there are a lot of bugs lurking.
+
+
+## Install
+
+To see how to setup a gdo6 site, please consult https://github.com/gizmore/gdo6/blob/master/DOCS/INSTALL.md
+
+
+### Dependencies
+
+The following gdo6 dependencies exist and can be cloned.
+
+    git clone --recursive https://github.com/gizmore/gdo6 # clone core
+    cd gdo6/GDO # change to module directory
+    # Install dependencies
+    git clone --recursive https://github.com/gizmore/gdo6-session-db Session
+    git clone --recursive https://github.com/gizmore/gdo6-friends Friends # for acl
+    git clone --recursive https://github.com/gizmore/gdo6-contact Contact
+    git clone --recursive https://github.com/gizmore/gdo6-account Account
+    git clone --recursive https://github.com/gizmore/gdo6-admin Admin
+    git clone --recursive https://github.com/gizmore/gdo6-vote Vote
+    git clone --recursive https://github.com/gizmore/gdo6-captcha Captcha
+    git clone --recursive https://github.com/gizmore/gdo6-profile Profile
+    git clone --recursive https://github.com/gizmore/gdo6-pagecounter Pagecounter
+    git clone --recursive https://github.com/gizmore/gdo6-online-users OnlineUsers
+    git clone --recursive https://github.com/gizmore/gdo6-jquery JQuery
+    git clone --recursive https://github.com/gizmore/gdo6-font-awesome FontAwesome
+    git clone --recursive https://github.com/gizmore/gdo6-jquery-autocomplete JQueryAutocomplete
+    git clone --recursive https://github.com/gizmore/gdo6-news News
+    git clone --recursive https://github.com/gizmore/gdo6-forum Forum
+    git clone --recursive https://github.com/gizmore/gdo6-comment Comment
+    git clone --recursive https://github.com/gizmore/gdo6-category Category
+    git clone --recursive https://github.com/gizmore/gdo6-votes Vote
+    git clone --recursive https://github.com/gizmore/gdo6-mibbit Mibbit
+    git clone --recursive https://github.com/gizmore/gdo6-tbs-bbmessage TBSBBMessage
+    git clone --recursive https://github.com/gizmore/gdo6-tbs TBS
+    git clone --recursive https://github.com/gizmore/gdo6-register Register
+    git clone --recursive https://github.com/gizmore/gdo6-recovery Recovery
+    git clone --recursive https://github.com/gizmore/gdo6-login Login
+    git clone --recursive https://github.com/gizmore/gdo6-session-db Session
+    git clone --recursive https://github.com/gizmore/gdo6-favicon Favicon
+    git clone --recursive https://github.com/gizmore/gdo6-pm PM
+    git clone --recursive https://github.com/gizmore/gdo6-load-on-click LoadOnClick
+    
+    
+Install like any gdo6 site.
+
+    php gdo.php configure # create a config to edit manually
+    nano protected/config.php # make sure you use this theme: tbsbbcode,tbs,default
+    php gdo.php install TBS # install all required modules
+    php gdo.php admin gizmore password # create an admin
+    
+    
+or via webserver: your.site/install/wizard.php
+
+
+### Crawl real TBS
+
+To crawl TBS for INPUT/ run the following commands from the /GDO/TBS/bin/ folder. (thx Xaav)
+
+    # todo
+    
+Place your CSV files into GDO/TBS/INPUT/CSV/*.csv
+
+As Admin run the importer in TBS admin section.
+
+
+#### License
+
+This module and it's content is licensed by and dedicated to Erik and TBS(TheBlackSheep).
+
+
+#### Work in Progress
+
+Please note that this is work in progress.

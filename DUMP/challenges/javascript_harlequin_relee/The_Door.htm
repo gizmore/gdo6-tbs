@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>The Door</title>
+</head>
+<BODY TEXT="#FFFF80" BGCOLOR="#000000">
+<script LANGUAGE="JavaScript1.1">
+<!--
+document.write("<center><IMG SRC='smiley.jpg' WIDTH=192 HEIGHT=185 BORDER='0'>");
+document.write("<br><br>"+
+"In your high powered job as senior dust removal technician at the city museum "+
+"you have been working, for the past week, in the prominent position of        "+
+"cleaning the basement. You feel honoured to be working down here, all the     "+
+"most important stuff is kept in this part of the museum and that fact that    "+
+"you never see anyone else doesn't bother you so much these days. Brushing     "+
+"away the cobwebs in the most dark and cold corner of your subteranean world   "+
+"you notice a small scrap of old parchment poking out from under a box. Gently "+
+"you ease the crisp paper out. It appears to have directions on it but to      "+
+"what? As you read further you realise these are directions to the exact       "+
+"location of the long since lost, treasure of the javascript smiley. The       "+
+"javascript smiley was reputed to have been put into storage somewhere in the  "+
+"vast caverns of the museum long ago. After a change of curator many years     "+
+"back its whereabouts was lost to all. Now, right here, in your hand, you have "+
+"the key, you can retrieve the javascript smiley and be the hero. Everyone     "+
+"will love you, you could even get a position upstairs, perhaps even with the  "+
+"major @operators. This is the opportunity you have been waiting for all your  "+
+"life.<br>                                                                     "+
+"<br>                                                                          "+
+"Dropping your broom and picking up your toolkit you head of into the depths of"+
+" the catacoombs. <br>                                                          "+
+"<br>                                                                          "+
+"After a long time winding and weaving you eventually come across the door     "+
+"described in the directions on the paper. Apparently, according to the        "+
+"scribblings you can make out, it is locked with some secret mechanism. This is"+
+" obviously your first task, you must figure out how this door opens so you can"+
+" continue your quest.........<br><br><br><br><br>");
+document.write("<table cellpadding=0 cellspacing=0 border=0 align='center'><tr>");
+document.write("<td><IMG SRC='door.jpg' USEMAP='#dungeon_door' WIDTH=150 HEIGHT=170 BORDER='0'><\/td><\/tr><\/table>");
+var count=0;
+var buttons=0;
+var enter="";
+document.write("<MAP NAME='dungeon_door'>");
+for( var i=0; i<150; i+=15 )
+{	for(var j=0;j<170;j+=17)
+	{document.write("<AREA ID='r"+(count)+"' SHAPE='RECT' HREF='javascript:Entry("+(count)+(i)+(j)+")' COORDS='"+(i)+", "+(j)+", "+(i+30)+", "+(j+34)+"'>");
+	 count++;
+	}
+}
+document.write("<\/map><br><br><br><br><br><br><br>");
+function Entry(x)
+{
+	enter +=x;buttons++;
+	if(buttons%3==0){var open=enter;enter="";window.location.href=open+".htm";}
+}
+// -->
+</SCRIPT>
+</center></div>
+</body>
+</html>

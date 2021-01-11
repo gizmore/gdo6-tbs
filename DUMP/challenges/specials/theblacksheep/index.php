@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Special 14: &quot;A short path!&quot;</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="theblacksheep">
+<link rel="stylesheet" type="text/css" href="/styles.css"></head><body class="usual"><div class="navline"><a href="/hackchallenge.php" title="Go to the challenge-list."><img src="/files/images/icons/list_small.gif" width="12" height="11" alt="icon" title="Go to the challenge-list." /><span>Challenges</span></a><img src="/files/images/misc/arrow_navline.gif" class="arrow" width="10" height="9" alt="-&gt;" title="" /><span>Special</span><img src="/files/images/misc/arrow_navline.gif" class="arrow" width="10" height="9" alt="-&gt;" title="" /><a href="/challenges/specials/theblacksheep/index.php" title="Challenge: &quot;A short path!&quot;"><span>A short path!</span></a></div><div class="module"><div class="chall_header"><table cellspacing="0"><tr><td class="info"><img class="grouppic" alt="a Special-challenge" src="/files/images/groupmasters/10_all.gif" height="18" width="25" /><span>Special 14: &quot;A short path!&quot;</span></td><td class="links"><table cellspacing="0"><tr><td class="forum"><a href="/challvote.php?challid=227" title="See the rating of this challenge!"><img src="/files/images/icons/vote_stat_see_sl.gif" width="16" height="16" alt="vote icon" title="See the rating of this challenge!" /><span>Vote</span></a></td><td class="forum_space">&nbsp;</td><td class="forum"><a href="/forum/forum_showforum.php?forumid=27&amp;challenge_id=227" title="Visit the Special-Forum to ask questions or to find hints for this challenge."><img src="/files/images/misc/challenge_forum_questions.gif" width="16" height="16" alt="forum icon" title="Visit the Special-Forum to ask questions or to find hints for this challenge." /><span>Forum</span></a></td><td class="notdone">not&nbsp;done&nbsp;<a href="/challengestats.php?challengeid=227" title="32 users have solved this challenge so far.">[32]</a></td></tr></table></td></tr></table></div><div class="challenge_div"><P align='center'>
+<PRE>
+To solve this riddle just follow my hints
+Start your search where the second ancient secret in this text begins
+You are allowed to use a PC not just your brain
+with internet access so you wont die in vain
+But dont get tricked by this little rhyme
+or you might loose your goal so keep it in mind
+To solve it you might have to travel around the earth once
+a swim in the great water might be necessary too
+You have to walk through the fire five times
+And finally breath three times the clean air of where you are in this very moment
+You are confused right now
+You should be many have been before
+</PRE>
+</p>
+<form action="/challenges/specials/theblacksheep/index.php" method="get" style="margin-top:3mm;margin-bottom:1mm;padding:0px;">
+  <input type="text" value="enter solution" name="solution" size="20" class="challenge_edit" />
+  <input type="submit" value="Check it!" name="button_submit" style="margin-left:5mm;" class="challenge_submit" />
+</form></div></div></body></html>

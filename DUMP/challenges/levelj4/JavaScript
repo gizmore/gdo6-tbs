@@ -1,0 +1,11 @@
+function testEncode(form) 
+{
+    input_user = document.formular.user.value;
+    if (input_user == "thebestoneisthis") {
+      window.location.href="thebestoneisthis.php";
+    }
+    else 
+  {
+      window.location.href=input_user +".php";
+    }
+}

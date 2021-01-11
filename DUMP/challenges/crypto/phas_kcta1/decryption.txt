@@ -1,0 +1,35 @@
+////////////////////////////////////////////////////////////
+// Decrypt
+//
+// * Param "key" is the key used to encrypt the plain text.
+// This key must be a number greater than 255
+//
+// * Param "ct" is the cipher text (a number)
+// 
+// * Return value : the plain text
+// 
+function Decrypt($key, $ct)
+{ 
+	// Initialize the result to empty string
+	$res = "";
+	
+	// Loop to operate while the cipher text is > 0
+	while($ct > 0)
+	{
+		// Divide the cipher text by the key
+		$ct = bcdiv($ct, $key);
+		
+		// Calculate the remain of the ct divided again by the key
+		$ch = bcmod($ct, $key);
+		
+		// ch is the ascii value of the ciphered letter.
+		// As we are recovering letters starting by the end,
+		// we have to put the letter before the accumulated result
+		$res = chr($ch).$res;
+		
+		// Substract the ascii value of the letter to the cipher text
+		$ct = bcsub($ct, $ch);
+	}
+	// return the text
+	return $res;
+}

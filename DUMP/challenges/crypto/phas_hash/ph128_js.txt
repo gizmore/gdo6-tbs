@@ -1,0 +1,69 @@
+function IntToHex(Value, Size)
+{
+	var digits = "0123456789abcdef";
+	var result = "";
+	while (Size > 0)
+	{
+		result = ""+digits.charAt(Value % 16)+result;
+		Value -= Value % 16;
+		Value /= 16;
+		Size--;
+	}
+    return result;
+}
+
+function ph128(InputString)
+{
+    /////////////////////////////////////////////////////////
+    // PH128 : PhasHash-128
+    // This function generates a 128 bit hash value from the
+    // Input String.
+    // 
+    // IMPORTANT: This algorithm has been designed by Phas to 
+    // be easily broken, so its security is not good and must 
+    // be used only for educational purposes
+    /////////////////////////////////////////////////////////
+    
+    // Set the initial hash value
+    var HashValue = new Array(0xF345A2CB, 0xF62C7DBD, 0x6D3240D5, 0xA8175D7D);
+    
+    // Get the length of the Input String
+    var len = InputString.length;
+
+    // If the input string is not a multiple of 4, fill with "*" untill next multiple of 4
+    while (len%4 > 0)
+    {
+        InputString = InputString+"*";
+        len++;
+    }
+
+    // Get the length of the input string XOR'd against all the chars in the string.
+    var RndValue = len%256;
+    for(var CharIndex=0; CharIndex < len; CharIndex++)
+        RndValue = RndValue ^ InputString.charCodeAt(CharIndex);
+
+    // Take the chars of the input string in groups of 4
+    for(var FourCharsIdx = 0; FourCharsIdx < len; FourCharsIdx += 4)
+    {
+        // Calculate a 32 bit number from the current 4 chars
+        var FourCharsNumber = 0;
+        for(var k = 0; k < 4; k++)
+            FourCharsNumber = FourCharsNumber * 256 + InputString.charCodeAt(FourCharsIdx+k);
+
+        // XOR each part of the HASH value against the 32 bit number multiplied by the
+        // RndValue previously calculated
+        for(var HashPart = 0; HashPart < 4; HashPart++)
+        {
+            HashValue[HashPart] ^= (FourCharsNumber*RndValue) & 0xFFFFFFFF;
+            if (HashValue[HashPart] < 0)
+                HashValue[HashPart] += 0x100000000;
+        }
+    }
+
+    // Construct the resulting string value from the hexadecimal values of the hash
+    var res = "";
+    for(var HashPart = 0; HashPart < 4; HashPart++)
+        res += IntToHex(HashValue[HashPart], 8);
+    
+    return res;
+}

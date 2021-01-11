@@ -1,0 +1,57 @@
+function PH128(InputString: string):string;
+    /////////////////////////////////////////////////////////
+    // PH128 : PhasHash-128
+    // This function generates a 128 bit hash value from the
+    // Input String.
+    //
+    // IMPORTANT: This algorithm has been designed by Phas to
+    // be easily broken, so its security is not good and must
+    // be used only for educational purposes
+    /////////////////////////////////////////////////////////
+var
+  HashValue: array[0..3] of DWORD;
+  len, RndValue, CharIndex, FourCharsIdx, FourCharsNumber, k, HashPart: DWORD;
+begin
+    // Set the initial hash value
+    HashValue[0] := $F345A2CB;
+    HashValue[1] := $F62C7DBD;
+    HashValue[2] := $6D3240D5;
+    HashValue[3] := $A8175D7D;
+
+    // Get the length of the Input String
+    len := Length(InputString);
+
+    // If the input string is not a multiple of 4, fill with "*" untill next multiple of 4
+    while (len mod 4 > 0) do
+    begin
+        Inc(len, 1);
+        InputString := InputString+'*';
+    end;
+
+    // Get the length of the input string XOR'd against all the chars in the string.
+    RndValue := len mod 256;
+    for CharIndex := 1 to len do
+        RndValue := RndValue xor integer(InputString[CharIndex]);
+
+    // Take the chars of the input string in groups of 4
+    FourCharsIdx := 0;
+    while FourCharsIdx < len do
+    begin
+        // Calculate a 32 bit number from the current 4 chars
+        FourCharsNumber := 0;
+        for k := 1 to 4 do
+            FourCharsNumber := FourCharsNumber * 256 + integer(InputString[FourCharsIdx+k]);
+
+        // XOR each part of the HASH value against the 32 bit number multiplied by the
+        // RndValue previously calculated
+        for HashPart := 0 to 3 do
+            HashValue[HashPart] := HashValue[HashPart] xor FourCharsNumber*RndValue;
+
+        Inc(FourCharsIdx, 4);
+    end;
+
+    // Construct the resulting string value from the hexadecimal values of the hash
+    Result := '';
+    for HashPart := 0 to 3 do
+        Result := Result + LowerCase(IntToHex(HashValue[HashPart],8));
+end;

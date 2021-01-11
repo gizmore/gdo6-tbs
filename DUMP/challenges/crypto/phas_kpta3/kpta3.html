@@ -1,0 +1,107 @@
+<html><head></head><body><H2>Encrypting me softly (KPTA 3).</H2>
+<BR>
+<H3>Description:</H3>
+Usually, for Known Plain Text Attacks, we need to know at least a plain text and its corresponding cipher text, 
+but in some occasions we can even analyze it without knowing the plain text, just knowing some details
+about that plain text.<BR>
+To demonstrate this, I have designed the following challenge. To solve the challenge, all you are given is 
+the cipher text, the algorithm and the fact that the plain text contains only uppercase, lowercase, numbers, 
+punctuation marks, line breaks, common math symbols and underscores.<BR>
+The algorithm uses groups of 8 bytes from the plain text to form groups of 8 bytes in the cipher text and are 
+encrypted with a key of 232 bits (29 bytes).<BR>
+<BR>
+<H3>Algorithm:</H3>
+<pre>//---------------------------------------------------------------------------
+// Encrypt:
+//    returns the size of Cipher Buffer
+unsigned int Encrypt(unsigned char key[29],
+                     unsigned char *pPlainBuffer,
+                     unsigned char **pCipherBuffer,
+                     unsigned int nLength)
+{
+    unsigned int n, len, b;
+    unsigned char *PT = NULL;
+    unsigned char *CT = NULL;
+
+    len = nLength;
+    // If the length of input buffer is not a multiple of 8,
+    // fill with 0x00 untill next multiple of 0
+    while (len%8 &gt; 0)
+        len++;
+
+    PT = (unsigned char*)malloc(len);
+    CT = (unsigned char*)malloc(len+sizeof(unsigned int));
+
+    if ((PT != NULL) &amp;&amp; (CT != NULL))
+    {
+        memcpy(PT, pPlainBuffer, nLength);
+        memset(PT+nLength, 0, len-nLength);
+        memset(CT, 0, len);
+        for(n = 0; n &lt; len; n++)
+        {
+            // Initialize CT with the key
+            CT[n] ^= key[n%29]^(n%256);
+
+            //for each bit in current BYTE
+            for (b = 0; b &lt; 8; b++)
+            {
+                // if bit is set...
+                if (PT[n] &amp; (1 &lt;&lt; b))
+                {
+                    // change bit number n%8 in CT[n-n%8+b]
+                    CT[n-n%8+b] ^= (1 &lt;&lt; n%8);
+                }
+            }
+        }
+        *(unsigned int*)(CT+len) = nLength;
+        *pCipherBuffer = CT;
+
+        // *pCipherBuffer must be freed by the caller
+        free(PT);
+        return len+sizeof(unsigned int);
+    }
+    if (PT)
+        free(PT);
+    if (CT)
+        free(CT);
+    return 0;
+}
+
+</pre>
+<H3>Encrypted Text:</H3>
+<pre>7B 4E 94 66 EA 77 70 B0 2B 22 31 EF 19 75 F1 F2  &#123;&#78;&#246;&#102;&#219;&#119;&#112;&#166;&#32;&#34;&#49;&#180;&#46;&#117;&#177;&#61;      
+ED 37 EF 43 A1 4D 3D 94 33 26 06 43 26 AC C0 F1  &#221;&#55;&#180;&#67;&#237;&#77;&#61;&#246;&#51;&#38;&#46;&#67;&#38;&#188;&#32;&#177;
+2B EF 16 08 5F 75 E3 CE 82 BF EC 0F 55 E7 5E E0  &#32;&#180;&#46;&#46;&#95;&#117;&#210;&#32;&#233;&#32;&#253;&#46;&#85;&#254;&#94;&#211;         
+C8 A7 C9 32 30 6C FF 8B 34 FA 6E 18 59 FB 2B B7  &#32;&#186;&#32;&#50;&#48;&#108;&#32;&#239;&#52;&#183;&#110;&#46;&#89;&#185;&#32;&#192;         
+9C B2 EC FC AD 44 C5 81 AC 1C 7B EF 0A E3 27 E0  &#163;&#166;&#253;&#179;&#161;&#68;&#32;&#252;&#188;&#46;&#123;&#180;&#46;&#210;&#39;&#211;     
+C9 0A 6F BD E8 B7 9F 19 00 94 1C 90 D6 A9 96 F0  &#32;&#46;&#111;&#162;&#222;&#192;&#131;&#46;&#46;&#246;&#46;&#201;&#205;&#174;&#251;&#173;     
+56 8E C0 B3 FA BA 44 52 FF E6 72 85 C7 42 90 C9  &#86;&#196;&#32;&#166;&#183;&#166;&#68;&#82;&#32;&#181;&#114;&#224;&#195;&#66;&#201;&#32;       
+
+64 AD 04 45 37 B9 F7 4E 4B 41 FD C8 E3 B9 6A 81  &#100;&#161;&#46;&#69;&#55;&#166;&#184;&#78;&#75;&#65;&#178;&#32;&#210;&#166;&#106;&#252;       
+E5 2F 83 4E FD DC 34 D6 A4 04 C9 02 1B 44 89 92  &#213;&#47;&#226;&#78;&#178;&#95;&#52;&#205;&#241;&#46;&#32;&#46;&#46;&#68;&#235;&#198;         
+48 58 00 B4 91 A4 E1 9C 17 3D 02 C1 2A 3E A1 BF  &#72;&#88;&#46;&#166;&#230;&#241;&#223;&#163;&#46;&#61;&#46;&#45;&#42;&#62;&#237;&#32;          
+D4 94 3C CD E8 DC 94 77 7B CE 89 1F 35 40 3D 9C  &#200;&#246;&#60;&#45;&#222;&#95;&#246;&#119;&#123;&#32;&#235;&#46;&#53;&#64;&#61;&#163;        
+F7 98 28 EA 38 FD E6 8C B8 BE 9C 45 5F BF 70 19  &#184;&#255;&#40;&#219;&#56;&#178;&#181;&#238;&#169;&#165;&#163;&#69;&#95;&#32;&#112;&#46;      
+67 90 AE 48 96 B9 8E F1 E6 E6 6E 96 FF DC 40 01  &#103;&#201;&#171;&#72;&#251;&#166;&#196;&#177;&#181;&#181;&#110;&#251;&#32;&#95;&#64;&#46;     
+92 5D C4 B5 D3 C3 D7 83 B6 E8 B4 DD 5A ED 36 59  &#198;&#93;&#45;&#193;&#203;&#32;&#206;&#226;&#194;&#222;&#166;&#166;&#90;&#221;&#54;&#89;      
+85 B6 C0 8C EE A6 04 F5 B6 FB 47 D1 4A 9A 9C 58  &#224;&#194;&#32;&#238;&#175;&#170;&#46;&#167;&#194;&#185;&#71;&#208;&#74;&#220;&#163;&#88;     
+D6 49 AA BC A2 CC 6D 0A DD 5E A0 22 3E AD F3 7C  &#205;&#73;&#172;&#32;&#243;&#166;&#109;&#46;&#166;&#94;&#225;&#34;&#62;&#161;&#190;&#124;      
+
+85 33 0A 58 C6 B4 C2 E9 23 C3 36 06 03 5D 8B E6  &#224;&#51;&#46;&#88;&#227;&#166;&#45;&#218;&#35;&#32;&#54;&#46;&#46;&#93;&#239;&#181;          
+3F 04 C1 BA ED DF 6D D8 0D 17 21 59 96 44 E7 A3  &#63;&#46;&#45;&#166;&#221;&#175;&#109;&#207;&#46;&#46;&#33;&#89;&#251;&#68;&#254;&#250;        
+11 7B ED 94 C2 E3 05 AF 8A 76 A8 38 41 2C 97 E9  &#46;&#123;&#221;&#246;&#45;&#210;&#46;&#187;&#232;&#118;&#191;&#56;&#65;&#44;&#249;&#218;      
+99 CA AA D5 DD 9B 5F 98 C2 A6 1A 29 70 DF D2 71  &#214;&#45;&#172;&#105;&#166;&#248;&#95;&#255;&#45;&#170;&#46;&#41;&#112;&#175;&#202;&#113;     
+8A CF 60 85 AC B1 0A E8 60 A1 6F BF E2 92 C8 7A  &#232;&#164;&#96;&#224;&#188;&#166;&#46;&#222;&#96;&#237;&#111;&#32;&#212;&#198;&#32;&#122;     
+A2 CE 17 47 BB 7A 13 F1 63 E1 F2 F1 16 91 0D 66  &#243;&#32;&#46;&#71;&#32;&#122;&#46;&#177;&#99;&#223;&#61;&#177;&#46;&#230;&#46;&#102;         
+39 AB E5 CF DB A1 50 99 AE 2B 92 1E 19 34 7F 3E  &#57;&#189;&#213;&#164;&#166;&#237;&#80;&#214;&#171;&#32;&#198;&#46;&#46;&#52;&#166;&#62;       
+E4 F2 3E F6 72 BC 74 6A D0 3F DB BC E5 4C 4D 74  &#245;&#61;&#62;&#247;&#114;&#32;&#116;&#106;&#240;&#63;&#166;&#32;&#213;&#76;&#77;&#116;       
+94 0F 0F 4A 6B 2E F7 A7 7F BB 8D 4D 61 F4 9E 5F  &#246;&#46;&#46;&#74;&#107;&#46;&#184;&#186;&#166;&#32;&#236;&#77;&#97;&#182;&#215;&#95;        
+
+E9 57 BE 26 E9 78 23 A4 95 FD 13 6F D7 AD D2 A4  &#218;&#87;&#165;&#38;&#218;&#120;&#35;&#241;&#242;&#178;&#46;&#111;&#206;&#161;&#202;&#241;    
+77 E1 1B 08 1E AF 6C 01 AA 74 0B 08 C8 AD 77 99  &#119;&#223;&#46;&#46;&#46;&#187;&#108;&#46;&#172;&#116;&#46;&#46;&#32;&#161;&#119;&#214;       
+5A B8 30 DF 13 A4 79 79 9E F6 81 12 CD AB AE EB  &#90;&#169;&#48;&#175;&#46;&#241;&#121;&#121;&#215;&#247;&#252;&#46;&#45;&#189;&#171;&#217;     
+BA 3D F1 88 62 F5 69 41 63 07 5F 79 F2 6E DD DD  &#166;&#61;&#177;&#234;&#98;&#167;&#105;&#65;&#99;&#46;&#95;&#121;&#61;&#110;&#166;&#166;       
+CD 01 00 00                                      &#45;&#46;&#46;&#46;</pre>
+<H3>Challenge:</H3>
+Decrypt the encrypted text :)
+</body></html>

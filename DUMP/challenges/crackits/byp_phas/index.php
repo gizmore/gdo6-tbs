@@ -1,0 +1,15 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CrackIt 39: &quot;Burn Your Processor&quot;</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="theblacksheep">
+<link rel="stylesheet" type="text/css" href="/styles.css"></head><body class="usual"><div class="navline"><a href="/hackchallenge.php" title="Go to the challenge-list."><img src="/files/images/icons/list_small.gif" width="12" height="11" alt="icon" title="Go to the challenge-list." /><span>Challenges</span></a><img src="/files/images/misc/arrow_navline.gif" class="arrow" width="10" height="9" alt="-&gt;" title="" /><span>CrackIt</span><img src="/files/images/misc/arrow_navline.gif" class="arrow" width="10" height="9" alt="-&gt;" title="" /><a href="/challenges/crackits/byp_phas/index.php" title="Challenge: &quot;Burn Your Processor&quot;"><span>Burn Your Processor</span></a></div><div class="module"><div class="chall_header"><table cellspacing="0"><tr><td class="info"><img class="grouppic" alt="a CrackIt-challenge" src="/files/images/groupmasters/4_all.gif" height="18" width="25" /><span>CrackIt 39: &quot;Burn Your Processor&quot; [made by <a class="fromuser" href="/userstats.php?username=Phas(retired)">Phas(retired)</a>]</span></td><td class="links"><table cellspacing="0"><tr><td class="forum"><a href="/challvote.php?challid=308" title="See the rating of this challenge!"><img src="/files/images/icons/vote_stat_see_sl.gif" width="16" height="16" alt="vote icon" title="See the rating of this challenge!" /><span>Vote</span></a></td><td class="forum_space">&nbsp;</td><td class="forum"><a href="/forum/forum_showforum.php?forumid=21&amp;challenge_id=308" title="Visit the CrackIt-Forum to ask questions or to find hints for this challenge."><img src="/files/images/misc/challenge_forum_questions.gif" width="16" height="16" alt="forum icon" title="Visit the CrackIt-Forum to ask questions or to find hints for this challenge." /><span>Forum</span></a></td><td class="notdone">not&nbsp;done&nbsp;<a href="/challengestats.php?challengeid=308" title="80 users have solved this challenge so far.">[80]</a></td></tr></table></td></tr></table></div><div class="challenge_div">  Just find the correct solution<br />
+  Hint: &quot;Use your brain, not your CPU&quot;
+ <p class="challenge_1" style="text-align:center;">
+<a class="challenge_2" href="http://bright-shadows.net/challenges/crackits/byp_phas/byp.exe">Download the CrackIt</a></p>
+(c)Phas 2005
+<form action="/challenges/crackits/byp_phas/index.php" method="get" style="margin-top:3mm;margin-bottom:1mm;padding:0px;">
+  <input type="text" value="enter solution" name="solution" size="20" class="challenge_edit" />
+  <input type="submit" value="Check it!" name="button_submit" style="margin-left:5mm;" class="challenge_submit" />
+</form></div></div></body></html>
