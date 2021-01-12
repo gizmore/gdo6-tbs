@@ -13,7 +13,6 @@ use GDO\File\FileUtil;
 use GDO\Forum\Module_Forum;
 use GDO\Forum\GDO_ForumBoard;
 use GDO\User\GDO_Permission;
-use GDO\Forum\Method\Repair;
 use GDO\TBS\GDO_TBS_ChallengeSolved;
 use GDO\Date\Time;
 use GDO\Forum\GDO_ForumThread;
@@ -161,7 +160,7 @@ final class ImportTBS
     
     private function convertChallengePath($fullpath)
     {
-        $fullpath = Strings::substrFrom($fullpath, 'GDO/TBS/INPUT/challenges/');
+        $fullpath = Strings::substrFrom($fullpath, 'GDO/TBS/DUMP/challenges/');
         return $this->challengesPath($fullpath);
     }
     
@@ -215,7 +214,7 @@ final class ImportTBS
         }
 
         # Clear cache for user permissions and maybe other things.
-        ClearCache::make()->execute();
+        ClearCache::make()->clearCache();
     }
     
     #############
@@ -363,11 +362,11 @@ final class ImportTBS
         FileUtil::createDir($this->challengesPath());
         
         # Copy public files
-        $path = $this->getModule()->filePath('INPUT/challenges/');
+        $path = $this->getModule()->filePath('DUMP/challenges/');
         Filewalker::traverse($path, null, [$this, 'importChallengeFile']);
 
         # Merge manual created files
-        $path = $this->getModule()->filePath('ADD_TO_CHALLS/');
+        $path = $this->getModule()->filePath('HIDDEN/');
         $path2 = $this->getModule()->filePath('challenges/');
         FileUtil::mergeDirectory($path2, $path);
     }

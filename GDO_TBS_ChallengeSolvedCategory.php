@@ -6,7 +6,15 @@ use GDO\Profile\GDT_User;
 use GDO\DB\GDT_UInt;
 use GDO\User\GDO_User;
 use GDO\DB\GDT_Decimal;
+use GDO\DB\Query;
 
+/**
+ * Precompute challenge points per category for the users.
+ * @TODO: convert this table into a view?
+ * 
+ * @author gizmore
+ *
+ */
 final class GDO_TBS_ChallengeSolvedCategory extends GDO
 {
     public function gdoCached() { return false; }
@@ -102,13 +110,67 @@ final class GDO_TBS_ChallengeSolvedCategory extends GDO
         ];
     }
 
+    public static function updateUsersWithHugeQuery()
+    {
+        $users = GDO_User::table()->select('user_id')->exec();
+        while ($userid = $users->fetchValue())
+        {
+            self::updateUserWithHugeQuery($userid);
+        }
+    }
+    
+    public static function updateUserWithHugeQuery($userid)
+    {
+        $userid = (int)$userid;
+        
+        $query = new Query(self::table());
+        $tableName = self::table()->gdoTableName();
+        
+        # 1 userid
+        $calcselect = "( SELECT $userid ), ";
+        
+        # 5 whole site
+        $calcselect .= self::calcselect($userid);
+        
+        # 5x12 each category
+        foreach (GDT_TBS_ChallengeCategory::$CATS as $category)
+        {
+            $calcselect .= self::calcselect($userid, $category);
+        }
+        
+        # fix
+        $calcselect = trim($calcselect, ' ,');
+        
+        $query = $query->raw("REPLACE INTO $tableName VALUES ( $calcselect )");
+        $query->exec();
+    }
+    
+    /**
+     * @TODO: Ugly code
+     * @param int $userid
+     * @param int $categoryID
+     */
+    private static function calcselect($userid, $category=null)
+    {
+        $challTable = GDO_TBS_Challenge::table()->gdoTableName();
+        $solvedTable = GDO_TBS_ChallengeSolved::table()->gdoTableName();
+        $whereCat = $category === null ? '' : " AND chall_category='$category'";
+        $calcselect = "( SELECT COUNT(*) FROM $solvedTable st JOIN $challTable ct ON st.cs_challenge = ct.chall_id WHERE st.cs_user=$userid$whereCat ), ";
+        $calcselect .= "( SELECT COUNT(*) FROM $challTable WHERE 1$whereCat ), ";
+        $calcselect .= "( SELECT SUM(chall_score) FROM $solvedTable st JOIN $challTable ct ON st.cs_challenge = ct.chall_id WHERE st.cs_user=$userid$whereCat ), ";
+        $calcselect .= "( SELECT SUM(chall_score) FROM $challTable WHERE 1$whereCat ), ";
+        $calcselect .= "( SELECT ( SELECT SUM(chall_score) FROM $solvedTable st JOIN $challTable ct ON st.cs_challenge = ct.chall_id WHERE st.cs_user=$userid$whereCat ) / ( SELECT SUM(chall_score) FROM $challTable WHERE 1$whereCat ) * 100.0 ), ";
+        return $calcselect;
+    }
+    
     public static function updateUsers()
     {
-        $result = GDO_User::table()->select()->exec();
-        while ($user = $result->fetchObject())
-        {
-            self::updateUser($user);
-        }
+        self::updateUsersWithHugeQuery();
+//         $result = GDO_User::table()->select()->exec();
+//         while ($user = $result->fetchObject())
+//         {
+//             self::updateUser($user);
+//         }
     }
     
     public static function get(GDO_User $user)
@@ -124,42 +186,44 @@ final class GDO_TBS_ChallengeSolvedCategory extends GDO
     
     public static function updateUser(GDO_User $user)
     {
-        $row = self::get($user);
+        self::updateUserWithHugeQuery($user->getID());
         
-        $before = $row->getVar('csc_points');
+//         $row = self::get($user);
         
-        $row->setVars([
-            'csc_solved' => GDO_TBS_ChallengeSolved::table()->queryNumSolved($user),
-            'csc_max_solved' => GDO_TBS_ChallengeSolved::table()->queryChallengeCount(),
-            'csc_points' => GDO_TBS_ChallengeSolved::table()->queryNumPoints($user),
-            'csc_max_points' => GDO_TBS_ChallengeSolved::table()->queryMaxPoints(),
-        ]);
-        $row->setVar('csc_percent', 
-            (int)
-            floatval($row->getVar('csc_points')) / 
-            floatval($row->getVar('csc_max_points')));
+//         $before = $row->getVar('csc_points');
         
-        foreach (GDT_TBS_ChallengeCategory::$CATS as $n => $category)
-        {
-            $row->setVars([
-                "csc_solved_{$n}" => GDO_TBS_ChallengeSolved::table()->queryNumSolved($user, $category),
-                "csc_max_solved_{$n}" => GDO_TBS_ChallengeSolved::table()->queryChallengeCount($category),
-                "csc_points_{$n}" => GDO_TBS_ChallengeSolved::table()->queryNumPoints($user, $category),
-                "csc_max_points_{$n}" => GDO_TBS_ChallengeSolved::table()->queryMaxPoints($category),
-            ]);
-            $row->setVar("csc_percent_{$n}",
-                (int)
-                floatval($row->getVar("csc_points_{$n}")) /
-                floatval($row->getVar("csc_max_points_{$n}")));
-        }
+//         $row->setVars([
+//             'csc_solved' => GDO_TBS_ChallengeSolved::table()->queryNumSolved($user),
+//             'csc_max_solved' => GDO_TBS_ChallengeSolved::table()->queryChallengeCount(),
+//             'csc_points' => GDO_TBS_ChallengeSolved::table()->queryNumPoints($user),
+//             'csc_max_points' => GDO_TBS_ChallengeSolved::table()->queryMaxPoints(),
+//         ]);
+//         $row->setVar('csc_percent', 
+//             (int)
+//             floatval($row->getVar('csc_points')) / 
+//             floatval($row->getVar('csc_max_points')));
         
-        $after = $row->getVar('csc_points');
+//         foreach (GDT_TBS_ChallengeCategory::$CATS as $n => $category)
+//         {
+//             $row->setVars([
+//                 "csc_solved_{$n}" => GDO_TBS_ChallengeSolved::table()->queryNumSolved($user, $category),
+//                 "csc_max_solved_{$n}" => GDO_TBS_ChallengeSolved::table()->queryChallengeCount($category),
+//                 "csc_points_{$n}" => GDO_TBS_ChallengeSolved::table()->queryNumPoints($user, $category),
+//                 "csc_max_points_{$n}" => GDO_TBS_ChallengeSolved::table()->queryMaxPoints($category),
+//             ]);
+//             $row->setVar("csc_percent_{$n}",
+//                 (int)
+//                 floatval($row->getVar("csc_points_{$n}")) /
+//                 floatval($row->getVar("csc_max_points_{$n}")));
+//         }
         
-        $row->save();
+//         $after = $row->getVar('csc_points');
         
-        $user->saveVar('user_level', $row->getVar('csc_points'));
+//         $row->save();
         
-        return [$before, $after];
+//         $user->saveVar('user_level', $row->getVar('csc_points'));
+        
+//         return [$before, $after];
     }
 
 }

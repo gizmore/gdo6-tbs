@@ -123,4 +123,9 @@ final class Module_TBS extends GDO_Module
         echo $this->templatePHP('profile.php', ['user' => $user]);
     }
     
+    public static function hookUserActivated(GDO_User $user)
+    {
+        # Craete scoring upon activation.
+        GDO_TBS_ChallengeSolvedCategory::updateUser($user);
+    }
 }

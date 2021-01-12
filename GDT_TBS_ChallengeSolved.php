@@ -3,7 +3,6 @@ namespace GDO\TBS;
 
 use GDO\User\GDO_User;
 use GDO\DB\GDT_Virtual;
-use GDO\Core\GDT;
 use GDO\UI\GDT_Label;
 
 final class GDT_TBS_ChallengeSolved extends GDT_Virtual

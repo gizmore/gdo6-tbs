@@ -56,4 +56,9 @@ final class GDT_TBS_ChallengeCategory extends GDT_EnumNoI18n
         return array_search($category, self::$CATS);
     }
     
+    public static function getCategoryIDs()
+    {
+        return array_keys(self::$CATS);
+    }
+
 }

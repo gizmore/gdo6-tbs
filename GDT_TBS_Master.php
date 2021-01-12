@@ -1,7 +1,6 @@
 <?php
 namespace GDO\TBS;
 
-use GDO\Core\GDT;
 use GDO\UI\GDT_Container;
 use GDO\User\GDO_User;
 use GDO\Core\GDO;
