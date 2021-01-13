@@ -11,8 +11,8 @@ use GDO\User\GDO_User;
 use GDO\Core\GDT_Error;
 use GDO\Core\Website;
 
-require 'protected/config.php';
 require "GDO6.php";
+require 'protected/config.php';
 
 Database::init();
 new ModuleLoader(GDO_PATH . 'GDO/');
