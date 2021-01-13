@@ -110,7 +110,7 @@ final class GDO_TBS_ChallengeSolvedCategory extends GDO
         ];
     }
 
-    public static function updateUsersWithHugeQuery()
+    private static function updateUsersWithHugeQuery()
     {
         $users = GDO_User::table()->select('user_id')->exec();
         while ($userid = $users->fetchValue())
@@ -119,7 +119,7 @@ final class GDO_TBS_ChallengeSolvedCategory extends GDO
         }
     }
     
-    public static function updateUserWithHugeQuery($userid)
+    private static function updateUserWithHugeQuery($userid)
     {
         $userid = (int)$userid;
         

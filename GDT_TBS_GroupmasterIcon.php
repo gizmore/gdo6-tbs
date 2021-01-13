@@ -34,16 +34,9 @@ final class GDT_TBS_GroupmasterIcon extends GDT
         
         $catID = GDT_TBS_ChallengeCategory::getCategoryID($this->category);
        
-        try
-        {
-            return
-                floatval($vars["csc_points_{$catID}"]) /
-                floatval($vars["csc_max_points_{$catID}"]) * 100.0;
-        }
-        catch (\Throwable $ex)
-        {
-            return 0.0;
-        }
+        $points = floatval($vars["csc_points_{$catID}"]);
+        $max = floatval($vars["csc_max_points_{$catID}"]);
+        return $max > 0 ? $points / $max * 100.0 : 0.0;
     }
     
     public $category;
