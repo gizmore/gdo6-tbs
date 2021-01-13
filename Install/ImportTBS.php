@@ -172,7 +172,12 @@ final class ImportTBS
     private function convertUsernameToID($username)
     {
         $username = $username ? $username : 'UnknownUser';
-        return GDO_User::getByName($username)->getID();
+        if (!($user = GDO_User::getByName($username)))
+        {
+            echo "Cannot find user $username<br/>\n";
+            $user = GDO_User::getByName('UnknownUser');
+        }
+        return $user->getID();
     }
     
     ################
