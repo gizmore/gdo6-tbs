@@ -24,7 +24,7 @@ use GDO\Net\GDT_Url;
  */
 final class Module_TBS extends GDO_Module
 {
-    public $module_priority = 100;
+    public $module_priority = 110;
     public $module_license = 'Properitary';
     
     public function isSiteModule() { return true; }
