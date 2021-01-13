@@ -60,7 +60,7 @@ Install like any gdo6 site.
     php gdo.php admin gizmore password # create an admin
     
     
-or via webserver: your.site/install/wizard.php
+or via webserver: Goto localhost/install/wizard.php
 
 
 ### Crawl real TBS
@@ -69,9 +69,22 @@ To crawl TBS for INPUT/ run the following commands from the /GDO/TBS/bin/ folder
 
     # todo
     
-Place your CSV files into GDO/TBS/INPUT/CSV/*.csv
+
+### Install crawled backup
+
+    mkdir TBS/INPUT
+    cp TBS/DUMP/TBS_public.db TBS/INPUT/TBS.db
+    TBS/bin/sqlite2csv.sh
 
 As Admin run the importer in TBS admin section.
+An import will take a while. Approx. 20Min.
+
+
+### Add hidden chall files
+
+The importer merges the folders DUMP/challenges and HIDDEN/ into challenges/
+If you wanna help with importing challenges you can take a look at
+@TODO: Add a few demo files to DUMP/challenges/ 
 
 
 #### License

@@ -4,7 +4,11 @@ cd ../../../
 
 echo "Converting TBS/INPUT/tbs.db to CSV..."
 
-DB=GDO/TBS/INPUT/tbs.db
+# input file
+DB=GDO/TBS/INPUT/TBS.db
+
+# output dir
+mkdir GDO/TBS/INPUT/CSV
 
 # obtains all data tables from database
 TS=`sqlite3 $DB "SELECT tbl_name FROM sqlite_master WHERE type='table' and tbl_name not like 'sqlite_%';"`
