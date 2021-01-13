@@ -6,6 +6,7 @@ use GDO\Friends\Module_Friends;
 use GDO\PM\Module_PM;
 use GDO\Language\Module_Language;
 use GDO\Forum\Module_Forum;
+use GDO\Mibbit\Module_Mibbit;
 
 /**
  * Configure a few modules on install.
@@ -15,11 +16,31 @@ final class InstallTBS
 {
     public static function onInstall()
     {
+        self::changeModuleConfigForTBS();
+    }
+    
+    private static function changeModuleConfigForTBS()
+    {
+        # TBS is not guest-friendly!
         Module_Core::instance()->saveConfigVar('allow_guests', '0');
+        
+        # Disable Friends. We only need it for GDT_ACL
         Module_Friends::instance()->saveVar('module_enabled', false);
+        
+        # Send a welcome PM
         Module_PM::instance()->saveConfigVar('pm_welcome', '1');
+        
+        # Available languages
         Module_Language::instance()->saveConfigVar('languages', '["en","de","it"]');
+        
+        # On install disable forum email.
         Module_Forum::instance()->saveConfigVar('forum_mail_enable', '0');
+     
+        # IRC
+        Module_Mibbit::instance()->saveConfigVar('mibbit_host', 'irc.wechall.net');
+        Module_Mibbit::instance()->saveConfigVar('mibbit_port', '6666');
+        Module_Mibbit::instance()->saveConfigVar('mibbit_tls', '1');
+        Module_Mibbit::instance()->saveConfigVar('mibbit_channel', '#tbs');
     }
     
 }
