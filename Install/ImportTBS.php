@@ -396,7 +396,7 @@ final class ImportTBS
         # Remove chall meta
         $fileData = preg_replace('#<body([^>]*)>.*</table></td></tr></table></div>#s', '<body$1>', $fileData);
         # Fix URLs
-        $fileData = str_replace('/challenges/', $module->wwwPath('challenges/'), $fileData);
+        $fileData = str_replace('/challenges/', $module->wwwPath('challenges/').'/', $fileData);
         # Fix windows.location (JS challs)
         $fileData = str_replace('window.location.href=', 'window.top.location.href=', $fileData);
         
