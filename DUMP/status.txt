@@ -31,7 +31,7 @@ Categ	order	URL	Title	Status
 1	10	/challenges/exploits/strange_link/index.php	[Down]The strange link.	DOWN
 1	11	/challenges/exploits/exploit_barnell/index.php	Barnell 	TODO PWD
 1	12	/challenges/exploits/exploit_analyse2/index.php	Analyse this II!	REVIVED!!
-1	13	/challenges/exploit_rhc6/index.php	RHC 6	not started
+1	13	/challenges/exploit_rhc6/index.php	RHC 6	REVIVED!!
 1	14	/challenges/exploits/exploit_guestbook/index.php	Our guestbook!	not started
 1	15	/challenges/exploits/exploit_mysql_2/index.php	SQL-Injection 2 	not started
 1	16	/challenges/exploit_rhc4/account.php	RHC 4	not started
