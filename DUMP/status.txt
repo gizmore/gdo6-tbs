@@ -3,6 +3,7 @@ OK => Hidden file ok, tester in TBS environment => ready
 TODO PWD => ready, password is known, waiting for the implementation of solutionChecker
 DOWN => challenge is down on original TBS website (may be possible to understand how it was supposed to work from the forums thought)
 PROBLEM => sth went wrong, did not find solution yet
+REVIVED!! => down on original TBS, but revived here !
 
 Categ	order	URL	Title	Status
 0	1	/challenges/scripts/js1/index.php	First one and very easy to do.	OK
@@ -28,8 +29,8 @@ Categ	order	URL	Title	Status
 1	8	/challenges/exploits/exploit_mysql_1/index.php	SQL-Injection I	PROBLEM
 1	9	/challenges/exploit_rhc2/localhost.php	RHC 2	DOWN
 1	10	/challenges/exploits/strange_link/index.php	[Down]The strange link.	DOWN
-1	11	/challenges/exploits/exploit_barnell/index.php	Barnell 	not started
-1	12	/challenges/exploits/exploit_analyse2/index.php	Analyse this II!	not started
+1	11	/challenges/exploits/exploit_barnell/index.php	Barnell 	TODO PWD
+1	12	/challenges/exploits/exploit_analyse2/index.php	Analyse this II!	REVIVED!!
 1	13	/challenges/exploit_rhc6/index.php	RHC 6	not started
 1	14	/challenges/exploits/exploit_guestbook/index.php	Our guestbook!	not started
 1	15	/challenges/exploits/exploit_mysql_2/index.php	SQL-Injection 2 	not started
