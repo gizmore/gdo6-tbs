@@ -1,9 +1,12 @@
 not started => not started to work on it
 OK => Hidden file ok, tester in TBS environment => ready 
 TODO PWD => ready, password is known, waiting for the implementation of solutionChecker
+SIMULATED => challenge not possible anymore, was based on a vuln that do not exist anymore => behaviour has been simulated
 DOWN => challenge is down on original TBS website (may be possible to understand how it was supposed to work from the forums thought)
-PROBLEM => sth went wrong, did not find solution yet
+PROBLEM => not implemented yet, problem to implement (but still working on it)
 REVIVED!! => down on original TBS, but revived here !
+NOT SOLVED => not solved yet
+MANUAL => manual checkin of solution (users had to post a messsage on a special forum with their solution and explanation)
 
 Categ	order	URL	Title	Status
 0	1	/challenges/scripts/js1/index.php	First one and very easy to do.	OK
@@ -30,15 +33,15 @@ Categ	order	URL	Title	Status
 1	9	/challenges/exploit_rhc2/localhost.php	RHC 2	DOWN
 1	10	/challenges/exploits/strange_link/index.php	[Down]The strange link.	DOWN
 1	11	/challenges/exploits/exploit_barnell/index.php	Barnell 	TODO PWD
-1	12	/challenges/exploits/exploit_analyse2/index.php	Analyse this II!	REVIVED!!
-1	13	/challenges/exploit_rhc6/index.php	RHC 6	REVIVED!!
-1	14	/challenges/exploits/exploit_guestbook/index.php	Our guestbook!	not started
-1	15	/challenges/exploits/exploit_mysql_2/index.php	SQL-Injection 2 	not started
-1	16	/challenges/exploit_rhc4/account.php	RHC 4	not started
-1	17	/challenges/exploits/exploit_rhc9/index.php	RHC 9	not started
-1	18	/challenges/exploit_rhc5/index.php	RHC 5	not started
-1	19	/challenges/exploits/exploit_loselip5/index.php	Lose Lip5 	not started
-1	20	/challenges/exploits/exploit_analyse3/index.php	Analyse this III!	not started
+1	12	/challenges/exploits/exploit_analyse2/index.php	Analyse this II!	REVIVED
+1	13	/challenges/exploit_rhc6/index.php	RHC 6	REVIVED
+1	14	/challenges/exploits/exploit_guestbook/index.php	Our guestbook!	PROBLEM
+1	15	/challenges/exploits/exploit_mysql_2/index.php	SQL-Injection 2 	PROBLEM
+1	16	/challenges/exploit_rhc4/account.php	RHC 4	TODO PWD
+1	17	/challenges/exploits/exploit_rhc9/index.php	RHC 9	TODO PWD
+1	18	/challenges/exploit_rhc5/index.php	RHC 5	PROBLEM
+1	19	/challenges/exploits/exploit_loselip5/index.php	Lose Lip5 	DOWN ?
+1	20	/challenges/exploits/exploit_analyse3/index.php	Analyse this III!	SIMULATED
 1	21	/challenges/exploits/exploit_rayden5/index.php	RHC 8 (rayp0rn) 	not started
 1	22	/challenges/exploits/exploit_r3d5pik3/index.php	RHC 7 (r3d5pik3) 	not started
 1	23	/challenges/exploits/exploit_linux_s_deadbeef/index.php	Linux Source Deadbeef 	not started
@@ -46,75 +49,75 @@ Categ	order	URL	Title	Status
 1	25	/challenges/exploit_write_bitboard/index.php	Write an Exploit I (bitboard 2.4 final)	not started
 1	26	/challenges/exploits/exploit_linux_b_starter/index.php	Linux Binary Starter 	not started
 1	27	/challenges/exploits/exploit_linux_1/index.php	Linux 	not started
-2	1	/challenges/levelc1/crypto1.php	Easy starter!	not started
-2	2	/challenges/crypto24/crypto24.php	MD is my friend! 	not started
-2	3	/challenges/levelc4/visual.php	First VISUAL crypto	not started
-2	4	/challenges/levelc2/crypto2.php	Harder but possible.	not started
-2	5	/challenges/levelc5/crypto5.php	VISUAL crypto 2. I hate addition ;-)	not started
-2	6	/challenges/crypto18/crypto18.php	Strange language	not started
-2	7	/challenges/levelc8/crypto8.php	How does it work?	not started
-2	8	/challenges/levelc7/visual3.php	third VISUAL crypto	not started
-2	9	/challenges/levelc13/crypto13.php	Not too complicated...	not started
-2	10	/challenges/crypto_allison1/index.php	I hate Footloose... 	not started
-2	11	/challenges/levelc12/crypto12.php	Back too the base!	not started
-2	12	/challenges/crypto_23/crypto23.php	Kensington Stone 	not started
-2	13	/challenges/crypto29/crypto29.php	Capitals	not started
-2	14	/challenges/levelc3/crypto3.php	You will get it!	not started
-2	15	/challenges/crypto17/crypto17.php	You should be able to see it!	not started
-2	16	/challenges/crypto19/crypto19.php	Count and wonder 	not started
-2	17	/challenges/levelc14/crypto14.php	Try out something...	not started
-2	18	/challenges/levelc15/crypto15.php	Easy to use but useful	not started
-2	19	/challenges/crypto35/index.php	Cryptography & Literature 	not started
-2	20	/challenges/levelc16/crypto16.php	Crypto 	not started
-2	21	/challenges/crypto/qwerty_where_to_go/index.php	GA BU ZO MEU 	not started
-2	22	/challenges/crypto/deathspawn_playfair/index.php	Ok. Let's all be nice and just play fair. 	not started
-2	23	/challenges/crypto31/index.php	Alien 	not started
-2	24	/challenges/crypto/roger_crypto_and_history/index.php	Cryptography & History 	not started
-2	25	/challenges/crypto_rj45	What is not written?	not started
-2	26	/challenges/crypto20/crypto20.php	Jules Verne 	not started
-2	27	/challenges/crypto28/eldorado.php	Eldorado 	not started
-2	28	/challenges/crypto_dennis/index.php	She likes hexcode 	not started
-2	29	/challenges/crypto/moyo_rsa/index.php	RSA - not always good 	not started
-2	30	/challenges/crypto/phas_kcta1/index.php	Weak algorithm (KCTA1) 	not started
-2	31	/challenges/crypto22/crypto22.php	Data file 	not started
-2	32	/challenges/crypto_elementary_watson/index.php	Elementary my dear Watson! 	not started
-2	33	/challenges/crypto36/index.php	What is it...? 	not started
-2	34	/challenges/crypto33/index.php	Bli Bla Blubb - the fish 	not started
-2	35	/challenges/crypto27/crypto27.php	Signs	not started
-2	36	/challenges/crypto/cabrero_music/index.php	Andante appassionato in F major 	not started
-2	37	/challenges/crypto32/index.php	The Treasure 	not started
-2	38	/challenges/crypto_inferno_2/index.php	Damn easy 	not started
-2	39	/challenges/crypto/cabrero_6/index.php	 	not started
-2	40	/challenges/crypto25/crypto25.php	Do you want to dance with me? 	not started
-2	41	/challenges/crypto_cyber_1/index.php	DO U LIKE MY JUMPS?	not started
-2	42	/challenges/crypto_mastermind/index.php	MasterMind	not started
-2	43	/challenges/crypto/cabrero_roberto/index.php	Roberto's crypto idea 	not started
-2	44	/challenges/crypto34/index.php	Amsco 	not started
-2	45	/challenges/crypto/phas_kcta2/index.php	Stronger key (KCTA 2) 	not started
-2	46	/challenges/crypto_inferno_3/index.php	Hexen 	not started
-2	47	/challenges/crypto/cyber3/index.php	OH MY GOD,THEY KILLED KENNY!	not started
-2	48	/challenges/crypto/phas_kpta1/index.php	Simple encryption (KPTA 1) 	not started
-2	49	/challenges/crypto_cabrero/index.php	Can I be analyzed please? 	not started
-2	50	/challenges/crypto/cerades_writesomething2/index.php	Write something II 	not started
-2	51	/challenges/crypto/bb_mda1/index.php	The Maldito Algorithm (MDA 1) 	not started
-2	52	/challenges/crypto_inferno/index.php	Double The Fun 	not started
-2	53	/challenges/crypto26/crypto26.php	Step by Step 	not started
-2	54	/challenges/crypto_cabrero_4/index.php	Pythagora's dream 	not started
-2	55	/challenges/crypto_corso/index.php	Exorcise me 	not started
-2	56	/challenges/crypto_vowels/index.php	The vowels attack 	not started
-2	57	/challenges/crypto/phas_kcta3/index.php	Powerful key (KCTA 3) 	not started
-2	58	/challenges/crypto_rj45_2/index.php	TWO CONVERSION	not started
-2	59	/challenges/crypto_alpha_nightmare/index.php	ALPHABET'S NIGHTMARE 	not started
-2	60	/challenges/crypto_cabrero_2/index.php	CONTACT !!! 	not started
-2	61	/challenges/crypto/crypto_velo/index.php	Slovenia 	not started
-2	62	/challenges/crypto/phas_hash/index.php	Hash me baby (ph128) 	not started
-2	63	/challenges/crypto/Siberian_Stigmatism/index.php	Siberian Stigmatism 	not started
-2	64	/challenges/crypto/phas_kpta3/index.php	Encrypting me softly (KPTA 3) 	not started
-2	65	/challenges/crypto/phas_cryptorouter/index.php	Crypto-Router 	not started
-2	66	/challenges/crypto/bb_mda2/index.php	The Maldito Algorithm II (MDA 2) 	not started
-2	67	/challenges/crypto/caesum_training/index.php	Crypto Training Programme 	not started
-2	68	/challenges/crypto/velo_squares/index.php	Crypto Square(s) 	not started
-2	69	/challenges/crypto/phas_kpta2/index.php	Secret algorithm (KPTA 2) 	not started
+2	1	/challenges/levelc1/crypto1.php	Easy starter!	TODO PWD
+2	2	/challenges/crypto24/crypto24.php	MD is my friend! 	TODO PWD
+2	3	/challenges/levelc4/visual.php	First VISUAL crypto	TODO PWD
+2	4	/challenges/levelc2/crypto2.php	Harder but possible.	TODO PWD
+2	5	/challenges/levelc5/crypto5.php	VISUAL crypto 2. I hate addition ;-)	TODO PWD
+2	6	/challenges/crypto18/crypto18.php	Strange language	TODO PWD
+2	7	/challenges/levelc8/crypto8.php	How does it work?	TODO PWD
+2	8	/challenges/levelc7/visual3.php	third VISUAL crypto	TODO PWD
+2	9	/challenges/levelc13/crypto13.php	Not too complicated...	TODO PWD
+2	10	/challenges/crypto_allison1/index.php	I hate Footloose... 	TODO PWD
+2	11	/challenges/levelc12/crypto12.php	Back too the base!	TODO PWD
+2	12	/challenges/crypto_23/crypto23.php	Kensington Stone 	TODO PWD
+2	13	/challenges/crypto29/crypto29.php	Capitals	TODO PWD
+2	14	/challenges/levelc3/crypto3.php	You will get it!	TODO PWD
+2	15	/challenges/crypto17/crypto17.php	You should be able to see it!	TODO PWD
+2	16	/challenges/crypto19/crypto19.php	Count and wonder 	TODO PWD
+2	17	/challenges/levelc14/crypto14.php	Try out something...	TODO PWD
+2	18	/challenges/levelc15/crypto15.php	Easy to use but useful	TODO PWD
+2	19	/challenges/crypto35/index.php	Cryptography & Literature 	TODO PWD
+2	20	/challenges/levelc16/crypto16.php	Crypto 	TODO PWD
+2	21	/challenges/crypto/qwerty_where_to_go/index.php	GA BU ZO MEU 	TODO PWD
+2	22	/challenges/crypto/deathspawn_playfair/index.php	Ok. Let's all be nice and just play fair. 	TODO PWD
+2	23	/challenges/crypto31/index.php	Alien 	TODO PWD
+2	24	/challenges/crypto/roger_crypto_and_history/index.php	Cryptography & History 	TODO PWD
+2	25	/challenges/crypto_rj45	What is not written?	TODO PWD
+2	26	/challenges/crypto20/crypto20.php	Jules Verne 	TODO PWD
+2	27	/challenges/crypto28/eldorado.php	Eldorado 	TODO PWD
+2	28	/challenges/crypto_dennis/index.php	She likes hexcode 	TODO PWD
+2	29	/challenges/crypto/moyo_rsa/index.php	RSA - not always good 	TODO PWD
+2	30	/challenges/crypto/phas_kcta1/index.php	Weak algorithm (KCTA1) 	TODO PWD
+2	31	/challenges/crypto22/crypto22.php	Data file 	TODO PWD
+2	32	/challenges/crypto_elementary_watson/index.php	Elementary my dear Watson! 	TODO PWD
+2	33	/challenges/crypto36/index.php	What is it...? 	TODO PWD
+2	34	/challenges/crypto33/index.php	Bli Bla Blubb - the fish 	DOWN
+2	35	/challenges/crypto27/crypto27.php	Signs	TODO PWD
+2	36	/challenges/crypto/cabrero_music/index.php	Andante appassionato in F major 	TODO PWD
+2	37	/challenges/crypto32/index.php	The Treasure 	TODO PWD
+2	38	/challenges/crypto_inferno_2/index.php	Damn easy 	TODO PWD
+2	39	/challenges/crypto/cabrero_6/index.php	 	TODO PWD
+2	40	/challenges/crypto25/crypto25.php	Do you want to dance with me? 	TODO PWD
+2	41	/challenges/crypto_cyber_1/index.php	DO U LIKE MY JUMPS?	TODO PWD
+2	42	/challenges/crypto_mastermind/index.php	Solve it!	TODO PWD
+2	43	/challenges/crypto/cabrero_roberto/index.php	Roberto's crypto idea 	TODO PWD
+2	44	/challenges/crypto34/index.php	Amsco 	TODO PWD
+2	45	/challenges/crypto/phas_kcta2/index.php	Stronger key (KCTA 2) 	TODO PWD
+2	46	/challenges/crypto_inferno_3/index.php	Hexen 	TODO PWD
+2	47	/challenges/crypto/cyber3/index.php	OH MY GOD,THEY KILLED KENNY!	TODO PWD
+2	48	/challenges/crypto/phas_kpta1/index.php	Simple encryption (KPTA 1) 	NOT SOLVED
+2	49	/challenges/crypto_cabrero/index.php	Can I be analyzed please? 	TODO PWD
+2	50	/challenges/crypto/cerades_writesomething2/index.php	Write something II 	TODO PWD
+2	51	/challenges/crypto/bb_mda1/index.php	The Maldito Algorithm (MDA 1) 	NOT SOLVED
+2	52	/challenges/crypto_inferno/index.php	Double The Fun 	TODO PWD
+2	53	/challenges/crypto26/crypto26.php	Step by Step 	TODO PWD
+2	54	/challenges/crypto_cabrero_4/index.php	Pythagora's dream 	TODO PWD
+2	55	/challenges/crypto_corso/index.php	Exorcise me 	TODO PWD
+2	56	/challenges/crypto_vowels/index.php	The vowels attack 	TODO PWD
+2	57	/challenges/crypto/phas_kcta3/index.php	Powerful key (KCTA 3) 	TODO PWD
+2	58	/challenges/crypto_rj45_2/index.php	TWO CONVERSION	TODO PWD
+2	59	/challenges/crypto_alpha_nightmare/index.php	ALPHABET'S NIGHTMARE 	TODO PWD
+2	60	/challenges/crypto_cabrero_2/index.php	CONTACT !!! 	TODO PWD
+2	61	/challenges/crypto/crypto_velo/index.php	Slovenia 	TODO PWD
+2	62	/challenges/crypto/phas_hash/index.php	Hash me baby (ph128) 	RUNNING
+2	63	/challenges/crypto/Siberian_Stigmatism/index.php	Siberian Stigmatism 	TODO PWD
+2	64	/challenges/crypto/phas_kpta3/index.php	Encrypting me softly (KPTA 3) 	NOT SOLVED
+2	65	/challenges/crypto/phas_cryptorouter/index.php	Crypto-Router 	NOT SOLVED
+2	66	/challenges/crypto/bb_mda2/index.php	The Maldito Algorithm II (MDA 2) 	NOT SOLVED
+2	67	/challenges/crypto/caesum_training/index.php	Crypto Training Programme 	NOT SOLVED
+2	68	/challenges/crypto/velo_squares/index.php	Crypto Square(s) 	NOT SOLVED
+2	69	/challenges/crypto/phas_kpta2/index.php	Secret algorithm (KPTA 2) 	NOT SOLVED
 3	1	/challenges/levelcr2/crackit2.php	Also easy.	not started
 3	2	/challenges/levelcr1/ziplogin.php	Show your cracking skills.	not started
 3	3	/challenges/levelcr3/crackit3.php	It's starting	not started
@@ -167,37 +170,37 @@ Categ	order	URL	Title	Status
 3	50	/challenges/harl_2/index.php	Flippin Eck!!!	not started
 3	51	/challenges/crackits/rayden_blackcat64_brain2/index.php	 Plasmator and Rayden	not started
 3	52	/challenges/crackits/mips_2/index.php	Oh Christ! Roger refuses his classical origins. 	not started
-4	1	/challenges/stegano/too_easy/index.php	I know too easy.	not started
-4	2	/challenges/stegano/first/index.php	First little stegano	not started
-4	3	/challenges/stegano/focus/index.php	Just focus! 	not started
-4	4	/challenges/stegano/ascii_1/index.php	ASCII	not started
-4	5	/challenges/stegano_sniperkid/index.php	How to VIEW me? 	not started
-4	6	/challenges/stegano/harder_than_second/index.php	Its harder than the second or ?	not started
-4	7	/challenges/stegano/bazooka_squirrel/index.php	Not everything is like it seems.	not started
-4	8	/challenges/stegano/BaRa_Lizzard/index.php	Evil Lizzard 	not started
-4	9	/challenges/stegano/move_it/index.php	Move it!	not started
-4	10	/challenges/stegano/you_will_get_it/index.php	You will get it! lol	not started
-4	11	/challenges/stegano/diskis_minesweeper/index.php	Minesweeper 	not started
-4	12	/challenges/stegano/house_flower_textpicture/index.php	I really like that one.	not started
-4	13	/challenges/stegano/firebird_niceone/index.php	Nice one 	not started
-4	14	/challenges/stegano13/stegano13.php	Dance!	not started
-4	15	/challenges/stegano/goat_similar/index.php	similar	not started
-4	16	/challenges/stegano/ascii_3/index.php	A more difficult ASCII (bits and bytes...)	not started
-4	17	/challenges/stegano/tristan_lines/index.php	Lines	not started
-4	18	/challenges/stegano/roger_cerditos/index.php	The two Cerditos 	not started
-4	19	/challenges/stegano14/stegano14.php	Feel the beat	not started
-4	20	/challenges/stegano/real_goat/index.php	The real goat!	not started
-4	21	/challenges/stegano/shapeless/index.php	Shapeless 	not started
-4	22	/challenges/stegano/skibabop_bara/index.php	Ski-Ba-Bop-Ba-Dop-Bop 	not started
-4	23	/challenges/stegano/inferno_pie/index.php	Hmmm	not started
-4	24	/challenges/stegano/morphling/index.php	Morphling 	not started
-4	25	/challenges/stegano/sa007_customized_colors/index.php	Customized colors 	not started
+4	1	/challenges/stegano/too_easy/index.php	I know too easy.	TODO PWD
+4	2	/challenges/stegano/first/index.php	First little stegano	TODO PWD
+4	3	/challenges/stegano/focus/index.php	Just focus! 	TODO PWD
+4	4	/challenges/stegano/ascii_1/index.php	ASCII	TODO PWD
+4	5	/challenges/stegano_sniperkid/index.php	How to VIEW me? 	TODO PWD
+4	6	/challenges/stegano/harder_than_second/index.php	Its harder than the second or ?	TODO PWD
+4	7	/challenges/stegano/bazooka_squirrel/index.php	Not everything is like it seems.	TODO PWD
+4	8	/challenges/stegano/BaRa_Lizzard/index.php	Evil Lizzard 	TODO PWD
+4	9	/challenges/stegano/move_it/index.php	Move it!	TODO PWD
+4	10	/challenges/stegano/you_will_get_it/index.php	You will get it! lol	TODO PWD
+4	11	/challenges/stegano/diskis_minesweeper/index.php	Minesweeper 	TODO PWD
+4	12	/challenges/stegano/house_flower_textpicture/index.php	I really like that one.	TODO PWD
+4	13	/challenges/stegano/firebird_niceone/index.php	Nice one 	TODO PWD
+4	14	/challenges/stegano13/stegano13.php	Dance!	TODO PWD
+4	15	/challenges/stegano/goat_similar/index.php	similar	TODO PWD
+4	16	/challenges/stegano/ascii_3/index.php	A more difficult ASCII (bits and bytes...)	TODO PWD
+4	17	/challenges/stegano/tristan_lines/index.php	Lines	TODO PWD
+4	18	/challenges/stegano/roger_cerditos/index.php	The two Cerditos 	TODO PWD
+4	19	/challenges/stegano14/stegano14.php	Feel the beat	TODO PWD
+4	20	/challenges/stegano/real_goat/index.php	The real goat!	DOWN
+4	21	/challenges/stegano/shapeless/index.php	Shapeless 	TODO PWD
+4	22	/challenges/stegano/skibabop_bara/index.php	Ski-Ba-Bop-Ba-Dop-Bop 	NOT SOLVED
+4	23	/challenges/stegano/inferno_pie/index.php	Hmmm	TODO PWD
+4	24	/challenges/stegano/morphling/index.php	Morphling 	RUNNING
+4	25	/challenges/stegano/sa007_customized_colors/index.php	Customized colors 	TODO PWD
 4	26	/challenges/stegano/inferno_coordinates/index.php	Let's coordinate stuff 	not started
-4	27	/challenges/stegano/mic_qwerty/index.php	I hate QWERTY 	not started
-4	28	/challenges/stegano/BaRa_Honduras/index.php	Greetings From Honduras 	not started
-4	29	/challenges/stegano/reality/index.php	SteganoReality 	not started
-4	30	/challenges/stegano16/stegano16.php	The Beatles	not started
-4	31	/challenges/stegano/orient_express/index.php	The Orient Express 	not started
+4	27	/challenges/stegano/mic_qwerty/index.php	I hate QWERTY 	TODO PWD
+4	28	/challenges/stegano/BaRa_Honduras/index.php	Greetings From Honduras 	TODO PWD
+4	29	/challenges/stegano/reality/index.php	SteganoReality 	DOWN ?
+4	30	/challenges/stegano16/stegano16.php	The Beatles	TODO PWD
+4	31	/challenges/stegano/orient_express/index.php	The Orient Express 	TODO PWD
 4	32	/challenges/stegano12/stegano12.php	Sorry no hint available!	not started
 4	33	/challenges/stegano/sos/index.php	SOS 	not started
 4	34	/challenges/stegano/another_sound_one/index.php	Another sound one 	not started
@@ -260,21 +263,21 @@ Categ	order	URL	Title	Status
 7	5	/challenges/java/tictactoe/index.php	Defeat Me 	TODO PWD
 7	6	/challenges/applets/quangnitron/index.php	QuangNiTron 	TODO PWD
 7	7	/challenges/applets/quangntenemy_javalesson/index.php	quangntenemy teaches Java 	TODO PWD
-7	8	/challenges/applets/quangntenemy_lifeapplet/index.php	The Applet of Life 	PROBLEM
-7	9	/challenges/applets/chimbo_jpacman/index.php	JPacMan 	PROBLEM
-7	10	/challenges/applets/quangntenemy_javalesson2/index.php	quangntenemy teaches Java 2 	PROBLEM
-8	1	/challenges/logic3/index.php	Brothers and sisters	not started
-8	2	/challenges/logic1/index.php	Get the addends!	not started
-8	3	/challenges/logic2/index.php	How old are they?	not started
-8	4	/challenges/logic6/index.php	Light bulb	not started
-8	5	/challenges/logic8/index.php	Party time! 	not started
-8	6	/challenges/logic4/logic4.php	Numerical series	not started
-8	7	/challenges/logic5/index.php	Old friends	not started
-8	8	/challenges/logic/the_river/index.php	The river 	not started
-8	9	/challenges/logic/inferno_24/index.php	24	not started
-8	10	/challenges/logic/birthday/index.php	When is my birthday? 	not started
-8	11	/challenges/logic_inferno_3/index.php	Primary Target 	not started
-8	12	/challenges/logic/fivezeros/index.php	5 zero's 	not started
+7	8	/challenges/applets/quangntenemy_lifeapplet/index.php	The Applet of Life 	NOT SOLVED
+7	9	/challenges/applets/chimbo_jpacman/index.php	JPacMan 	NOT SOLVED
+7	10	/challenges/applets/quangntenemy_javalesson2/index.php	quangntenemy teaches Java 2 	NOT SOLVED
+8	1	/challenges/logic3/index.php	Brothers and sisters	TODO PWD
+8	2	/challenges/logic1/index.php	Get the addends!	TODO PWD
+8	3	/challenges/logic2/index.php	How old are they?	TODO PWD
+8	4	/challenges/logic6/index.php	Light bulb	MANUAL
+8	5	/challenges/logic8/index.php	Party time! 	MANUAL
+8	6	/challenges/logic4/logic4.php	Numerical series	TODO PWD
+8	7	/challenges/logic5/index.php	Old friends	MANUAL
+8	8	/challenges/logic/the_river/index.php	The river 	TODO PWD
+8	9	/challenges/logic/inferno_24/index.php	24	TODO PWD
+8	10	/challenges/logic/birthday/index.php	When is my birthday? 	MANUAL
+8	11	/challenges/logic_inferno_3/index.php	Primary Target 	TODO PWD
+8	12	/challenges/logic/fivezeros/index.php	5 zero's 	TODO PWD
 8	13	/challenges/logic_inferno/index.php	Math Miracles 	not started
 8	14	/challenges/logic_prices/index.php	Mmmmm... candies! 	not started
 8	15	/challenges/logic7/logic7.php	MasterMind	not started
