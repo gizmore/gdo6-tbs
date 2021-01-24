@@ -38,7 +38,8 @@ final class InstallTBS
         
         # On install disable forum email.
         Module_Forum::instance()->saveConfigVar('forum_mail_enable', '0');
-     
+        Module_Forum::instance()->saveConfigVar('forum_hook_left_bar', '0');
+
         # IRC
         Module_Mibbit::instance()->saveConfigVar('mibbit_host', 'irc.wechall.net');
         Module_Mibbit::instance()->saveConfigVar('mibbit_port', '6666');

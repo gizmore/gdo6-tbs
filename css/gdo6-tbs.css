@@ -576,6 +576,10 @@ img.gdo-captcha-img {
 	padding: 0 3px 0 2px;
 }
 
+.board_select {
+	display: inline-block;
+}
+
 /** Votes **/
 .gdt-like-button.liked .gdo-icon {
 	color: red;

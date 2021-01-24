@@ -40,7 +40,7 @@ $page->loadSidebars();
 	  <div><?=$page->bottomNav->render()?></div>
 	</div>
 	
-	<?=GDT_Loading::make('loading')->renderCell()?>
+	<?=GDT_Loading::make()->renderCell()?>
 	
 	<?=Javascript::displayJavascripts(Module_Core::instance()->cfgMinifyJS() === 'concat')?>
 
