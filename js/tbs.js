@@ -20,12 +20,8 @@ window.TBS = {
 				let profileLink = user.profileLink();
 				online.addChild($('<div>' + profileLink + '<span>'+user.level()+'</span></div>'));
 			}
-			
-			
-			
-			console.log(result);
 		});
 	}
 };
 
-setInterval(window.TBS.heartbeat, 5000);
+setInterval(window.TBS.heartbeat, 30000);
