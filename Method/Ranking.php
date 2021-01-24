@@ -19,7 +19,7 @@ final class Ranking extends MethodQueryTable
 {
     public function isOrdered() { return false; }
     public function isFiltered() { return false; }
-    public function getDefaultOrder() { 'user_level'; }
+    public function getDefaultOrder() { return 'user_level'; }
     public function getDefaultOrderDir() { return false; }
     public function getDefaultIPP() { return 100; }
     public function fetchAs() { return GDO_User::table(); }
@@ -31,7 +31,9 @@ final class Ranking extends MethodQueryTable
     
     public function getQuery()
     {
-        return parent::getQuery()->joinObject('csc_user')->where('user_type="member"');
+        return
+            parent::getQuery()->joinObject('csc_user')->
+            where('user_type="member"');
     }
     
     public function gdoHeaders()
