@@ -2,8 +2,13 @@
 use GDO\TBS\Module_TBS;
 use GDO\TBS\GDT_TBS_Online;
 use GDO\User\GDO_User;
+use GDO\PM\GDO_PM;
+use GDO\Forum\GDO_ForumPost;
+use GDO\Forum\GDO_ForumRead;
+use GDO\Forum\GDO_ForumThread;
 
 $mod = Module_TBS::instance();
+$user = GDO_User::current();
 ?>
 <div id="left_bar">
 
@@ -46,6 +51,8 @@ $mod = Module_TBS::instance();
     <div class="left_link">
       <img src="<?=$mod->wwwPath('img/sidebar/menu_forum.gif')?>" />
       ::[<a href="<?=href('Forum', 'Boards')?>"><?=t('link_tbs_forum')?></a>]
+      <?php $count = GDO_ForumRead::countUnread($user); ?>
+      <div id="left-unread-forum" class="left-unread-count" <?=$count?'':'style="display:none;"'?>><?=$count?></div>
     </div>
 
     <div class="left_link">
@@ -56,6 +63,8 @@ $mod = Module_TBS::instance();
     <div class="left_link">
       <img src="<?=$mod->wwwPath('img/sidebar/menu_pm.gif')?>" />
       ::[<a href="<?=href('PM', 'Overview')?>"><?=t('link_tbs_pm')?></a>]
+      <?php $count = GDO_PM::countUnread($user); ?>
+      <div id="left-unread-pm" class="left-unread-count" <?=$count?'':'style="display:none;"'?>><?=$count?></div>
     </div>
 
   </div>

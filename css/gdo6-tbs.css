@@ -63,6 +63,7 @@ div.collapse-content { padding: 6px; }
 	color: #fff;
 	font-size: 11px;
 	line-height: 16px;
+	position: relative;
 }
 
 .left_link img {
@@ -169,6 +170,7 @@ div.collapse-content { padding: 6px; }
 	padding: 4px 8px;
 	color: #000;
 	background-color: #c0c0b8;
+	background-color: #A0A0B0;
 	border: 1px solid #000;
 }
 
@@ -186,7 +188,7 @@ div.collapse-content { padding: 6px; }
 	color: green;
 }
 
-.gdo-error p {
+.gdo-error p, .gdo-exception {
 	background: #d87;
 }
 
@@ -241,6 +243,33 @@ td.gdt-num {
 
 
 /** Lists **/
+div.gdt-list-item,
+div.gdt-list > h3:first-child {
+	margin: 0 -16px;
+	padding: 0 16px;
+	border-bottom: 1px solid #333;
+/* 	margin-bottom: 8px; */
+	padding-bottom: 8px;
+}
+div.gdt-list-item:nth-child(2) {
+	border-top: 1px solid #333;
+}
+
+div.gdt-list, div.gdt-list-card {
+	margin-top: 16px;
+	width: fit-content;
+}
+div.gdt-list > h3,
+div.gdt-list-card > h3 {
+	background: url(../images/backgrounds/bkgnd1.jpeg);
+	padding: 8px;
+}
+
+/** List item **/
+.gdt-li-upper {
+	display: flex;
+}
+
 
 /** Cards **/
 /* .gdt-card { */
@@ -256,11 +285,21 @@ td.gdt-num {
 	background: #707080;
 }
 
+.gdt-card-middle {
+	display: flex;
+	flex-direction: row;
+}
+
 .gdt-card-fields {
 	display: grid;
 	grid-template-columns: 2fr 8fr;
 	grid-template-rows: auto;
 }
+
+.gdt-card-fields .gdt-html {
+	grid-column: 1 / 3;
+}
+
 .gdt-card-fields label {
 	color: red;
 }
@@ -309,10 +348,12 @@ ul.pagination li a:hover {
 .gdo-form form > input {
 	grid-column: 1 / 4;
 }
+.gdo-form .gdt-headline,
 .gdo-form form textarea,
 .gdo-form-error,
 .gdo-form form .gdt-bar,
 .gdo-form form .gdt-divider,
+.gdo-form form .gdt-paragraph,
 .gdo-form form .gdo-gdt_link,
 .form-span-columns,
 .gdo-form form > .gdo-container .gdo-container,
@@ -320,6 +361,8 @@ ul.pagination li a:hover {
 .gdo-file-controls {
 	grid-column: 1 / 4;
 }
+
+
 
 .gdo-form form .gdt-divider {
 	background: #aaa;
@@ -343,6 +386,9 @@ ul.pagination li a:hover {
 	font-weight: bold;
 	font-size: 20px;
 	padding-bottom: 4px;
+}
+.gdo-form .gdo-file-preview img {
+	max-width: 100%;
 }
 
 button,
@@ -499,4 +545,38 @@ img.gdo-captcha-img {
 #challenge_iframe {
 	width: 100%;
 	height: inherit;
+}
+
+/** Forum **/
+.forum-post .gdt-card-image {
+	width: 110px;
+	min-width: 110px;
+}
+
+.badge-container {
+	flex-wrap: wrap;
+}
+
+.forum-post .gdt-card-middle {
+	border-bottom: 1px dashed #999;
+}
+
+.left-unread-count {
+	position: absolute;
+	right: 4px;
+	top: 4px;
+	width: auto;
+	left: auto;
+	border-style: solid;
+	border-color: #000;
+	border-width: 1px 0px 1px 1px;
+	background-color: #C06060;
+	color: #FFF;
+	font-weight: bold;
+	padding: 0 3px 0 2px;
+}
+
+/** Votes **/
+.gdt-like-button.liked .gdo-icon {
+	color: red;
 }

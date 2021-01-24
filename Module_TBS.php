@@ -11,6 +11,9 @@ use GDO\Date\GDT_Duration;
 use GDO\DB\GDT_UInt;
 use GDO\DB\GDT_Checkbox;
 use GDO\Net\GDT_Url;
+use GDO\UI\GDT_Card;
+use GDO\UI\GDT_Container;
+use GDO\DB\Query;
 
 /**
  * TBS website as gdo6 module.
@@ -123,7 +126,25 @@ final class Module_TBS extends GDO_Module
         echo $this->templatePHP('profile.php', ['user' => $user]);
     }
     
-    public static function hookUserActivated(GDO_User $user)
+    public function hookDecoratePostUser(GDT_Card $card, GDT_Container $cont, GDO_User $user)
+    {
+        $cont2 = GDT_Container::make()->horizontal()->addClass('badge-container');
+        foreach (GDT_TBS_ChallengeCategory::$CATS as $category)
+        {
+            $cont2->addField(
+                GDT_TBS_GroupmasterIcon::make()->category($category)->gdo($user)
+            );
+        }
+        $cont->addField($cont2);
+    }
+    
+    public function hookMethodQueryTable_Forum_Thread(Query $query)
+    {
+        $join = 'LEFT JOIN gdo_tbs_challengesolvedcategory AS csc ON csc_user=post_creator';
+        $query->join($join);
+    }
+    
+    public function hookUserActivated(GDO_User $user)
     {
         # Craete scoring upon activation.
         GDO_TBS_ChallengeSolvedCategory::updateUser($user);

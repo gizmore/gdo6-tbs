@@ -26,13 +26,15 @@ use GDO\Admin\Method\ClearCache;
  * Import TBS data from /INPUT/ folder.
  * 
  * - Import some CSV from Xaav
- * - Copy GDO/TBS/challenges/ to /challenges. Rewrite some urls in all the files.
- * - Import forums from crawled forum files.
  * 
  * Problems:
  * 
- *  - Some post is very very long. I truncate at roughly 10MB now. You have to set max packet size in my.ini to 40MB for this.
- *  - Clarify how to merge challenges and solution forums nicely. In theory it already should be capable of repeated multi imports. Clarify for HIDDEN updates.
+ *  - Some post is very very long. I truncate at roughly 10MB now.
+ *    You have to set max packet size in my.ini to 40MB for this.
+ *    
+ *  - Clarify how to merge challenges and solution forums nicely.
+ *    In theory it already should be capable of repeated multi imports.
+ *    Clarify for HIDDEN updates.
  *  
  *  
  * @version 6.10
@@ -472,7 +474,7 @@ final class ImportTBS
     {
         $module = Module_TBS::instance();
         # Fix smileys.
-        $s = str_replace('/files/images/', $module->wwwPath('files/images/'), $s);
+        $s = str_replace('/files/images/', $module->wwwPath('images/'), $s);
         # No other decoding happens
         return $s;
     }
