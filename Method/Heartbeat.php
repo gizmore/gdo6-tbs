@@ -32,7 +32,7 @@ final class Heartbeat extends MethodAjax
             GDT_UInt::make('unread_pm')->var($pm),
             GDT_UInt::make('unread_forum')->var($forum),
             GDT_JSON::make('online_users')->value($users),
-            GDT_UInt::make('online_anonymous')->var(3),
+            GDT_UInt::make('online_anonymous')->var(3)
         );
     }
 
