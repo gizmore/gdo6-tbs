@@ -212,7 +212,6 @@ final class ImportTBS
             GDO_ForumBoard::$BUILD_TREE_UPON_SAVE = false;
             $this->importForum();
             GDO_ForumBoard::$BUILD_TREE_UPON_SAVE = true;
-//             Repair::make()->repair();
         }
         
         if ($config['import_permissions'])
@@ -399,8 +398,8 @@ final class ImportTBS
         $fileData = preg_replace('#<body([^>]*)>.*</table></td></tr></table></div>#s', '<body$1>', $fileData);
         # Fix URLs
         $fileData = str_replace('/challenges/', $module->wwwPath('challenges/').'/', $fileData);
-        # Fix windows.location (JS challs)
-        $fileData = str_replace('window.location.href=', 'window.top.location.href=', $fileData);
+//         # Fix windows.location (JS challs)
+//         $fileData = str_replace('window.location.href=', 'window.top.location.href=', $fileData);
         
         # Save
         file_put_contents($outPath, $fileData);
@@ -459,11 +458,18 @@ final class ImportTBS
     #############
     ### Forum ###
     #############
+    private $boardMapping = [];
+    private function boardMapped($tbsBoardId)
+    {
+        return @$this->boardMapping[$tbsBoardId];
+    }
+    
     public function importForum()
     {
         GDT_Message::$DECODER = [$this, 'nullDecoder'];
+        
         $this->importForumRoots();
-        Module_Forum::instance()->saveConfigVar('forum_root', '13');
+        Module_Forum::instance()->saveConfigVar('forum_root', $this->boardMapped('13'));
         $this->importForumBoards();
         $this->importForumFixes(); # Trashcan
         $this->importForumThreads();
@@ -488,7 +494,7 @@ final class ImportTBS
                 'board_title' => 'Trashcan',
                 'board_description' => 'Posts that are subject to be deleted.',
                 'board_creator' => '1',
-                'board_parent' => '13',
+                'board_parent' => $this->boardMapped('13'),
             ]);
         }
         else
@@ -497,7 +503,7 @@ final class ImportTBS
                 'board_title' => 'Trashcan',
                 'board_description' => 'Posts that are subject to be deleted.',
                 'board_creator' => '1',
-                'board_parent' => '13',
+                'board_parent' => $this->boardMapped('13'),
             ]);
         }
         
@@ -512,31 +518,36 @@ final class ImportTBS
         $csv = new CSV($path);
         
         Database::instance()->disableForeignKeyCheck();
+       
+        Database::instance()->truncateTable(GDO_ForumPost::table());
+        Database::instance()->truncateTable(GDO_ForumThread::table());
+        Database::instance()->truncateTable(GDO_ForumBoard::table());
+        GDO_ForumBoard::table()->clearCache();
         
         $roots = $csv->all();
         
         foreach ($roots as $row)
         {
             $bid = $row[self::CSV_FORUM_ROOT_ID];
-            $board = GDO_ForumBoard::getById($bid);
+            $board = GDO_ForumBoard::getById($this->boardMapped($bid));
             if (!$board)
             {
                 $board = GDO_ForumBoard::blank([
-                    'board_id' => $bid,
+//                     'board_id' => $bid,
                     'board_title' => $row[self::CSV_FORUM_ROOT_TITLE],
                     'board_created' => Time::getDate(),
                     'board_creator' => '1',
                 ]);
                 $board->save();
             }
+            $this->boardMapping[$bid] = $board->getID();
         }
         
         # Fix PID again because foreign keys
         foreach ($roots as $row)
         {
-            $bid = $row[self::CSV_FORUM_ROOT_ID];
-            $board = GDO_ForumBoard::getById($bid);
-            if ($pid = $row[self::CSV_FORUM_ROOT_PID])
+            $board = GDO_ForumBoard::getById($this->boardMapped($row[self::CSV_FORUM_ROOT_ID]));
+            if ($pid = $this->boardMapped($row[self::CSV_FORUM_ROOT_PID]))
             {
                 $board->saveVar('board_parent', $pid);
             }
@@ -544,7 +555,7 @@ final class ImportTBS
         
         GDO_ForumBoard::table()->clearCache();
         GDO_ForumBoard::table()->rebuildFullTree();
-         
+        
         Database::instance()->enableForeignKeyCheck();
     }
 
@@ -560,13 +571,13 @@ final class ImportTBS
         $csv->eachLine(function($row) {
             
             $bid = $row[self::CSV_FORUM_BOARD_ID];
-            $board = GDO_ForumBoard::getById($bid);
+            $board = GDO_ForumBoard::getById($this->boardMapped($bid));
             
             if (!$board)
             {
                 $board = GDO_ForumBoard::blank([
-                    'board_id' => $bid,
-                    'board_parent' => $row[self::CSV_FORUM_BOARD_PID],
+//                     'board_id' => $bid,
+                    'board_parent' => $this->boardMapped($row[self::CSV_FORUM_BOARD_PID]),
                     'board_title' => $this->convertBoardTitle($row),
                     'board_description' => $row[self::CSV_FORUM_BOARD_DESCR],
                     'board_created' => Time::getDate(),
@@ -577,7 +588,7 @@ final class ImportTBS
             else
             {
                 $board->setVars([
-                    'board_parent' => $row[self::CSV_FORUM_BOARD_PID],
+                    'board_parent' => $this->boardMapped($row[self::CSV_FORUM_BOARD_PID]),
                     'board_title' => $this->convertBoardTitle($row),
                     'board_description' => $row[self::CSV_FORUM_BOARD_DESCR],
                     'board_created' => Time::getDate(),
@@ -594,6 +605,8 @@ final class ImportTBS
             }
                 
             $board->save();
+            
+            $this->boardMapping[$bid] = $board->getID();
 
             if ($row[self::CSV_FORUM_BOARD_CHALL_ID])
             {
@@ -641,7 +654,7 @@ final class ImportTBS
             {
                 $thread = GDO_ForumThread::blank([
                     'thread_id' => $tid,
-                    'thread_board' => $bid ? $bid : $this->forumTrashcan->getID(),
+                    'thread_board' => $bid ?  $this->boardMapped($bid) : $this->forumTrashcan->getID(),
                     'thread_title' => $this->convertThreadTitle($row),
                     'thread_creator' => '1',
                     'thread_lastposted' => Time::getDate(),

@@ -186,44 +186,12 @@ final class GDO_TBS_ChallengeSolvedCategory extends GDO
     
     public static function updateUser(GDO_User $user)
     {
+        $row = self::get($user);
+        $before = $row->getVar('csc_points');
         self::updateUserWithHugeQuery($user->getID());
-        
-//         $row = self::get($user);
-        
-//         $before = $row->getVar('csc_points');
-        
-//         $row->setVars([
-//             'csc_solved' => GDO_TBS_ChallengeSolved::table()->queryNumSolved($user),
-//             'csc_max_solved' => GDO_TBS_ChallengeSolved::table()->queryChallengeCount(),
-//             'csc_points' => GDO_TBS_ChallengeSolved::table()->queryNumPoints($user),
-//             'csc_max_points' => GDO_TBS_ChallengeSolved::table()->queryMaxPoints(),
-//         ]);
-//         $row->setVar('csc_percent', 
-//             (int)
-//             floatval($row->getVar('csc_points')) / 
-//             floatval($row->getVar('csc_max_points')));
-        
-//         foreach (GDT_TBS_ChallengeCategory::$CATS as $n => $category)
-//         {
-//             $row->setVars([
-//                 "csc_solved_{$n}" => GDO_TBS_ChallengeSolved::table()->queryNumSolved($user, $category),
-//                 "csc_max_solved_{$n}" => GDO_TBS_ChallengeSolved::table()->queryChallengeCount($category),
-//                 "csc_points_{$n}" => GDO_TBS_ChallengeSolved::table()->queryNumPoints($user, $category),
-//                 "csc_max_points_{$n}" => GDO_TBS_ChallengeSolved::table()->queryMaxPoints($category),
-//             ]);
-//             $row->setVar("csc_percent_{$n}",
-//                 (int)
-//                 floatval($row->getVar("csc_points_{$n}")) /
-//                 floatval($row->getVar("csc_max_points_{$n}")));
-//         }
-        
-//         $after = $row->getVar('csc_points');
-        
-//         $row->save();
-        
-//         $user->saveVar('user_level', $row->getVar('csc_points'));
-        
-//         return [$before, $after];
+        $row = self::get($user);
+        $after = $row->getVar('csc_points');
+        return [$before, $after];
     }
 
 }

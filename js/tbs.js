@@ -5,12 +5,16 @@ window.TBS = {
 		let url = GWF_WEB_ROOT + 'index.php?mo=TBS&me=Heartbeat';
 		$.get(url).then(function(result) {
 			
+			let url1 = window.GDO.href('PM', 'Overview');
+			let unreadAnchor1 = $('<a href="'+url1+'">'+result.data.unread_pm+'</a>');
 			$('#left-unread-pm').
-			text(result.data.unread_pm).
+			html(unreadAnchor1).
 			css('display', result.data.unread_pm > 0 ? 'block' : 'none');
 
+			let url2 = window.GDO.href('Forum', 'Unread');
+			let unreadAnchor2 = $('<a href="'+url2+'">'+result.data.unread_forum+'</a>');
 			$('#left-unread-forum').
-			text(result.data.unread_forum).
+			html(unreadAnchor2).
 			css('display', result.data.unread_forum > 0 ? 'block' : 'none');
 			
 			let online = $('#tbs-online-list');

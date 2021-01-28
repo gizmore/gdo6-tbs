@@ -20,7 +20,8 @@ use GDO\DB\Query;
  * 
  * @TODO BBDecoder in Module_TBSBBMessage
  * 
- * @KNOWN_BUG first challenge does not save permission id Oo
+ * @ISSUES
+ * - Forum is way too slow :(
  * 
  * @author gizmore
  * @license Property of Erik and TBS

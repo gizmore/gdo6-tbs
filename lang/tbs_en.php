@@ -53,6 +53,9 @@ return [
     'tbs_not_done' => 'Not Done',
     
     ## Solving
+    'msg_tbs_solved_alpha' => 'Correct, but this challenge is not installed yet.',
+    'msg_tbs_solved_already' => 'Good, but you already solved this challenge.',
+    'msg_tbs_solved' => 'Very good, you solved this challenge. You gained %s points and now have %s.',
     
     ## Ranking
     'table_tbs_ranking' => '%s Ranked Users',

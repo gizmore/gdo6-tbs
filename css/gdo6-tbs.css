@@ -8,6 +8,9 @@ pre {
 	word-break: break-all;
 }
 
+/** Menu **/
+.menu-title { display: none; }
+
 /** Accordeon **/
 .gdt-accordeon.opened .collapse-bar { display: none; }
 .gdt-accordeon.closed .uncollapse-bar { display: none; }

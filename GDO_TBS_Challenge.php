@@ -91,8 +91,8 @@ final class GDO_TBS_Challenge extends GDO
     public function getOrder() { return $this->getVar('chall_order'); }
     
     public function hrefChallenge() { return href('TBS', 'Challenge', "&challenge={$this->getID()}"); }
-    public function href_chall_questions() { return href('Forum', 'Boards', "&id={$this->getQuestionBoardID()}"); }
-    public function href_chall_solutions() { return href('Forum', 'Boards', "&id={$this->getSolutionBoardID()}"); }
+    public function href_chall_questions() { return href('Forum', 'Boards', "&board={$this->getQuestionBoardID()}"); }
+    public function href_chall_solutions() { return href('Forum', 'Boards', "&board={$this->getSolutionBoardID()}"); }
     
     public function queryChallengeCount() { return $this->countWhere(); }
 
