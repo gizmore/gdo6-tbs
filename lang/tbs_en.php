@@ -10,6 +10,9 @@ return [
     'tbs_welcome_title' => 'Welcome!',
     'tbs_welcome_text' => 'Hello and welcome at tbs.wechall.net, the homepage of TheBlacksheep and Erik (Germany). The main part is a challenge about Programming, JavaScript, PHP, Java, Steganography, and Cryptography (among others). After registration, you have access to the challenges. Our page is always under construction: we add new challenges, change features and so on. If you have any hints, opinions, suggestions, requests or whatever, please tell us!',
 
+    # Settings
+    'tbs_ranked' => 'Ranked?',
+    
     # Chat
     'tbs_chat_title' => 'IRCS: #tbs on irc.wechall.net:6666',
     'tbs_chat_text' => 'We have a channel on irc.wechall.net: "#tbs"! On this server, you will find channels of quite a lot of challenge sites. You can request your stats in the channel(s) using "!tbs "(, followed by the username); similar commands exist for other challenge-sites too (use !help to get more information).<br/><br/><b class="b ce">Many thanks to Whiteboy and Cyon for this!</b>',

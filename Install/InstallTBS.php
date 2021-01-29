@@ -7,6 +7,7 @@ use GDO\PM\Module_PM;
 use GDO\Language\Module_Language;
 use GDO\Forum\Module_Forum;
 use GDO\Mibbit\Module_Mibbit;
+use GDO\Register\Module_Register;
 
 /**
  * Configure a few modules on install.
@@ -45,6 +46,10 @@ final class InstallTBS
         Module_Mibbit::instance()->saveConfigVar('mibbit_port', '6666');
         Module_Mibbit::instance()->saveConfigVar('mibbit_tls', '1');
         Module_Mibbit::instance()->saveConfigVar('mibbit_channel', '#tbs');
+        
+        # Register
+        Module_Register::instance()->saveConfigVar('right_bar', '0');
+        Module_Register::instance()->saveConfigVar('signup_password_retype', '0');
     }
     
 }

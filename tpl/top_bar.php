@@ -5,12 +5,13 @@ use GDO\UI\GDT_Image;
 use GDO\User\GDO_User;
 use GDO\OnlineUsers\Method\ViewOnline;
 use GDO\Pagecounter\Module_Pagecounter;
+use GDO\Statistics\GDO_Statistic;
 
 echo "<div id=\"tbs_top_bar\">\n";
 
 $mo = Module_TBS::instance();
 
-$countViews = Module_Pagecounter::instance()->cfgPagecount();
+$countViews = GDO_Statistic::totalHits();
 $countChalls = GDO_TBS_Challenge::table()->getChallengeCount();
 $countUsers = GDO_User::table()->countWhere('user_type="member"');
 $countOnline = ViewOnline::make()->getQuery()->selectOnly('COUNT(*)')->exec()->fetchValue();

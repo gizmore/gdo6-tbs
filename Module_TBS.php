@@ -14,6 +14,7 @@ use GDO\Net\GDT_Url;
 use GDO\UI\GDT_Card;
 use GDO\UI\GDT_Container;
 use GDO\DB\Query;
+use GDO\Vote\Module_Vote;
 
 /**
  * TBS website as gdo6 module.
@@ -44,11 +45,12 @@ final class Module_TBS extends GDO_Module
         return [
             'Country', 'Language', 'Contact',
             'Classic', 'Forum', 'News', 'Mibbit',
-            'Pagecounter', 'OnlineUsers', 'Profile', 'PM',
+            'OnlineUsers', 'Profile', 'PM',
             'Login', 'Register', 'Recovery', 'Admin',
             'Favicon', 'FontAwesome', 'Captcha',
             'JQuery', 'JQueryAutocomplete',
-            'TBSBBMessage', 'LoadOnClick', 'Perf',
+            'TBSBBMessage', 'LoadOnClick',
+            'Perf', 'Statistics',
         ];
     }
     
@@ -129,6 +131,11 @@ final class Module_TBS extends GDO_Module
     
     public function hookDecoratePostUser(GDT_Card $card, GDT_Container $cont, GDO_User $user)
     {
+        # Add likes
+        $likes = Module_Vote::instance()->userSettingVar($user, 'likes');
+        $cont->addField(GDT_UInt::make()->label('num_likes', [$likes]));
+        
+        # Add groupmaster icons
         $cont2 = GDT_Container::make()->horizontal()->addClass('badge-container');
         foreach (GDT_TBS_ChallengeCategory::$CATS as $category)
         {

@@ -6,9 +6,9 @@ use GDO\Core\GDT_Response;
 use GDO\PM\GDO_PM;
 use GDO\User\GDO_User;
 use GDO\DB\GDT_UInt;
-use GDO\Forum\GDO_ForumRead;
 use GDO\Core\GDT_JSON;
 use GDO\OnlineUsers\Method\ViewOnline;
+use GDO\Forum\GDO_ForumUnread;
 
 /**
  * Updates online list and pm/forum badge.
@@ -22,7 +22,7 @@ final class Heartbeat extends MethodAjax
         
         $pm = GDO_PM::countUnread($user);
         
-        $forum = GDO_ForumRead::countUnread($user);
+        $forum = GDO_ForumUnread::countUnread($user);
         
         $query = ViewOnline::make()->getQuery()->
             selectOnly('user_id, user_name, user_real_name, user_guest_name, user_level, user_gender');

@@ -249,10 +249,9 @@ td.gdt-num {
 div.gdt-list-item,
 div.gdt-list > h3:first-child {
 	margin: 0 -16px;
-	padding: 0 16px;
+	padding: 8px 16px;
 	border-bottom: 1px solid #333;
 /* 	margin-bottom: 8px; */
-	padding-bottom: 8px;
 }
 div.gdt-list-item:nth-child(2) {
 	border-top: 1px solid #333;
@@ -271,6 +270,17 @@ div.gdt-list-card > h3 {
 /** List item **/
 .gdt-li-upper {
 	display: flex;
+	margin-bottom: 4px;
+	padding-bottom: 4px;
+	border-bottom: 1px dashed #999;
+}
+
+.gdt-li-title-texts {
+	width: 100%;
+}
+
+.gdt-list-item .gdo-gdt_createdat {
+	float: right;
 }
 
 
@@ -581,6 +591,11 @@ img.gdo-captcha-img {
 
 .board_select {
 	display: inline-block;
+}
+
+/** PM **/
+.pm-unread {
+	background: lightyellow!important;	
 }
 
 /** Votes **/
