@@ -29,13 +29,13 @@ Categ	order	URL	Title	Status
 1	5	/challenges/exploit_passwords/index.php	Common passwords	OK
 1	6	/challenges/exploit_rhc1/localhost.php	Realistic Hacking Challenge (RHC) 1	DOWN
 1	7	/challenges/exploit_key/index.php	Global userkey	OK
-1	8	/challenges/exploits/exploit_mysql_1/index.php	SQL-Injection I	PROBLEM
+1	8	/challenges/exploits/exploit_mysql_1/index.php	SQL-Injection I	TODO PWD
 1	9	/challenges/exploit_rhc2/localhost.php	RHC 2	DOWN
 1	10	/challenges/exploits/strange_link/index.php	[Down]The strange link.	DOWN
 1	11	/challenges/exploits/exploit_barnell/index.php	Barnell 	TODO PWD
 1	12	/challenges/exploits/exploit_analyse2/index.php	Analyse this II!	REVIVED
 1	13	/challenges/exploit_rhc6/index.php	RHC 6	REVIVED
-1	14	/challenges/exploits/exploit_guestbook/index.php	Our guestbook!	PROBLEM
+1	14	/challenges/exploits/exploit_guestbook/index.php	Our guestbook!	OK
 1	15	/challenges/exploits/exploit_mysql_2/index.php	SQL-Injection 2 	PROBLEM
 1	16	/challenges/exploit_rhc4/account.php	RHC 4	TODO PWD
 1	17	/challenges/exploits/exploit_rhc9/index.php	RHC 9	TODO PWD
@@ -118,10 +118,10 @@ Categ	order	URL	Title	Status
 2	67	/challenges/crypto/caesum_training/index.php	Crypto Training Programme 	NOT SOLVED
 2	68	/challenges/crypto/velo_squares/index.php	Crypto Square(s) 	NOT SOLVED
 2	69	/challenges/crypto/phas_kpta2/index.php	Secret algorithm (KPTA 2) 	NOT SOLVED
-3	1	/challenges/levelcr2/crackit2.php	Also easy.	not started
+3	1	/challenges/levelcr2/crackit2.php	Also easy.	TODO PWD
 3	2	/challenges/levelcr1/ziplogin.php	Show your cracking skills.	not started
-3	3	/challenges/levelcr3/crackit3.php	It's starting	not started
-3	4	/challenges/crackit15/crackit15.php	Easy VB-Crackit 	not started
+3	3	/challenges/levelcr3/crackit3.php	It's starting	TODO PWD
+3	4	/challenges/crackit15/crackit15.php	Easy VB-Crackit 	TODO PWD
 3	5	/challenges/levelcr5/crackit5.php	Not possible?	not started
 3	6	/challenges/levelcr6/crackit6.php	That is harder.	not started
 3	7	/challenges/levelcr4/crackit4.php	Still not difficult	not started
@@ -201,43 +201,43 @@ Categ	order	URL	Title	Status
 4	29	/challenges/stegano/reality/index.php	SteganoReality 	DOWN ?
 4	30	/challenges/stegano16/stegano16.php	The Beatles	TODO PWD
 4	31	/challenges/stegano/orient_express/index.php	The Orient Express 	TODO PWD
-4	32	/challenges/stegano12/stegano12.php	Sorry no hint available!	not started
-4	33	/challenges/stegano/sos/index.php	SOS 	not started
-4	34	/challenges/stegano/another_sound_one/index.php	Another sound one 	not started
-4	35	/challenges/stegano/halaman_coastguard/index.php	The coast guard 	not started
-4	36	/challenges/stegano17/stegano17.php	Easy Beatle stegano	not started
-4	37	/challenges/stegano/only_noise/index.php	Only noise?	not started
-4	38	/challenges/stegano/footprints/index.php	FootPrints 	not started
-4	39	/challenges/stegano/aroundtheworld/index.php	Around The World 	not started
-4	40	/challenges/stegano/japanese/index.php	Lesson of Japanese 	not started
-4	41	/challenges/stegano/red_bar/index.php	Red bar 	not started
-4	42	/challenges/stegano/jmordax_forest/index.php	Forest in Autumn 	not started
-4	43	/challenges/stegano/jagori_reloaded/index.php	Stegano Reloaded 	not started
-4	44	/challenges/stegano/goat_customized_colors/index.php	Customized colors	not started
-4	45	/challenges/stegano/jmordax_complement/index.php	Complement in the Forest 	not started
-4	46	/challenges/stegano/doOdzZZ_depth_code/index.php	In the depth of the code 	not started
-4	47	/challenges/stegano/license_bara/index.php	You are granted a license! 	not started
-4	48	/challenges/stegano/riok_careful/index.php	Be careful! 	not started
-4	49	/challenges/stegano/jmordax_waterfall/index.php	Waterfall 	not started
-4	50	/challenges/stegano/jmordax_coffee/index.php	Did you have coffee today? 	not started
-4	51	/challenges/stegano/targetidentification/index.php	Target-Identification 	not started
-4	52	/challenges/stegano/n17r0_hidden/index.php	Hidden Stegano 	not started
-4	53	/challenges/stegano/BaRa_CEP/index.php	Cutting Edge Photography 	not started
-4	54	/challenges/stegano/superpacked/index.php	Superpacked 	not started
-4	55	/challenges/stegano/aroundtheworld2/index.php	Around The World 2 	not started
-4	56	/challenges/stegano/BaRa_Issue/index.php	The Lost Issue 	not started
-4	57	/challenges/stegano/bara_wiblewoble/index.php	Wible Woble 	not started
-4	58	/challenges/stegano/BaRa_FP2/index.php	Footprints 2 	not started
-4	59	/challenges/stegano/S0410N3_bmpaddict/index.php	BMP Addiction 	not started
-4	60	/challenges/stegano/bara_kiwi/index.php	KiWi Frenzy 	not started
-4	61	/challenges/stegano/The_Friendly_Hobo/index.php	The Friendly Hobo 	not started
-4	62	/challenges/stegano/BaRa_Screensaver/index.php	The Screensaver 	not started
-4	63	/challenges/stegano/bara_forgottengame/index.php	The Long Forgotten Game 	not started
-4	64	/challenges/stegano/aroundtheworld4/index.php	Around The World 4 - The Pixel Press 	not started
-4	65	/challenges/stegano/bara_confession/index.php	Confession To Life 	not started
-4	66	/challenges/stegano/Down_The_Tubes/index.php	Down the tubes 	not started
-4	67	/challenges/stegano/aroundtheworld3/index.php	!Around The World 3 - The Image Press 	not started
-5	1	/challenges/internet2/tbsflash1.swf	Flash one 	not started
+4	32	/challenges/stegano12/stegano12.php	Sorry no hint available!	TODO PWD
+4	33	/challenges/stegano/sos/index.php	SOS 	TODO PWD
+4	34	/challenges/stegano/another_sound_one/index.php	Another sound one 	NOT SOLVED
+4	35	/challenges/stegano/halaman_coastguard/index.php	The coast guard 	TODO PWD
+4	36	/challenges/stegano17/stegano17.php	Easy Beatle stegano	NOT SOLVED
+4	37	/challenges/stegano/only_noise/index.php	Only noise?	NOT SOLVED
+4	38	/challenges/stegano/footprints/index.php	FootPrints 	TODO PWD
+4	39	/challenges/stegano/aroundtheworld/index.php	Around The World 	NOT SOLVED
+4	40	/challenges/stegano/japanese/index.php	Lesson of Japanese 	NOT SOLVED
+4	41	/challenges/stegano/red_bar/index.php	Red bar 	NOT SOLVED
+4	42	/challenges/stegano/jmordax_forest/index.php	Forest in Autumn 	NOT SOLVED
+4	43	/challenges/stegano/jagori_reloaded/index.php	Stegano Reloaded 	NOT SOLVED
+4	44	/challenges/stegano/goat_customized_colors/index.php	Customized colors	TODO PWD
+4	45	/challenges/stegano/jmordax_complement/index.php	Complement in the Forest 	NOT SOLVED
+4	46	/challenges/stegano/doOdzZZ_depth_code/index.php	In the depth of the code 	NOT SOLVED
+4	47	/challenges/stegano/license_bara/index.php	You are granted a license! 	NOT SOLVED
+4	48	/challenges/stegano/riok_careful/index.php	Be careful! 	NOT SOLVED
+4	49	/challenges/stegano/jmordax_waterfall/index.php	Waterfall 	NOT SOLVED
+4	50	/challenges/stegano/jmordax_coffee/index.php	Did you have coffee today? 	NOT SOLVED
+4	51	/challenges/stegano/targetidentification/index.php	Target-Identification 	NOT SOLVED
+4	52	/challenges/stegano/n17r0_hidden/index.php	Hidden Stegano 	TODO PWD
+4	53	/challenges/stegano/BaRa_CEP/index.php	Cutting Edge Photography 	NOT SOLVED
+4	54	/challenges/stegano/superpacked/index.php	Superpacked 	TODO PWD
+4	55	/challenges/stegano/aroundtheworld2/index.php	Around The World 2 	NOT SOLVED
+4	56	/challenges/stegano/BaRa_Issue/index.php	The Lost Issue 	NOT SOLVED
+4	57	/challenges/stegano/bara_wiblewoble/index.php	Wible Woble 	NOT SOLVED
+4	58	/challenges/stegano/BaRa_FP2/index.php	Footprints 2 	NOT SOLVED
+4	59	/challenges/stegano/S0410N3_bmpaddict/index.php	BMP Addiction 	NOT SOLVED
+4	60	/challenges/stegano/bara_kiwi/index.php	KiWi Frenzy 	NOT SOLVED
+4	61	/challenges/stegano/The_Friendly_Hobo/index.php	The Friendly Hobo 	NOT SOLVED
+4	62	/challenges/stegano/BaRa_Screensaver/index.php	The Screensaver 	NOT SOLVED
+4	63	/challenges/stegano/bara_forgottengame/index.php	The Long Forgotten Game 	NOT SOLVED
+4	64	/challenges/stegano/aroundtheworld4/index.php	Around The World 4 - The Pixel Press 	NOT SOLVED
+4	65	/challenges/stegano/bara_confession/index.php	Confession To Life 	NOT SOLVED
+4	66	/challenges/stegano/Down_The_Tubes/index.php	Down the tubes 	NOT SOLVED
+4	67	/challenges/stegano/aroundtheworld3/index.php	!Around The World 3 - The Image Press 	NOT SOLVED
+5	1	/challenges/internet2/tbsflash1.swf	Flash one 	OK
 5	2	/challenges/flash/goat/index.php	Flash #2	not started
 5	3	/challenges/flash/goat_flash_hex/index.php	Flash-Hex	not started
 6	1	/challenges/programming/get_started/index.php	Just to get started	not started
@@ -278,76 +278,77 @@ Categ	order	URL	Title	Status
 8	10	/challenges/logic/birthday/index.php	When is my birthday? 	MANUAL
 8	11	/challenges/logic_inferno_3/index.php	Primary Target 	TODO PWD
 8	12	/challenges/logic/fivezeros/index.php	5 zero's 	TODO PWD
-8	13	/challenges/logic_inferno/index.php	Math Miracles 	not started
-8	14	/challenges/logic_prices/index.php	Mmmmm... candies! 	not started
-8	15	/challenges/logic7/logic7.php	MasterMind	not started
-8	16	/challenges/logic_sniperkid/index.php	Do you like soccer? 	not started
-8	17	/challenges/logic/chimbo_monastery/index.php	The Monastery 	not started
-8	18	/challenges/logic/phas_longwait/index.php	The Long Wait! 	not started
-8	19	/challenges/logic_inferno_2/index.php	Not everything is what it looks like! 	not started
-8	20	/challenges/logic/all_of_us/index.php	The logic can be found in all of us 	not started
-9	1	/challenges/special_filetypes/index.php	Filetypes 	not started
-9	2	/challenges/special2/special2.php	BF	not started
+8	13	/challenges/logic_inferno/index.php	Math Miracles 	TODO PWD
+8	14	/challenges/logic_prices/index.php	Mmmmm... candies! 	MANUAL
+8	15	/challenges/logic7/logic7.php	MasterMind	TODO PWD
+8	16	/challenges/logic_sniperkid/index.php	Do you like soccer? 	NOT SOLVED
+8	17	/challenges/logic/chimbo_monastery/index.php	The Monastery 	MANUAL
+8	18	/challenges/logic/phas_longwait/index.php	The Long Wait! 	TODO PWD
+8	19	/challenges/logic_inferno_2/index.php	Not everything is what it looks like! 	TODO PWD
+8	20	/challenges/logic/all_of_us/index.php	The logic can be found in all of us 	TODO PWD
+9	1	/challenges/special_filetypes/index.php	Filetypes 	TODO PWD
+9	2	/challenges/special2/special2.php	BF	TODO PWD
 9	3	/challenges/special1/special1.php	Combination 	not started
 9	4	/challenges/special3/special3.php	Simple math debugging 	not started
-9	5	/challenges/specials/roger_flags/index.php	Special flags 	not started
-9	6	/challenges/specials/cryptostegano2/index.php	Crypto Stegano Research II 	not started
-9	7	/challenges/specials/bender0/index.php	Special 9 	not started
-9	8	/challenges/specials/cryptostegano/index.php	Crypto Stegano Research 	not started
-9	9	/challenges/crypto30/crypto30.php	Lord of the Runes 	not started
+9	5	/challenges/specials/roger_flags/index.php	Special flags 	DOWN ?
+9	6	/challenges/specials/cryptostegano2/index.php	Crypto Stegano Research II 	TODO PWD
+9	7	/challenges/specials/bender0/index.php	Special 9 	NOT SOLVED
+9	8	/challenges/specials/cryptostegano/index.php	Crypto Stegano Research 	NOT SOLVED
+9	9	/challenges/crypto30/crypto30.php	Lord of the Runes 	NOT SOLVED
 9	10	/challenges/specials/carlabake_inferno/index.php	Carla Bake 	not started
-9	11	/challenges/specials/cryptostegano3/index.php	Crypto Stegano Research III 	not started
-9	12	/challenges/specials/gnomes_bara/index.php	Gnomes 	not started
-9	13	/challenges/special_phas/index.php	Contact Solver 	not started
-9	14	/challenges/special_inferno/index.php	A noteable challenge 	not started
-9	15	/challenges/special4/index.php	[Rev1]F7 and some messages	not started
-9	16	/challenges/specials/zbod_die_hard/index.php	Die hard! 	not started
-9	17	/challenges/specials/hint_machine_2/index.php	Hint Machine 2A different base 	not started
-9	18	/challenges/special_occio/index.php	Puzzle77 	not started
-9	19	/challenges/specials/hint_machine/index.php	Hint Machine 1Half a bite 	not started
-9	20	/challenges/specials/cubis/index.php	Cubis 	not started
-9	21	/challenges/specials/bankfraud/index.php	Bank Fraud 	not started
-9	22	/challenges/specials/rhican_more_than_once/index.php	Run through it more than once.	not started
-9	23	/challenges/specials/theblacksheep/index.php	A short path!	not started
-9	24	/challenges/specials/MultiplePhases/index.php	Multiple Phases 	not started
-9	25	/challenges/specials/sfabriz1/index.php	Skills required	not started
-9	26	/challenges/specials/mips_relee_longhorn/index.php	Longhorn 	not started
-9	27	/challenges/specials/polyglot/index.php	PolyGlot 	not started
-9	28	/challenges/specials/warpcores/index.php	The Stolen Warp Cores 	not started
-9	29	/challenges/specials/newyear/index.php	New Year 	not started
-9	30	/challenges/specials/rayden_meat/index.php	too much raw meat is bad for your health 	not started
-9	31	/challenges/specials/chrisi_lock/index.php	Crack the lock 	not started
-9	32	/challenges/specials/bb_reverseme/index.php	ReverseMe 2 	not started
-10	1	/challenges/math1/math1.php	Logarithms	not started
-10	2	/challenges/science/tent/index.php	The tent 	not started
-10	3	/challenges/math2/math2.php	Geometry	not started
-10	4	/challenges/math3/index.php	Distance of time 	not started
-10	5	/challenges/science/circles/index.php	Circles 	not started
-10	6	/challenges/science/lifespan/index.php	Lifespan 	not started
-10	7	/challenges/science/prism/index.php	Prisms	not started
-10	8	/challenges/science/polyhedra/index.php	Polyhedra 	not started
-10	9	/challenges/science/Vibrations/index.php	Vibrations 	not started
-11	1	/challenges/internet4/internet4.php	Where am I from?	not started
-11	2	/challenges/information_gathering/website_stegano/index.php	Website Stegano	not started
-11	3	/challenges/inet_transportation/index.php	Public Transportation 	not started
-11	4	/challenges/internet_research/research.php	Research - Google is your friend 	not started
-11	5	/challenges/internet/bara_2/index.php	Cure Sheep 	not started
-11	6	/challenges/information_gathering/95_morceau/index.php	95 morceaux 	not started
-11	7	/challenges/internet/findname/index.php	Find my name 	not started
-11	8	/challenges/information_gathering/zbod_historical_years/index.php	Historical years 	not started
-12	1	/challenges/javascript7/anotherjavachallenge.html	Strange challenge 	not started
-12	2	/challenges/levelc6/textcrypto.php	Only an easy text crypto.	not started
-12	3	/challenges/specials/matrixman/index.php	Do you know this gate?? 	not started
-12	4	/challenges/crypt_yesyes/index.php	MasterMind	not started
-12	5	/challenges/crypto_maki/index.php	Alien II or... 	not started
-12	6	/challenges/crypto_sniperkid/index.php	Hard to master 	not started
-12	7	/challenges/crackit_tristan/index.php	Multi-Part 	not started
-12	8	/challenges/crypto/egypt/index.php	Egypt-Crypt 	not started
-12	9	/challenges/crypto_allison_5/index.php	My name is what? 	not started
-12	10	/challenges/crypto_cabrero_5/index.php	Minimalist crypto 	not started
-12	11	/challenges/special_fbi/index.php	FBI 	not started
+9	11	/challenges/specials/cryptostegano3/index.php	Crypto Stegano Research III 	TODO PWD
+9	12	/challenges/specials/gnomes_bara/index.php	Gnomes 	TODO PWD
+9	13	/challenges/special_phas/index.php	Contact Solver 	NOT SOLVED
+9	14	/challenges/special_inferno/index.php	A noteable challenge 	NOT SOLVED
+9	15	/challenges/special4/index.php	[Rev1]F7 and some messages	NOT SOLVED
+9	16	/challenges/specials/zbod_die_hard/index.php	Die hard! 	TODO PWD
+9	17	/challenges/specials/hint_machine_2/index.php	Hint Machine 2A different base 	NOT SOLVED
+9	18	/challenges/special_occio/index.php	Puzzle77 	RUNNING
+9	19	/challenges/specials/hint_machine/index.php	Hint Machine 1Half a bite 	NOT SOLVED
+9	20	/challenges/specials/cubis/index.php	Cubis 	NOT SOLVED
+9	21	/challenges/specials/bankfraud/index.php	Bank Fraud 	NOT SOLVED
+9	22	/challenges/specials/rhican_more_than_once/index.php	Run through it more than once.	NOT SOLVED
+9	23	/challenges/specials/theblacksheep/index.php	A short path!	TODO PWD
+9	24	/challenges/specials/MultiplePhases/index.php	Multiple Phases 	NOT SOLVED
+9	25	/challenges/specials/sfabriz1/index.php	Skills required	NOT SOLVED
+9	26	/challenges/specials/mips_relee_longhorn/index.php	Longhorn 	NOT SOLVED
+9	27	/challenges/specials/polyglot/index.php	PolyGlot 	NOT SOLVED
+9	28	/challenges/specials/warpcores/index.php	The Stolen Warp Cores 	NOT SOLVED
+9	29	/challenges/specials/newyear/index.php	New Year 	NOT SOLVED
+9	30	/challenges/specials/rayden_meat/index.php	too much raw meat is bad for your health 	NOT SOLVED
+9	31	/challenges/specials/chrisi_lock/index.php	Crack the lock 	NOT SOLVED
+9	32	/challenges/specials/bb_reverseme/index.php	ReverseMe 2 	NOT SOLVED
+10	1	/challenges/math1/math1.php	Logarithms	TODO PWD
+10	2	/challenges/science/tent/index.php	The tent 	TODO PWD
+10	3	/challenges/math2/math2.php	Geometry	TODO PWD
+10	4	/challenges/math3/index.php	Distance of time 	TODO PWD
+10	5	/challenges/science/circles/index.php	Circles 	TODO PWD
+10	6	/challenges/science/lifespan/index.php	Lifespan 	TODO PWD
+10	7	/challenges/science/prism/index.php	Prisms	MANUAL
+10	8	/challenges/science/polyhedra/index.php	Polyhedra 	TODO PWD
+10	9	/challenges/science/Vibrations/index.php	Vibrations 	TODO PWD
+11	1	/challenges/internet4/internet4.php	Where am I from?	DOWN
+11	2	/challenges/information_gathering/website_stegano/index.php	Website Stegano	TODO PWD
+11	3	/challenges/inet_transportation/index.php	Public Transportation 	TODO PWD
+11	4	/challenges/internet_research/research.php	Research - Google is your friend 	MANUAL
+11	5	/challenges/internet/bara_2/index.php	Cure Sheep 	RUNNING
+11	6	/challenges/information_gathering/95_morceau/index.php	95 morceaux 	RUNNING
+11	7	/challenges/internet/findname/index.php	Find my name 	DOWN
+11	8	/challenges/information_gathering/zbod_historical_years/index.php	Historical years 	RUNNING
+12	1	/challenges/javascript7/anotherjavachallenge.html	Strange challenge 	OK
+12	2	/challenges/levelc6/textcrypto.php	Only an easy text crypto.	TODO PWD
+12	3	/challenges/specials/matrixman/index.php	Do you know this gate?? 	TODO PWD
+12	4	/challenges/crypt_yesyes/index.php	MasterMind	TODO PWD
+12	5	/challenges/crypto_maki/index.php	Alien II or... 	NOT SOLVED
+12	6	/challenges/crypto_sniperkid/index.php	Hard to master 	TODO PWD
+12	7	/challenges/crackit_tristan/index.php	Multi-Part 	NOT SOLVED
+12	8	/challenges/crypto/egypt/index.php	Egypt-Crypt 	NOT SOLVED
+12	9	/challenges/crypto_allison_5/index.php	My name is what? 	NOT SOLVED
+12	10	/challenges/crypto_cabrero_5/index.php	Minimalist crypto 	NOT SOLVED
+12	11	/challenges/special_fbi/index.php	FBI 	NOT SOLVED
 12	12	/challenges/crypto/goat_ring0/index.php	Ring0 Or...?	not started
 12	13	/challenges/crypto/chalga_write/index.php	Write something 	not started
-12	14	/challenges/crypto_deathspawn/index.php	A hop	not started
-12	15	/challenges/crypto/drug_addict/index.php	Im a drug addict!	not started
-12	16	/challenges/crypto/numbercrunch/index.php	Number crunching	not started
+12	14	/challenges/crypto_deathspawn/index.php	A hop	TODO PWD
+12	15	/challenges/crypto/drug_addict/index.php	Im a drug addict!	NOT SOLVED
+12	16	/challenges/crypto/numbercrunch/index.php	Number crunching	NOT SOLVED
+
