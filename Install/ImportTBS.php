@@ -461,7 +461,8 @@ final class ImportTBS
     private $boardMapping = [];
     private function boardMapped($tbsBoardId)
     {
-        return @$this->boardMapping[$tbsBoardId];
+        return $tbsBoardId; # Keep TBS mapping.
+//         return @$this->boardMapping[$tbsBoardId];
     }
     
     public function importForum()
@@ -533,7 +534,7 @@ final class ImportTBS
             if (!$board)
             {
                 $board = GDO_ForumBoard::blank([
-//                     'board_id' => $bid,
+                    'board_id' => $bid,
                     'board_title' => $row[self::CSV_FORUM_ROOT_TITLE],
                     'board_created' => Time::getDate(),
                     'board_creator' => '1',
@@ -576,7 +577,7 @@ final class ImportTBS
             if (!$board)
             {
                 $board = GDO_ForumBoard::blank([
-//                     'board_id' => $bid,
+                    'board_id' => $this->boardMapped($bid),
                     'board_parent' => $this->boardMapped($row[self::CSV_FORUM_BOARD_PID]),
                     'board_title' => $this->convertBoardTitle($row),
                     'board_description' => $row[self::CSV_FORUM_BOARD_DESCR],

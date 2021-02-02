@@ -37,6 +37,15 @@ final class ImportRealTBS extends MethodForm
         );
     }
     
+    public function execute()
+    {
+        if (GWF_DB_DEBUG)
+        {
+            return $this->error('err_db_debug_level_too_high', [GWF_DB_DEBUG]);
+        }
+        return parent::execute();
+    }
+    
     public function createForm(GDT_Form $form)
     {
         $form->info(t('tbs_import_info'));

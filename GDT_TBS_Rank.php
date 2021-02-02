@@ -25,7 +25,7 @@ final class GDT_TBS_Rank extends GDT_UInt
         return $this;
     }
     
-    public function gdo(GDO $gdo)
+    public function gdo(GDO $gdo=null)
     {
         $this->var($this->rank++);
     }

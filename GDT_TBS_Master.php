@@ -13,7 +13,7 @@ final class GDT_TBS_Master extends GDT_Container
         $this->horizontal();
     }
     
-    public function gdo(GDO $gdo)
+    public function gdo(GDO $gdo=null)
     {
         $this->removeFields();
         $this->addMasterIcons($gdo);
