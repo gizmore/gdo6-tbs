@@ -10,6 +10,9 @@ return [
     'tbs_welcome_title' => 'Welcome!',
     'tbs_welcome_text' => 'Hello and welcome at tbs.wechall.net, the homepage of TheBlacksheep and Erik (Germany). The main part is a challenge about Programming, JavaScript, PHP, Java, Steganography, and Cryptography (among others). After registration, you have access to the challenges. Our page is always under construction: we add new challenges, change features and so on. If you have any hints, opinions, suggestions, requests or whatever, please tell us!',
 
+    # Tutorials
+    'tbs_tutorials' => 'Tutorials',
+    
     # Settings
     'tbs_ranked' => 'Ranked?',
     
@@ -40,6 +43,7 @@ return [
     
     ## Challenge
     'tbs_table_challs' => '%s %s Challenges',
+    'title_challenge' => '%s (%s)',
     'chall_order' => 'ID',
     'chall_votes' => 'Votes',
     'chall_difficulty' => 'D',

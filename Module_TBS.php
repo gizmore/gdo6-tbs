@@ -85,6 +85,11 @@ final class Module_TBS extends GDO_Module
         ];
     }
     
+    public function tutorialWWWPath()
+    {
+        return $this->wwwPath('tutorials/');
+    }
+    
     ############
     ### Init ###
     ############

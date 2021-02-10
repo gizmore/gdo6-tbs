@@ -1,6 +1,6 @@
 /** General **/
 * {
-	font-family: Times New Roman;
+/* 	font-family: Times New Roman; */
 }
 
 pre {
@@ -52,7 +52,7 @@ div.collapse-content { padding: 6px; }
 }
 
 #left_bar * {
-	font-family: Verdana;
+	font-family: 'Verdana', serif;
 }
 
 .left_group {
@@ -91,6 +91,10 @@ div.collapse-content { padding: 6px; }
 }
 
 /** TOP **/
+#topTabs {
+	margin-top: 4px;
+}
+
 #tbs_top_bar {
 	grid-area: top_bar;
 	background: url('../img/metall.jpg');
@@ -117,10 +121,12 @@ div.collapse-content { padding: 6px; }
 }
 
 /** Main **/
-.gdo-main {
+div.gdo-main {
 	grid-area: content;
-	padding: 5mm;
 	background-color: #D0D0C0;
+	padding: 5mm;
+/* 	line-height: 32px; */
+	vertical-align: middle;
 }
 
 /** Bar **/
@@ -337,6 +343,12 @@ ul.pagination li a {
 ul.pagination li a:hover {
 	text-decoration: underline;
 }
+
+ul.pagination li.page-selected {
+	background: slategrey;
+	border-radius: 6px;
+}
+
 
 /** Forms **/
 .gdo-form form {
@@ -560,6 +572,19 @@ img.gdo-captcha-img {
 	height: inherit;
 }
 
+#challenge_bar span {
+	margin: 0 2px 0 4px;
+}
+
+#challenge_bar a {
+	color: #000060;
+	text-decoration: none;
+}
+
+#challenge_bar a:hover {
+	text-decoration: underline;
+}
+
 /** Forum **/
 .forum-post .gdt-card-image {
 	width: 110px;
@@ -601,4 +626,83 @@ img.gdo-captcha-img {
 /** Votes **/
 .gdt-like-button.liked .gdo-icon {
 	color: red;
+}
+
+/** Pages **/
+.module {
+	border-style:solid;
+	border-width:2px;
+	border-color:#FFF #000 #000 #FFF;
+	background-image:url('../images/metall.jpg');
+	background-color:#BEB8C5;
+	margin:0px;
+	padding:4px;
+}
+
+.module h1 {
+	color: #D00000;
+	font-weight: bold;
+	font-family: 'Times New Roman',serif;
+	font-size: 20px;
+}
+
+div.content {
+	background-color: #CCB;
+	border-color: #000;
+	border-style: solid;
+	border-width: 0px 1px 1px 1px;
+	padding: 4px 8px 4px 4px;
+	font-family: 'Verdana',sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	text-align: justify;
+}
+
+.module h2, .module h3 {
+	background-image: url(../images/backgrounds/headline2.png);
+	background-color: #911501;
+	color: #FFF;
+	font-family: "Georgia", "Times New Roman", serif;
+	font-size: 14px;
+	line-height: 14px;
+	font-weight: normal;
+	padding: 1px 0px 2px 4px;
+	margin-top: 10px;
+	border-style: solid;
+	border-color: #000;
+	border-width: 1px;
+}
+.module div.box {
+	padding: 4px 8px;
+	border: dotted 1px #99B;
+	margin: 4px 8px 8px 8px;
+	color: #000;
+	background-color: #DDC;
+}
+
+.module ul.com_list1 {
+    margin: 2mm;
+    padding-left: 5mm;
+    color: #000000;
+    font-family: 'Verdana',sans-serif;
+    font-size: 10pt;
+    line-height: 14pt;
+}
+
+.module ul.com_list1 li {
+    list-style-image: url(../images/misc/bullet1.gif);
+}
+
+.module ul.com_list1 li:hover {
+    list-style-image: url(../images/misc/bullet2.gif);
+}
+
+.module ul.com_list1 a {
+    text-decoration: none;
+    color: #048;
+}
+
+.module ul.com_list1 a:hover {
+    text-decoration: underline;
+    color: #44F;
 }

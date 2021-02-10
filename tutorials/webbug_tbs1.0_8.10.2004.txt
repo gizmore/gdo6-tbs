@@ -1,0 +1,193 @@
+             ================================================
+            <------------------------------------------------>
+            <------------#www.bright-shadows.net#------------>
+            <------------------------------------------------>
+            <--------------#theblacksheep&erik#-------------->
+            <------------------------------------------------>
+             ================================================
+
+                              Web Bug v1.0
+
+
+Author: theblacksheep + r3d5pik3
+Version: 1.0 Date: August 10th 2004
+Contact: webmaster@bright-shadows.net
+
+#- Introduction
+#- Thx!
+
+----------------------------------------------------------------------------
+--[< Introduction >] -------------------------------------------------------
+----------------------------------------------------------------------------
+
+A Web Bug is a simple graphic on a web site or in a email that collects
+information about the user who is visiting the website or who is reading
+the email.
+They often say look for graphics which are 1x1 pixel big, but even a normal
+graphic can be a Web Bug.
+In this tutorial I want to show you how to create such a Web Bug.
+
+If you find any mistakes please write me an e-mail (webmaster@bright-shadows.net)
+and I will fix it.
+
+----------------------------------------------------------------------------
+--[< Web Bug >] ------------------------------------------------------------
+----------------------------------------------------------------------------
+
+Things you will need:
+ ->web hosting or your own server which allows you to use:
+ ->.htacces files
+ ->php scripts
+ ->the gd library has to be installed
+
+First create a new folder. Something like "webbug/" but it can be anything.
+Now create a ".htaccess" file which contains the following line
+
+ForceType application/x-httpd-php
+
+and put it into the "webbug/" folder. That tells the webserver to treat
+everything in this folder as a php file (the extension doesn't matter).
+
+So "file1.jpg" would be treated like a php file and not like a jpg file.
+
+Now you have to put your jpg file (the one that is going to be the Web Bug later)
+into the "webbug/" folder. Just save it as "sigpic.jpg";
+
+Time to open your favourite editor. Create a new file and just save it as "sig.jpg".
+This is the file with all the php code.
+
+It is important that you start the file off with
+-----------------------------------
+<?php
+header("Content-type: image/jpeg");
+-----------------------------------
+Now it gets treated as a jpg file by the browser.
+After that you can write whatever to log information.
+
+Use this to log the ip of people that viewed the site with the picture.
+
+-----------------------------------
+if ($_SERVER["HTTP_X_FORWARDED_FOR"]){
+ $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+ }else{
+ $ip = $_SERVER["REMOTE_ADDR"];
+}
+
+$ip = "IP: ".$ip."<br />";
+
+$hfile = fopen("data.txt", "w+");
+fwrite($hfile, $intofile);
+fclose($hfile);
+-----------------------------------
+
+
+At the end just add:
+-----------------------------------
+$BGImage = imagecreatefromjpeg("sigpic.jpg");
+imagejpeg($BGImage);
+imagedestroy($BGImage);
+?>
+-----------------------------------
+So the image gets shown and nobody even has a clue that something else
+is going on in between.
+
+You can also check out "http://www.bright-shadows.net/tbs/sig/sig.jpg". This picture
+stores your IP, Referer and User-Agent in the file "data.txt" (just as long 
+as nobody else looks at the picture).
+
+For a more detailed example just look at the code of r3d5pik3s dynamic sig:
+
+----------------------------------------------------------------------------
+
+<?php
+/* tell the browser requesting the file to treat it as a jpg */
+header("Content-type: image/jpeg");
+
+/*grab the user agent make it all lower case then assign it to $agent*/
+$agent = strtolower($_SERVER["HTTP_USER_AGENT"]);
+
+/*check the user agent for os references. you could add more os's but i just added the most popular*/
+if (eregi($agent, 'windows'))$OS = "Microshit's Winblowz";
+if (eregi($agent, 'linux'))$OS = "Some Linux Distro";
+if (eregi($agent, 'freebsd'))$OS = "Free BSD (a.k.a. teh good shit)";
+if (!isset($OS))$OS = "(bastardized useragent)";
+
+/*check user agent for browser references*/
+if (eregi($agent, 'msie'))$browser = "Internet Exploder";
+if (eregi($agent, 'mozilla'))$browser = "Mozilla or Netscape";
+if (eregi($agent, 'opera'))$browser = "Opera (Better then IE)";
+if (eregi($agent, 'firefox'))$browser = "FireFox (good choice)";
+if (!isset($OS))$browser = "(bastardized useragent)";
+
+/*if the user is using a proxy it will still try to get the users original IP but if it fails it will just return the proxies IP*/
+if ($_SERVER["HTTP_X_FORWARDED_FOR"]){
+$UserIP = $_SERVER["HTTP_X_FORWARDED_FOR"];
+}else{
+$UserIP = $_SERVER["REMOTE_ADDR"];
+}
+
+/*grabe the referer header to see where there coming from*/
+if(!$_SERVER["HTTP_REFERER"]){
+$CameFrom = "Unknown";
+}else{
+$CameFrom = $_SERVER["HTTP_REFERER"];
+}
+
+
+/*random sayings*/
+$number = rand(1,9);
+if($number==1)$Saying = "Ph34r teh r3d 1z";
+if($number==2)$Saying = "You have been haxxored by r3d5pik3";
+if($number==3)$Saying = "Just because yur paraniod dont mean there not after you";
+if($number==4)$Saying = "My Sig is better than yurz";
+if($number==5)$Saying = "Can you beleive people are still christians?";
+if($number==6)$Saying = "Open yur mind. Toke some herb";
+if($number==7)$Saying = "The economy is weak. Lets throw rocks at it!";
+if($number==8)$Saying = "Those who would sacrifice freedom for security deserve neither. -BF";
+if($number==9)$Saying = "More a question then a course. How can hell be any worse?";
+
+/*making the data gathered look more detailed*/
+$Line1 = "Your IP is: " . $UserIP;
+$Line2 = "Your O/S: " . $OS;
+$Line3 = "Your Browswer: " . $browser;
+$Line4 = $CameFrom;
+$Line5 = $Saying;
+
+/*loads the bg pic*/
+$BGImage = imagecreatefromjpeg("images/phpsig.jpg");
+
+/*set up the color of the text using imagecolorallocate(bgpic, r3d, gr33n, blu3) */
+$textcolor = imagecolorallocate($BGImage, 255, 255, 255);
+
+/*establish the base cordinates for the first string NOTE:doing this makes the strings easier to play with*/
+$x=95;
+$y=6;
+
+/*one line at a time we will print the gathered strings onto the upper layer of the image*/
+imagestring($BGImage, 2,$x, $y, $Line1, $textcolor);
+imagestring($BGImage, 2,$x, $y+15, $Line2, $textcolor);
+imagestring($BGImage, 2,$x, $y+30, $Line3, $textcolor);
+imagestring($BGImage, 2,$x, $y+44, "You came from:", $textcolor);
+imagestring($BGImage, 1,$x, $y+56, $Line4, $textcolor);
+imagestring($BGImage, 2,$x-10, $y+64, $Line5, $textcolor);
+
+/*k now lets up it all together*/
+imagejpeg($BGImage);
+/*Now we kill the image*/
+imagedestroy($BGImage);
+?>
+
+----------------------------------------------------------------------------
+
+----------------------------------------------------------------------------
+--[< Thx! >] ---------------------------------------------------------------
+----------------------------------------------------------------------------
+
+@r3d5pik3 for the idea and for allowing me to use his code as an example
+
+
+
+
+
+
+
