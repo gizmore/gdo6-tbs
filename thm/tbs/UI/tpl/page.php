@@ -18,6 +18,7 @@ $page->loadSidebars();
 <html>
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title><?=Website::displayTitle()?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="robots" content="index, follow" />
 	<meta name="generator" content="GDO v<?=Module_Core::instance()->gdo_revision?>">
