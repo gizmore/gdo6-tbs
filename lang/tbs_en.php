@@ -83,7 +83,17 @@ return [
     ## Welcome PM
     'pm_welcome_title' => 'Welcome to %s',
     'pm_welcome_message' => "
-Hi %s,<br/>\n
-<br/>\n
-<br/>\n",
+Hi gizmore3,<br/>
+<br/>
+TheBlacksheep and Erik welcome you on www.bright-shadows.net. Thank you for your registration! -_-<br/>
+<br/>
+:teach: Choose a strong password and ensure your email account is secure. Otherwise someone might be able to log into your account!<br/>
+You can edit your profile when you click on the link linkMyAccount in the menu. There you can also change your password.<br/>
+<br/>
+Be reminded that bruteforce attacks on the website are not allowed. Have a look at the linkFAQ for further information.<br/>
+Accounts of users will be locked if they don't follow the rules.<br/>
+<br/>
+We wish you a nice time on our site - fun, gaining experience, etc. If you have any comments, ideas, challenges or whatsoever, feel free to tell us what you think. You can send us a private message or an email (linkContact in the menu).<br/>
+<br/>
+Bye, TheBlacksheep and Erik :-)<br/>",
 ];
