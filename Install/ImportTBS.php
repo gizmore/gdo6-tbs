@@ -21,6 +21,7 @@ use GDO\DB\Database;
 use GDO\UI\GDT_Message;
 use GDO\User\GDO_UserPermission;
 use GDO\Admin\Method\ClearCache;
+use GDO\TBS\GDT_TBS_ChallengeStatus;
 
 /**
  * Import TBS data from /INPUT/ folder.
@@ -108,6 +109,12 @@ final class ImportTBS
     const CSV_FORUM_POST_EDITOR = 6;
     const CSV_FORUM_POST_EDITED = 7;
     
+    # Excludes from simple form solution checker
+    private static $NO_SIMPLE_FORM = array(
+        # Here we can place files that are excluded from simple solution
+    
+    );
+    
     /**
      * @return Module_TBS
      */
@@ -151,7 +158,7 @@ final class ImportTBS
     
     private function convertChallengeURL($url)
     {
-        $url = trim($url, '/');
+//         $url = trim($url, '/');
         return $url;
     }
     
@@ -343,6 +350,12 @@ final class ImportTBS
             }
             else
             {
+                # Reset autochecker status
+                if ($chall->getStatus() === GDT_TBS_ChallengeStatus::NOT_TRIED)
+                {
+                    $data['chall_status'] = GDT_TBS_ChallengeStatus::NOT_CHECKED;
+                }
+                
                 $chall->saveVars($data);
             }
             
@@ -388,21 +401,86 @@ final class ImportTBS
         
         # Replace CSS path
         $fileData = str_replace('/styles.css', $module->wwwPath('css/tbs_challenge.css'), $fileData);
+
         # Replace Challenge Lists Link
         $fileData = str_replace('/hackchallenge.php', $module->href('ChallengeLists'), $fileData);
+
         # Replace Image paths
         $fileData = str_replace('/files/images/', $module->wwwPath('images/'), $fileData);
-        # Set parent target
-        $fileData = str_replace('<head>', "<head>\n<base target=\"_parent\">\n", $fileData);
-        # Remove chall meta
+
+//        # Set parent target (BAD IDEA?)
+//        $fileData = str_replace('<head>', "<head>\n<base target=\"_parent\">\n", $fileData);
+        
+        # Remove chall meta (intro that is not needed anymore?)
         $fileData = preg_replace('#<body([^>]*)>.*</table></td></tr></table></div>#s', '<body$1>', $fileData);
-        # Fix URLs
-        $fileData = str_replace('/challenges/', $module->wwwPath('challenges/'), $fileData);
-//         # Fix windows.location (JS challs)
+
+//         # Fix windows.location (JS challs) (BAD IDEA?)
 //         $fileData = str_replace('window.location.href=', 'window.top.location.href=', $fileData);
+
+        # Replace answer forms with solution checker
+        $fileData = $this->enhanceFormsToUseSolutionChecking($fileData, $fullpath);
+        
+        # Fix URLs to /challenges/
+        $fileData = str_replace('/challenges/', $module->wwwPath('challenges/'), $fileData);
         
         # Save
         file_put_contents($outPath, $fileData);
+    }
+    
+    /**
+     * Enhance forms that submit to thyself.
+     * @param string $fileData
+     * @param string $fullpath
+     * @return string
+     */
+    private function enhanceFormsToUseSolutionChecking($fileData, $fullpath)
+    {
+        # Get relative path to self.
+        $self = Strings::substrFrom($fullpath, '/TBS/DUMP');
+        
+        # Skip by exclusion rule?
+        if (in_array($self, self::$NO_SIMPLE_FORM, true))
+        {
+            return $fileData;
+        }
+        
+        # Replace form with checker + form
+        $count = 0;
+        $fileData = preg_replace_callback(
+            '#<form action="'.$self.'/index.php".*</form>#ms',
+            [$this, '_enhanceForms'], $fileData, 1, $count);
+        if (!$count)
+        {
+            $fileData = preg_replace_callback(
+                '#<form action="'.$self.'".*</form>#ms',
+                [$this, '_enhanceForms'], $fileData, 1, $count);
+        }
+
+        # On replace mark this challenge as not tried, if still not checked.
+        if ($count)
+        {
+//             $url = trim($self, '/');
+            $challenge = GDO_TBS_Challenge::table()->select()->where("chall_url LIKE '{$self}%'")->first()->exec()->fetchObject();
+            if ($challenge->getStatus() === GDT_TBS_ChallengeStatus::NOT_CHECKED)
+            {
+                $challenge->saveVar('chall_status', GDT_TBS_ChallengeStatus::NOT_TRIED);
+            }
+        }
+        
+        # Done
+        return $fileData;
+    }
+    
+    /**
+     * Prepend solution checker code to simple forms.
+     * @param array $matches
+     * @return string
+     */
+    public function _enhanceForms($matches)
+    {
+        $href = GDO_PATH.'GDO/TBS/chall_include_checker.php';
+        $solutionCheckerCode = sprintf('<?php require "%s"; ?>', $href);
+        return $solutionCheckerCode . "\n" . $matches[0];
     }
     
     ####################

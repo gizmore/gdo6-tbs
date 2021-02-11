@@ -10,6 +10,8 @@ final class ChallengeLists extends Method
 {
     public function isGuestAllowed() { return false; }
     
+    public function getTitle() { return t('link_tbs_challenges'); }
+    
     public function gdoParameters()
     {
         return [

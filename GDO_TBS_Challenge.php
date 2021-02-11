@@ -50,8 +50,8 @@ final class GDO_TBS_Challenge extends GDO
             GDT_TBS_VoteField::make('chall_education')->tooltip('tbs_tt_chall_education'),
             GDT_TBS_VoteField::make('chall_presentation')->tooltip('tbs_tt_chall_presentation'),
             
-            GDT_ForumBoard::make('chall_questions'),
-            GDT_ForumBoard::make('chall_solutions'),
+            GDT_ForumBoard::make('chall_questions')->label('tbs_question_board'),
+            GDT_ForumBoard::make('chall_solutions')->label('tbs_solution_board'),
             
             GDT_Virtual::make('chall_solver_count')->gdtType(GDT_Decimal::make()->tooltip('tbs_tt_chall_solver_count'))->subquery("SELECT COUNT(*) FROM gdo_tbs_challengesolved cs WHERE cs_challenge=gdo_tbs_challenge.chall_id"),
             GDT_TBS_ChallengeSolved::make('chall_solved'),
@@ -68,6 +68,7 @@ final class GDO_TBS_Challenge extends GDO
     public function getQuestionBoardID() { return $this->getVar('chall_questions'); }
     public function getSolutionBoardID() { return $this->getVar('chall_solutions'); }
     public function displayCategory() { return $this->getVar('chall_category'); }
+    public function getStatus() { return $this->getVar('chall_status'); }
     
     /**
      * @return GDO_Permission
@@ -90,6 +91,7 @@ final class GDO_TBS_Challenge extends GDO
     
     public function getOrder() { return $this->getVar('chall_order'); }
     
+    public function hrefEdit() { return href('TBS', 'ChallengeCRUD', "&id={$this->getID()}"); }
     public function hrefChallenge() { return href('TBS', 'Challenge', "&challenge={$this->getID()}"); }
     public function href_chall_questions() { return href('Forum', 'Boards', "&board={$this->getQuestionBoardID()}"); }
     public function href_chall_solutions() { return href('Forum', 'Boards', "&board={$this->getSolutionBoardID()}"); }

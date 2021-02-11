@@ -49,6 +49,7 @@ final class ChallengeList extends MethodQueryTable
         $challs = GDO_TBS_Challenge::table();
         return [
             $challs->gdoColumn('chall_order'),
+            $challs->gdoColumn('chall_status'),
             GDT_TBS_ChallTitle::make('chall_title'),
             $challs->gdoColumn('chall_votes'),
             $challs->gdoColumn('chall_difficulty'),

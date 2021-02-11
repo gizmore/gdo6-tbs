@@ -8,7 +8,12 @@ return [
     
     # Welcome
     'tbs_welcome_title' => 'Welcome!',
-    'tbs_welcome_text' => 'Hello and welcome at tbs.wechall.net, the homepage of TheBlacksheep and Erik (Germany). The main part is a challenge about Programming, JavaScript, PHP, Java, Steganography, and Cryptography (among others). After registration, you have access to the challenges. Our page is always under construction: we add new challenges, change features and so on. If you have any hints, opinions, suggestions, requests or whatever, please tell us!',
+    'tbs_welcome_text' => '
+Hello and welcome at tbs.wechall.net, the homepage of TheBlacksheep and Erik (Germany).
+The main part is a challenge about Programming, JavaScript, PHP, Java, Steganography, and Cryptography (among others).
+After registration, you have access to the challenges.
+Our page is always under construction: we add new challenges, change features and so on.
+If you have any hints, opinions, suggestions, requests or whatever, please tell us!',
 
     # Tutorials
     'tbs_tutorials' => 'Tutorials',
@@ -18,7 +23,15 @@ return [
     
     # Chat
     'tbs_chat_title' => 'IRCS: #tbs on irc.wechall.net:6666',
-    'tbs_chat_text' => 'We have a channel on irc.wechall.net: "#tbs"! On this server, you will find channels of quite a lot of challenge sites. You can request your stats in the channel(s) using "!tbs "(, followed by the username); similar commands exist for other challenge-sites too (use !help to get more information).<br/><br/><b class="b ce">Many thanks to Whiteboy and Cyon for this!</b>',
+    'tbs_chat_text' => '
+We have a channel on irc.wechall.net: "#tbs"!
+On this server, you will find channels of quite a lot of challenge sites.
+You can request your stats in the channel(s) using "!tbs",
+followed by the username.
+Similar commands exist for other challenge-sites too.
+Use !help to get more information.
+<br/><br/>
+<b class="b ce">Many thanks to Whiteboy and Cyon for this!</b>',
 
     # Sidebar
     'link_tbs_home' => 'Home',
@@ -42,6 +55,7 @@ return [
     'tbs_guestcount' => '%s anonymous',
     
     ## Challenge
+    'gdo_tbs_challenge' => 'Challenge',
     'tbs_table_challs' => '%s %s Challenges',
     'title_challenge' => '%s (%s)',
     'chall_order' => 'ID',
@@ -51,6 +65,7 @@ return [
     'chall_education' => 'E',
     'chall_presentation' => 'P',
     'chall_solver_count' => '#',
+    'chall_solution' => 'Solution',
     'tbs_tt_chall_difficulty' => 'Difficulty',
     'tbs_tt_chall_creativity' => 'Creativity',
     'tbs_tt_chall_education' => 'Education',
@@ -58,7 +73,33 @@ return [
     'tbs_tt_chall_solver_count' => 'Number of solvers',
     'tbs_done' => 'Done',
     'tbs_not_done' => 'Not Done',
+    'tbs_question_board' => 'Questions',
+    'tbs_solution_board' => 'Solutions',
     
+    ## Challenge Category
+    'enum_JavaScript' => 'JavaScript',
+    'enum_Exploit' => 'Exploit',
+    'enum_Crypto' => 'Crypto',
+    'enum_CrackIt' => 'CrackIt',
+    'enum_Stegano' => 'Stegano',
+    'enum_Flash' => 'Flash',
+    'enum_Programming' => 'Programming',
+    'enum_Java-Applet' => 'Java-Applet',
+    'enum_Logic' => 'Logic',
+    'enum_Special' => 'Special',
+    'enum_Science' => 'Science',
+    'enum_Information Gathering' => 'Information Gathering',
+    'enum_/dev/null' => '/dev/null',
+    
+    ## Challenge Status
+    'chall_status' => 'OK?',
+    'tbs_tt_not_checked' => 'No auto checker. No exception. Status unknown',
+    'tbs_tt_not_tried' => 'Challenge has auto checker, but no success yet.',
+    'tbs_tt_in_progress' => 'We have to manually work at it. Challenge not working yet.',
+    'tbs_tt_wont_fix' => 'We cannot or won\'t fix this challenge. It will be lost.',
+    'tbs_tt_need_files' => 'We are aware that we need more files or resources for this challenge. Maybe you can help us out?',
+    'tbs_tt_working' => 'This challenge is working as expected.',
+
     ## Solving
     'msg_tbs_solved_alpha' => 'Correct, but this challenge is not installed yet.',
     'msg_tbs_solved_already' => 'Good, but you already solved this challenge.',
@@ -74,7 +115,7 @@ return [
     'link_tbs_recalc' => 'Score Recalculation',
     'ft_tbs_recalcpoints' => 'Recalculate challenge points',
     'tbs_msg_recalced' => 'Recalculation finished.',
-    'tbs_reacalc_points_info' => 'This will recalculate all category stats for a user.',
+    'tbs_reacalc_points_info' => 'This will recalculate all category stats for all users.',
     
     # Import
     'ft_tbs_importrealtbs' => 'Import the TBS/INPUT/ folder',

@@ -181,6 +181,7 @@ div.gdo-main {
 	background-color: #c0c0b8;
 	background-color: #A0A0B0;
 	border: 1px solid #000;
+	line-height: 16px;
 }
 
 .gdo-form form {
@@ -368,6 +369,7 @@ ul.pagination li.page-selected {
 .gdo-form form label {
 	line-height: 28px;
 	grid-column: 2 / 3;
+	margin-right: 8px;
 }
 
 .gdo-form form > input {
@@ -388,16 +390,20 @@ ul.pagination li.page-selected {
 }
 
 .gdo-form form .gdt-divider {
-	background: #aaa;
+	background: #AAA;
 	padding: 4px 8px;
 	margin: 0 -8px;
 	border-bottom: 1px solid #333;
 }
 
 .gdo-form-error {
-	background: #fcb;
-	padding: 8px;
-	margin-top: 4px;
+	background: #D87;
+    padding: 4px 8px;
+    margin-top: 4px;
+    line-height: 20px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    border: 1px dotted #333;
 }
 
 .gdo-has-error input {
@@ -566,6 +572,10 @@ img.gdo-captcha-img {
 	white-space: nowrap;
 }
 
+td.gdo-gdt_tbs_challengestatus span.gdo-icon {
+	color: inherit;
+}
+ 
 /** Challenge **/
 #challenge_iframe {
 	width: 100%;
