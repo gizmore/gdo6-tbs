@@ -141,8 +141,14 @@ final class GDO_TBS_ChallengeSolvedCategory extends GDO
         # fix
         $calcselect = trim($calcselect, ' ,');
         
+        # Exec calculation
         $query = $query->raw("REPLACE INTO $tableName VALUES ( $calcselect )");
         $query->exec();
+
+        # Change user_level
+        $user = GDO_User::table()->find($userid);
+        $user->setVar('user_level', (int)self::get($user)->getVar('csc_points'));
+        $user->save();
     }
     
     /**
@@ -179,6 +185,7 @@ final class GDO_TBS_ChallengeSolvedCategory extends GDO
         {
             $row = self::blank([
                 'csc_user' => $user->getID(),
+                'csc_points' => '0',
             ]);
         }
         return $row;

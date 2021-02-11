@@ -387,8 +387,6 @@ ul.pagination li.page-selected {
 	grid-column: 1 / 4;
 }
 
-
-
 .gdo-form form .gdt-divider {
 	background: #aaa;
 	padding: 4px 8px;
@@ -560,10 +558,12 @@ img.gdo-captcha-img {
 
 .tbs-done {
 	color: #50FF50;
+	white-space: nowrap;
 }
 
 .tbs-not-done {
 	color: #FF5050;
+	white-space: nowrap;
 }
 
 /** Challenge **/
