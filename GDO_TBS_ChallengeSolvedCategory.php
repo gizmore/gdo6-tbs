@@ -10,10 +10,13 @@ use GDO\DB\Query;
 
 /**
  * Precompute challenge points per category for the users.
+ * 
  * @TODO: convert this table into a view?
+ * @TODO: on a solve it is enough to increment a single category for a single user. A challenge can only have 1 category.
  * 
  * @author gizmore
- *
+ * @version 6.10
+ * @since 6.10
  */
 final class GDO_TBS_ChallengeSolvedCategory extends GDO
 {
@@ -172,11 +175,6 @@ final class GDO_TBS_ChallengeSolvedCategory extends GDO
     public static function updateUsers()
     {
         self::updateUsersWithHugeQuery();
-//         $result = GDO_User::table()->select()->exec();
-//         while ($user = $result->fetchObject())
-//         {
-//             self::updateUser($user);
-//         }
     }
     
     public static function get(GDO_User $user)

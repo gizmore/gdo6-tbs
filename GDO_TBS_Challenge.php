@@ -19,6 +19,7 @@ use GDO\User\GDO_Permission;
 use GDO\User\GDT_Permission;
 use GDO\User\GDT_Password;
 use GDO\Net\URL;
+use GDO\DB\GDT_Index;
 
 /**
  * A challenge on TBS.
@@ -59,6 +60,8 @@ final class GDO_TBS_Challenge extends GDO
             GDT_CreatedAt::make('chall_created'),
             GDT_DeletedBy::make('chall_deletor'),
             GDT_DeletedAt::make('chall_deleted'),
+            
+            GDT_Index::make('index_chall_category')->indexColumns('chall_category'),
         ];
     }
     
@@ -66,7 +69,8 @@ final class GDO_TBS_Challenge extends GDO
     public function displayTitle() { return $this->display('chall_title'); }
     public function getQuestionBoardID() { return $this->getVar('chall_questions'); }
     public function getSolutionBoardID() { return $this->getVar('chall_solutions'); }
-    public function displayCategory() { return $this->getVar('chall_category'); }
+    public function getCategory() { return $this->getVar('chall_category'); }
+    public function displayCategory() { return $this->display('chall_category'); }
     public function getStatus() { return $this->getVar('chall_status'); }
     
     /**

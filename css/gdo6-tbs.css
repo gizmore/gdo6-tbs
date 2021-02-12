@@ -104,6 +104,7 @@ div.collapse-content { padding: 6px; }
 	display: grid;
 	background: #668;
 	border: 1px solid #000;
+	text-align: right;
 }
 
 #tbs_top_counts th {
