@@ -28,9 +28,9 @@ final class RecalcPoints extends MethodForm
     {
         $form->info(t('tbs_reacalc_points_info'));
         $form->addFields([
-            GDT_Submit::make(),
             GDT_AntiCSRF::make(),
         ]);
+        $form->actions()->addField(GDT_Submit::make());
     }
     
     public function formValidated(GDT_Form $form)

@@ -10,16 +10,15 @@ use GDO\DB\GDT_DeletedBy;
 use GDO\DB\GDT_DeletedAt;
 use GDO\UI\GDT_Title;
 use GDO\DB\GDT_Virtual;
-use GDO\Core\GDT_MD5;
 use GDO\DB\GDT_Decimal;
 use GDO\DB\GDT_UInt;
 use GDO\User\GDO_User;
 use GDO\Net\GDT_Url;
 use GDO\Forum\GDT_ForumBoard;
-use GDO\Core\GDT_Success;
-use GDO\Core\GDT_Response;
 use GDO\User\GDO_Permission;
 use GDO\User\GDT_Permission;
+use GDO\User\GDT_Password;
+use GDO\Net\URL;
 
 /**
  * A challenge on TBS.
@@ -40,7 +39,7 @@ final class GDO_TBS_Challenge extends GDO
             GDT_Title::make('chall_title'),
             GDT_Url::make('chall_url')->allowLocal(true)->allowExternal(false)->notNull(),
             
-            GDT_MD5::make('chall_solution'),
+            GDT_Password::make('chall_solution'),
             GDT_Permission::make('chall_permission'),
             
             GDT_UInt::make('chall_votes')->notNull()->initial('0'),
@@ -87,6 +86,9 @@ final class GDO_TBS_Challenge extends GDO
      */
     public function getCreator() { return $this->getValue('chall_creator'); }
     
+    /**
+     * @return URL
+     */
     public function getURL() { return $this->getValue('chall_url'); }
     
     public function getOrder() { return $this->getVar('chall_order'); }
@@ -108,6 +110,9 @@ final class GDO_TBS_Challenge extends GDO
         return $count;
     }
     
+    ###############
+    ### Factory ###
+    ###############
     /**
      * @return self
      */
@@ -119,45 +124,29 @@ final class GDO_TBS_Challenge extends GDO
             first()->exec()->fetchObject();
     }
     
+    /**
+     * Get a challenge by GDO url.
+     * @param string $url
+     * @return self
+     */
+    public static function getByURL($url)
+    {
+        return self::table()->select()->
+            where("chall_url LIKE '{$url}%'")->
+            first()->exec()->fetchObject();
+    }
+    
+    ###############
+    ### Solving ###
+    ###############
     public function onSolve($answer)
     {
-        if ($this->getVar('chall_solution') === md5($answer))
-        {
-            $this->solved();
-        }
+        return (new ChallSolveEngine($this))->onSolve($answer);
     }
     
-    public function solved(GDO_User $user=null)
+    public function solved(GDO_User $user)
     {
-        $user = $user === null ? GDO_User::current() : $user;
-        
-        if (!$this->isPersisted())
-        {
-            return $this->response('msg_tbs_solved_alpha');
-        }
-        
-        if ($this->hasSolved($user))
-        {
-            return $this->response('msg_tbs_solved_already');
-        }
-        
-        return $this->onSolved($user);
+        return (new ChallSolveEngine($this))->solved($user);
     }
-    
-    private function onSolved(GDO_User $user)
-    {
-        GDO_TBS_ChallengeSolved::challengeSolved($this, $user);
-        
-        list($before, $after) = GDO_TBS_ChallengeSolvedCategory::updateUser($user);
-        $gain = $after - $before;
-        return $this->response('msg_tbs_solved', [$gain, $after]);
-    }
-    
-    private function response($key, array $args=null)
-    {
-        return GDT_Response::makeWith(
-            GDT_Success::make()->text($key, $args)
-        );
-    }
-    
+   
 }

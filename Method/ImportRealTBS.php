@@ -55,9 +55,9 @@ final class ImportRealTBS extends MethodForm
             GDT_Checkbox::make('import_chall_solved')->initial('0'),
             GDT_Checkbox::make('import_forum')->initial('0'),
             GDT_Checkbox::make('import_permissions')->initial('0'),
-            GDT_Submit::make(),
             GDT_AntiCSRF::make(),
         ]);
+        $form->actions()->addField(GDT_Submit::make());
     }
     
     function formValidated(GDT_Form $form)

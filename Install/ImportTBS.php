@@ -110,9 +110,11 @@ final class ImportTBS
     const CSV_FORUM_POST_EDITED = 7;
     
     # Excludes from simple form solution checker
+    # Here we can place challenges that are excluded from simple solution checker
+    # @TODO: Complete the list of exceptional / non simple solution files.
     private static $NO_SIMPLE_FORM = array(
-        # Here we can place files that are excluded from simple solution
-    
+        '/challenges/exploit_long/index.php',
+        '/challenges/exploits/exploit_analyse1/index.php'
     );
     
     /**
@@ -441,6 +443,12 @@ final class ImportTBS
         # Skip by exclusion rule?
         if (in_array($self, self::$NO_SIMPLE_FORM, true))
         {
+            $challenge = GDO_TBS_Challenge::getByURL($self);
+            if ($challenge->getStatus() === GDT_TBS_ChallengeStatus::NOT_CHECKED)
+            {
+                $challenge->saveVar(
+                    'chall_status', GDT_TBS_ChallengeStatus::IN_PROGRESS);
+            }
             return $fileData;
         }
         
@@ -459,8 +467,7 @@ final class ImportTBS
         # On replace mark this challenge as not tried, if still not checked.
         if ($count)
         {
-//             $url = trim($self, '/');
-            $challenge = GDO_TBS_Challenge::table()->select()->where("chall_url LIKE '{$self}%'")->first()->exec()->fetchObject();
+            $challenge = GDO_TBS_Challenge::getByURL($self);
             if ($challenge->getStatus() === GDT_TBS_ChallengeStatus::NOT_CHECKED)
             {
                 $challenge->saveVar('chall_status', GDT_TBS_ChallengeStatus::NOT_TRIED);
@@ -478,8 +485,8 @@ final class ImportTBS
      */
     public function _enhanceForms($matches)
     {
-        $href = GDO_PATH.'GDO/TBS/chall_include_checker.php';
-        $solutionCheckerCode = sprintf('<?php require "%s"; ?>', $href);
+        $path = GDO_PATH . 'GDO/TBS/chall_include_checker.php';
+        $solutionCheckerCode = sprintf('<?php require "%s"; ?>', $path);
         return $solutionCheckerCode . "\n" . $matches[0];
     }
     
@@ -545,7 +552,9 @@ final class ImportTBS
     
     public function importForum()
     {
-        GDT_Message::$DECODER = [$this, 'nullDecoder'];
+        # Fix decoder to purify for now
+//         GDT_Message::$DECODER = [$this, 'nullDecoder']; # null decoder is a bad idea.
+        GDT_Message::$DECODER = [GDT_Message::class, 'DECODE']; # default purifier
         
         $this->importForumRoots();
         Module_Forum::instance()->saveConfigVar('forum_root', $this->boardMapped('13'));
@@ -555,14 +564,14 @@ final class ImportTBS
         $this->importForumPosts();
     }
     
-    public function nullDecoder($s)
-    {
-        $module = Module_TBS::instance();
-        # Fix smileys.
-        $s = str_replace('/files/images/', $module->wwwPath('images/'), $s);
-        # No other decoding happens
-        return $s;
-    }
+//     public function nullDecoder($s)
+//     {
+//         $module = Module_TBS::instance();
+//         # Fix smileys.
+//         $s = str_replace('/files/images/', $module->wwwPath('images/'), $s);
+//         # No other decoding happens
+//         return $s;
+//     }
     
     private $forumTrashcan;
     public function importForumFixes()
@@ -766,7 +775,7 @@ final class ImportTBS
                 $post = GDO_ForumPost::blank([
                     'post_id' => $postID,
                     'post_thread' => $row[self::CSV_FORUM_POST_TOPIC],
-                    'post_message' => $row[self::CSV_FORUM_POST_MESSAGE],
+                    'post_message' => $this->purify($row[self::CSV_FORUM_POST_MESSAGE]),
                     'post_created' => Time::getDate($row[self::CSV_FORUM_POST_DATE]),
                     'post_creator' => $this->convertUsernameToID($row[self::CSV_FORUM_POST_AUTHOR]),
                 ]);
@@ -782,6 +791,31 @@ final class ImportTBS
             
             $post->save();
         });
+    }
+    
+    /**
+     * TBS posts are crazy.
+     * Replace a few crazy things, then purify for safety.
+     * @TODO: Analyze more posts. Sadly this has to happen before purify. No idea yet.
+     * @param string $message
+     * @return string
+     */
+    private function purify($message)
+    {
+        # Replace local images
+        $message = str_replace('/files/images/',
+            Module_TBS::instance()->wwwPath('images/'), $message);
+        
+        # Replace crazy php tags.
+        $message = str_replace('<?php', '&lt;?php', $message);
+        $message = str_replace('?>', '?&gt;', $message);
+        
+        # Replace crazy html comments.
+        $message = str_replace('<!--', '&lt;!--', $message);
+        $message = str_replace('-->', '--&gt;', $message);
+        
+        # Purifier
+        return GDT_Message::getPurifier()->purify($message);
     }
 
     ###################

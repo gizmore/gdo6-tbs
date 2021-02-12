@@ -198,6 +198,7 @@ final class GDO_TBS_ChallengeSolvedCategory extends GDO
         self::updateUserWithHugeQuery($user->getID());
         $row = self::get($user);
         $after = $row->getVar('csc_points');
+        
         return [$before, $after];
     }
 

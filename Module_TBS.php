@@ -15,14 +15,16 @@ use GDO\UI\GDT_Card;
 use GDO\UI\GDT_Container;
 use GDO\DB\Query;
 use GDO\Vote\Module_Vote;
+use GDO\Core\GDT_Secret;
+use GDO\User\GDO_UserSetting;
 
 /**
- * TBS website as gdo6 module.
+ * TBS website revival as gdo6 module.
+ * 
+ * - Read the Import instructions
+ * - Solution to crypto1 is ahdefjuklgrbdsegf
  * 
  * @TODO BBDecoder in Module_TBSBBMessage
- * 
- * @ISSUES
- * - Forum is way too slow :(
  * 
  * @author gizmore
  * @license Property of Erik and TBS
@@ -50,7 +52,7 @@ final class Module_TBS extends GDO_Module
             'Favicon', 'FontAwesome', 'Captcha',
             'JQuery', 'JQueryAutocomplete',
             'TBSBBMessage', 'LoadOnClick',
-            'Perf', 'Statistics',
+            'Perf', 'Statistics', 'Python',
         ];
     }
     
@@ -72,10 +74,14 @@ final class Module_TBS extends GDO_Module
         return [
             GDT_Duration::make('chall_solve_timeout')->initial('5m'),
             GDT_UInt::make('chall_solve_attempts')->initial('5'),
+            GDT_Secret::make('chall_solver_user')->initial('gizmore3'),
+            GDT_Secret::make('chall_solver_pass')->initial('11111111'),
         ];
     }
     public function cfgSolveTimeout() { return $this->getConfigValue('chall_solve_timeout'); }
     public function cfgSolveAttempts() { return $this->getConfigVar('chall_solve_attempts'); }
+    public function cfgSolveUser() { return $this->getConfigVar('chall_solver_user'); }
+    public function cfgSolvePass() { return $this->getConfigVar('chall_solver_pass'); }
     
     public function getUserSettings()
     {
@@ -127,6 +133,17 @@ final class Module_TBS extends GDO_Module
         $path = $this->wwwPath("images/{$path}");
         $title = $title ? " title=\"{$title}\"" : $title;
         return sprintf('<img%s src="%s" alt="icon" />', $title, $path);
+    }
+    
+    /**
+     * Add fields to profile card.
+     * @param GDO_User $user
+     * @param GDT_Card $card
+     */
+    public function hookProfileCard(GDO_User $user, GDT_Card $card)
+    {
+        $card->addField($this->userSetting($user, 'tbs_website'));
+        $card->addField($this->userSetting($user, 'tbs_ranked'));
     }
     
     public function hookProfileTemplate(GDO_User $user)

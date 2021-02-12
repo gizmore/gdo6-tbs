@@ -30,7 +30,7 @@ Debug::setDieOnError(GWF_ERROR_DIE);
 Debug::setMailOnError(GWF_ERROR_MAIL);
 GDO_Session::instance();
 ?>
-<!doctype HTML>
+<!DOCTYPE html>
 <html>
 <head>
 <title>TBS Challenge</title>

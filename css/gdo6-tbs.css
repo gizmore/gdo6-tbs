@@ -1,8 +1,4 @@
 /** General **/
-* {
-/* 	font-family: Times New Roman; */
-}
-
 pre {
 	white-space: pre-wrap;
 	word-break: break-all;
@@ -174,7 +170,7 @@ div.gdo-main {
 	text-align: justify;
 }
 .gdo-panel > p,
-.gdo-form form,
+.gdo-form .gdo-form-inner,
 .gdo-form p {
 	padding: 4px 8px;
 	color: #000;
@@ -292,9 +288,6 @@ div.gdt-list-card > h3 {
 
 
 /** Cards **/
-/* .gdt-card { */
-/* 	background-image: url(../img/metall.jpg); */
-/* } */
 .gdt-card-upper {
 	font-weight: bold;
 }
@@ -352,15 +345,19 @@ ul.pagination li.page-selected {
 
 
 /** Forms **/
-.gdo-form form {
+.gdo-form div.gdo-form-inner {
 	display: grid;
 	width: auto;
 	grid-template-columns: auto auto 9fr;
 	grid-template-rows: auto;
 }
 
-.gdo-form form > .gdo-container {
+.gdo-form .gdo-form-inner > .gdo-container {
 	display: contents;
+}
+
+.gdo-form .gdo-form-actions {
+	margin: 8px 0 0 2px;
 }
 
 .gdo-form form .gdo-icon {
@@ -370,12 +367,14 @@ ul.pagination li.page-selected {
 	line-height: 28px;
 	grid-column: 2 / 3;
 	margin-right: 8px;
+	max-width: 240px;
 }
 
 .gdo-form form > input {
 	grid-column: 1 / 4;
 }
 .gdo-form .gdt-headline,
+.gdo-form .gdo-form-head,
 .gdo-form form textarea,
 .gdo-form-error,
 .gdo-form form .gdt-bar,
@@ -392,7 +391,8 @@ ul.pagination li.page-selected {
 .gdo-form form .gdt-divider {
 	background: #AAA;
 	padding: 4px 8px;
-	margin: 0 -8px;
+	margin: 0 -8px 4px;
+	border-top: 1px solid #333;
 	border-bottom: 1px solid #333;
 }
 
@@ -468,6 +468,11 @@ img.gdo-captcha-img {
 	float: none;
 	padding: 6px 12px;
 	margin-bottom: 4px;
+}
+
+.gdo-form input[type=file] {
+	border: none;
+	padding: 4px;
 }
 
 .gdo-form input,
@@ -715,4 +720,15 @@ div.content {
 .module ul.com_list1 a:hover {
     text-decoration: underline;
     color: #44F;
+}
+
+.gdo-setting-old {
+	color: #822;
+	font-weight: bold;
+	text-decoration: line-through;
+}
+
+.gdo-setting-new {
+	color: #060;
+	font-weight: bold;
 }

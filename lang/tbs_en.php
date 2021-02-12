@@ -56,6 +56,7 @@ Use !help to get more information.
     
     ## Challenge
     'gdo_tbs_challenge' => 'Challenge',
+    'mtitle_tbs_challengecrud' => 'Edit Challenge',
     'tbs_table_challs' => '%s %s Challenges',
     'title_challenge' => '%s (%s)',
     'chall_order' => 'ID',
@@ -101,6 +102,8 @@ Use !help to get more information.
     'tbs_tt_working' => 'This challenge is working as expected.',
 
     ## Solving
+    'err_tbs_challenge' => 'This challenge is unknown.',
+    'err_tbs_solve_timeout' => 'Please wait %s before you try again.',
     'msg_tbs_solved_alpha' => 'Correct, but this challenge is not installed yet.',
     'msg_tbs_solved_already' => 'Good, but you already solved this challenge.',
     'msg_tbs_solved' => 'Very good, you solved this challenge. You gained %s points and now have %s.',

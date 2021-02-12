@@ -50,6 +50,7 @@ The following gdo6 dependencies exist and can be cloned.
     git clone --recursive https://github.com/gizmore/gdo6-favicon Favicon
     git clone --recursive https://github.com/gizmore/gdo6-pm PM
     git clone --recursive https://github.com/gizmore/gdo6-load-on-click LoadOnClick
+    git clone --recursive https://github.com/gizmore/gdo6-python Python
     
     
 Install like any gdo6 site.
