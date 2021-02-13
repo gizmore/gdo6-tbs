@@ -51,7 +51,7 @@ The following gdo6 dependencies exist and can be cloned.
     git clone --recursive https://github.com/gizmore/gdo6-pm PM
     git clone --recursive https://github.com/gizmore/gdo6-load-on-click LoadOnClick
     git clone --recursive https://github.com/gizmore/gdo6-python Python
-    
+    git clone --recursive https://github.com/gizmore/gdo6-statistics Statistics
     
 Install like any gdo6 site.
 
