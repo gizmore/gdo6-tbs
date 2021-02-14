@@ -6,6 +6,11 @@ use GDO\Core\GDT_Response;
 use GDO\Profile\GDT_User;
 use GDO\TBS\GDT_TBS_ChallengeCategory;
 
+/**
+ * List all challenge categories.
+ * Foreach category call ChallengeList.
+ * @author gizmore
+ */
 final class ChallengeLists extends Method
 {
     public function isGuestAllowed() { return false; }
