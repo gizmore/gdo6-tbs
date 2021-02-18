@@ -41,14 +41,14 @@ Categ	order	URL	Title	Status
 1	17	/challenges/exploits/exploit_rhc9/index.php	RHC 9	TODO PWD
 1	18	/challenges/exploit_rhc5/index.php	RHC 5	PROBLEM
 1	19	/challenges/exploits/exploit_loselip5/index.php	Lose Lip5 	DOWN ?
-1	20	/challenges/exploits/exploit_analyse3/index.php	Analyse this III!	SIMULATED
+1	20	/challenges/exploits/exploit_analyse3/index.php	Analyse this III!	TODO PWD
 1	21	/challenges/exploits/exploit_rayden5/index.php	RHC 8 (rayp0rn) 	not started
 1	22	/challenges/exploits/exploit_r3d5pik3/index.php	RHC 7 (r3d5pik3) 	not started
-1	23	/challenges/exploits/exploit_linux_s_deadbeef/index.php	Linux Source Deadbeef 	not started
-1	24	/challenges/exploits/exploit_kalitrust/index.php	Kalitrust	not started
-1	25	/challenges/exploit_write_bitboard/index.php	Write an Exploit I (bitboard 2.4 final)	not started
-1	26	/challenges/exploits/exploit_linux_b_starter/index.php	Linux Binary Starter 	not started
-1	27	/challenges/exploits/exploit_linux_1/index.php	Linux 	not started
+1	23	/challenges/exploits/exploit_linux_s_deadbeef/index.php	Linux Source Deadbeef 	MANUAL
+1	24	/challenges/exploits/exploit_kalitrust/index.php	Kalitrust	TODO PWD
+1	25	/challenges/exploit_write_bitboard/index.php	Write an Exploit I (bitboard 2.4 final)	MANUAL
+1	26	/challenges/exploits/exploit_linux_b_starter/index.php	Linux Binary Starter 	MANUAL
+1	27	/challenges/exploits/exploit_linux_1/index.php	Linux 	MANUAL
 2	1	/challenges/levelc1/crypto1.php	Easy starter!	TODO PWD
 2	2	/challenges/crypto24/crypto24.php	MD is my friend! 	TODO PWD
 2	3	/challenges/levelc4/visual.php	First VISUAL crypto	TODO PWD
@@ -240,7 +240,7 @@ Categ	order	URL	Title	Status
 5	1	/challenges/internet2/tbsflash1.swf	Flash one 	OK
 5	2	/challenges/flash/goat/index.php	Flash #2	not started
 5	3	/challenges/flash/goat_flash_hex/index.php	Flash-Hex	not started
-6	1	/challenges/programming/get_started/index.php	Just to get started	not started
+6	1	/challenges/programming/get_started/index.php	Just to get started	TODO PWD
 6	2	/challenges/programming/xor/index.php	Still solveable	not started
 6	3	/challenges/programming/dit_dit_dah/index.php	Dit Dit Dah	not started
 6	4	/challenges/programming/calculate/index.php	Can you 'calculate'?	not started
