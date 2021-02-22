@@ -244,8 +244,8 @@ Categ	order	URL	Title	Status
 6	2	/challenges/programming/xor/index.php	Still solveable	TODO PWD
 6	3	/challenges/programming/dit_dit_dah/index.php	Dit Dit Dah	TODO PWD
 6	4	/challenges/programming/calculate/index.php	Can you 'calculate'?	TODO PWD
-6	5	/challenges/programming/calculate2/index.php	just another calculation	not started
-6	6	/challenges/programming/numbers/index.php	Numbers	not started
+6	5	/challenges/programming/calculate2/index.php	just another calculation	DOWN
+6	6	/challenges/programming/numbers/index.php	Numbers	TODO PWD
 6	7	/challenges/programming/peanojordan/index.php	Peano Jordan	not started
 6	8	/challenges/programming/speckled/index.php	Speckled Windows 	not started
 6	9	/challenges/programming/caesum_1/index.php	The Blacksheep Story Part I 	not started
