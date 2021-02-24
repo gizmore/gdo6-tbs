@@ -247,7 +247,7 @@ Categ	order	URL	Title	Status
 6	5	/challenges/programming/calculate2/index.php	just another calculation	DOWN
 6	6	/challenges/programming/numbers/index.php	Numbers	TODO PWD
 6	7	/challenges/programming/peanojordan/index.php	Peano Jordan	TODO PWD
-6	8	/challenges/programming/speckled/index.php	Speckled Windows 	not started
+6	8	/challenges/programming/speckled/index.php	Speckled Windows 	TODO PWD
 6	9	/challenges/programming/caesum_1/index.php	The Blacksheep Story Part I 	not started
 6	10	/challenges/programming/looping/index.php	Looping 	not started
 6	11	/challenges/programming/caesum_2/index.php	The Blacksheep Story Part II 	not started
