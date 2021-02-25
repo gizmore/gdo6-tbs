@@ -28,6 +28,16 @@ final class GDT_TBS_ChallengeStatus extends GDT_Enum
         self::WORKING => '#0F0', # challenge should be working. manually assigned.
     ];
     
+    /**
+     * @var GDT_Tooltip
+     */
+    private $tooltip;
+    
+    /**
+     * @var GDT_Link
+     */
+    private $editLink;
+    
     protected function __construct()
     {
         parent::__construct();
@@ -41,6 +51,8 @@ final class GDT_TBS_ChallengeStatus extends GDT_Enum
         $this->label('tbs_chall_status');
         $this->notNull();
         $this->initial(self::NOT_CHECKED);
+        $this->tooltip = GDT_Tooltip::make('chall_tooltip');
+        $this->editLink = GDT_Link::make('chall_edit_link');
     }
     
     /**
@@ -61,15 +73,14 @@ final class GDT_TBS_ChallengeStatus extends GDT_Enum
     {
         # Build status tooltip icon.
         $key = 'tbs_tt_'.$this->getVar();
-        $tt = GDT_Tooltip::make()->tooltip($key)->render();
+        $tt = $this->tooltip->tooltip($key)->render();
         $color = self::$COLORS[$this->getVar()];
         $icon = sprintf('<div style="color: %s;">%s</div>', $color, $tt);
         
         # If we can edit we return a link with icon as label.
         if (GDO_User::current()->isStaff())
         {
-            $link = GDT_Link::make()->href($this->getChallenge()->hrefEdit())->labelRaw($icon);
-            return $link->render();
+            return $this->editLink->href($this->getChallenge()->hrefEdit())->labelRaw($icon)->render();
         }
         
         # Else just the icon.
