@@ -16,7 +16,6 @@ use GDO\UI\GDT_Container;
 use GDO\DB\Query;
 use GDO\Vote\Module_Vote;
 use GDO\Core\GDT_Secret;
-use GDO\User\GDO_UserSetting;
 
 /**
  * TBS website revival as gdo6 module.
