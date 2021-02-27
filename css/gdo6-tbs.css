@@ -603,8 +603,32 @@ td.gdo-gdt_tbs_challengestatus span.gdo-icon {
 
 /** Forum **/
 .forum-post .gdt-card-image {
-	width: 110px;
-	min-width: 110px;
+	width: 113px;
+	min-width: 113px;
+	padding: 4px 6px;
+	border-right: 1px solid #333;
+}
+
+.forum-post .gdt-card-image .gdo-profile-link {
+	display: block;
+}
+
+.forum-post .gdt-card-image label {
+	float: left;
+	display: block;
+	clear: both;
+}
+
+.forum-post .gdt-card-image label:after {
+	content: ": ";
+}
+
+.forum-post .gdt-card-image span {
+	display: block;
+}
+
+.forum-post .gdt-html {
+	padding: 8px;
 }
 
 .badge-container {

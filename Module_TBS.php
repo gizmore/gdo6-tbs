@@ -154,7 +154,7 @@ final class Module_TBS extends GDO_Module
     {
         # Add likes
         $likes = Module_Vote::instance()->userSettingVar($user, 'likes');
-        $cont->addField(GDT_UInt::make()->label('num_likes', [$likes]));
+        $cont->addField(GDT_UInt::make()->initial($likes)->label('btn_likes'));
         
         # Add groupmaster icons
         $cont2 = GDT_Container::make()->horizontal()->addClass('badge-container');
