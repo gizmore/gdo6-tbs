@@ -16,6 +16,7 @@ use GDO\UI\GDT_Container;
 use GDO\DB\Query;
 use GDO\Vote\Module_Vote;
 use GDO\Core\GDT_Secret;
+use GDO\Core\GDT_Array;
 
 /**
  * TBS website revival as gdo6 module.
@@ -134,6 +135,9 @@ final class Module_TBS extends GDO_Module
         return sprintf('<img%s src="%s" alt="icon" />', $title, $path);
     }
     
+    #############
+    ### Hooks ###
+    #############
     /**
      * Add fields to profile card.
      * @param GDO_User $user
@@ -178,4 +182,15 @@ final class Module_TBS extends GDO_Module
         # Craete scoring upon activation.
         GDO_TBS_ChallengeSolvedCategory::updateUser($user);
     }
+    
+    public function hookIgnoreDocsFiles(GDT_Array $ignore)
+    {
+        $ignore->data[] = 'GDO/TBS/challenges/**/*';
+        $ignore->data[] = 'GDO/TBS/DUMP/**/*';
+        $ignore->data[] = 'GDO/TBS/HIDDEN/**/*';
+        $ignore->data[] = 'GDO/TBS/HIDDEN_EXAMPLE/**/*';
+        $ignore->data[] = 'GDO/TBS/INPUT/**/*';
+        $ignore->data[] = 'GDO/TBS/tutorials/**/*';
+    }
+
 }
