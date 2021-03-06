@@ -384,7 +384,7 @@ ul.pagination li.page-selected {
 .gdo-form form .gdo-gdt_link,
 .form-span-columns,
 .gdo-form form > .gdo-container .gdo-container,
-.gdo-form form > .gdo-tabs,
+.gdo-form form .gdo-tabs,
 .gdo-file-controls {
 	grid-column: 1 / 4;
 }
