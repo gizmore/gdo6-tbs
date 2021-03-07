@@ -4,14 +4,13 @@ namespace GDO\TBS\Method;
 use GDO\Core\Method;
 use GDO\TBS\GDT_TBS_Challenge;
 use GDO\TBS\GDO_TBS_Challenge;
-use GDO\TBS\GDT_TBS_ChallengeCategory;
 
 /**
  * Load a challenge and display challenge template.
  * 
  * @author gizmore
- * @version 6.10
- * @since 6.10
+ * @version 6.10.1
+ * @since 6.10.0
  */
 final class Challenge extends Method
 {

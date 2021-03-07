@@ -17,6 +17,7 @@ use GDO\DB\Query;
 use GDO\Vote\Module_Vote;
 use GDO\Core\GDT_Secret;
 use GDO\Core\GDT_Array;
+use GDO\Core\Application;
 
 /**
  * TBS website revival as gdo6 module.
@@ -106,9 +107,12 @@ final class Module_TBS extends GDO_Module
     
     public function onIncludeScripts()
     {
-        $this->addJavascript('js/tbs.js');
-        $this->addCSS('css/gdo6-tbs.css');
-        Module_Classic::instance()->addJavascript('js/gdo6-classic.js');
+        if (Application::instance()->hasTheme('tbs'))
+        {
+            $this->addJavascript('js/tbs.js');
+            $this->addCSS('css/gdo6-tbs.css');
+            Module_Classic::instance()->addJavascript('js/gdo6-classic.js');
+        }
     }
 
     ##############

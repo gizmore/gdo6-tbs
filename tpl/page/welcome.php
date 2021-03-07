@@ -1,7 +1,6 @@
 <?php
 use GDO\UI\GDT_Panel;
 use GDO\Login\Method\Form;
-use GDO\Core\GDT_Method;
 
 $panel = GDT_Panel::make();
 $panel->title('tbs_welcome_title');

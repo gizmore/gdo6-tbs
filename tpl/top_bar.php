@@ -4,7 +4,6 @@ use GDO\TBS\Module_TBS;
 use GDO\UI\GDT_Image;
 use GDO\User\GDO_User;
 use GDO\OnlineUsers\Method\ViewOnline;
-use GDO\Pagecounter\Module_Pagecounter;
 use GDO\Statistics\GDO_Statistic;
 
 echo "<div id=\"tbs_top_bar\">\n";
