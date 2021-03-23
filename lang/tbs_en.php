@@ -1,5 +1,13 @@
 <?php
 return [
+    # Meta
+    'keywords' =>
+        'automated scanning, security, hack, hacker, hacking, crack, cracker, '.
+        'cracking, exploits, root, intrusion detection, windows, windowsnt, nt, '. 
+        'server, unix, linux, firewall, scanner, internet, intranet, '.
+        'vulnerability, phreak, rootshell, maximum, tcpip, udp, tcp, '. 
+        'cryptography, hunt, session, hijack, reset',
+    
     # Top Right
     'tbs_top_views' => 'Views',
     'tbs_top_challs' => 'Challenges',
@@ -17,6 +25,8 @@ If you have any hints, opinions, suggestions, requests or whatever, please tell 
 
     # Tutorials
     'tbs_tutorials' => 'Tutorials',
+    
+    # Vulnerable Code
     
     # Settings
     'tbs_ranked' => 'Ranked?',
@@ -50,6 +60,9 @@ Use !help to get more information.
     'link_tbs_contact' => 'Contact/FAQ',
     'link_tbs_logout' => 'Logout',
     'link_tbs_admin' => 'Administration',
+    
+    # Vuln code
+    'mtitle_tbs_vulnerablecode' => 'Vulnerable Code',
 
     # Online users
     'tbs_guestcount' => '%s anonymous',
