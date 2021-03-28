@@ -55,10 +55,11 @@ The following gdo6 dependencies exist and can be cloned.
     
 Install like any gdo6 site.
 
-    php gdo.php configure # create a config to edit manually
+    cd gdo6
+    php gdoadm.php configure # create a config to edit manually
     nano protected/config.php # make sure you use this theme: tbsbbcode,tbs,default
-    php gdo.php install TBS # install all required modules
-    php gdo.php admin gizmore password # create an admin
+    php gdoadm.php install TBS # install all required modules
+    php gdoadm.php admin gizmore password # create an admin
     
     
 or via webserver: Goto localhost/install/wizard.php
