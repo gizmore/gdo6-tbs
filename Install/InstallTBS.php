@@ -26,10 +26,10 @@ final class InstallTBS
         Module_Core::instance()->saveConfigVar('allow_guests', '0');
         
         # Disable Friends. We only need it for GDT_ACL
-        if (module_enabled('Friends'))
-        {
-            Module_Friends::instance()->saveVar('module_enabled', false);
-        }
+//         if (module_enabled('Friends'))
+//         {
+//             Module_Friends::instance()->saveVar('module_enabled', false);
+//         }
         
         # Send a welcome PM
         Module_PM::instance()->saveConfigVar('pm_welcome', '1');

@@ -24,6 +24,8 @@ final class Ranking extends MethodQueryTable
     public function getDefaultIPP() { return 100; }
     public function fetchAs() { return GDO_User::table(); }
     
+    public function getTitleLangKey() { return 'table_tbs_ranking'; }
+    
     public function gdoTable()
     {
         return GDO_TBS_ChallengeSolvedCategory::table();
