@@ -21,7 +21,7 @@ new Application();
 ModuleLoader::instance()->loadModulesCache();
 
 # Bootstrap
-Trans::$ISO = GWF_LANGUAGE;
+Trans::setISO(GWF_LANGUAGE);
 Logger::init(null, GWF_ERROR_LEVEL); # 1st init as guest
 Debug::init();
 Debug::enableErrorHandler();
@@ -47,6 +47,4 @@ else
 {
     $chall = GDO_TBS_Challenge::getChallenge(TBS_CHALL_CATEGORY, TBS_CHALL_TITLE);
 }
-
 ?>
-</html>
