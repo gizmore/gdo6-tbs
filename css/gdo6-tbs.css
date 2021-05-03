@@ -347,8 +347,8 @@ ul.pagination li.page-selected {
 .gdt-card-avatar {
 	float: left;
 	vertical-align: middle;
-	line-height: 35px;
-	margin-right: 8px;
+	line-height: 100%;
+	margin-right: 5px;
 }
 
 /** Forms **/
@@ -375,6 +375,12 @@ ul.pagination li.page-selected {
 	grid-column: 2 / 3;
 	margin-right: 8px;
 	max-width: 240px;
+}
+
+.gdo-form .gdo-form-inner .gdo-gdt_link {
+	height: 28px;
+	line-height: 28px;
+	vertical-align: middle;
 }
 
 .gdo-form form > input {
@@ -463,12 +469,12 @@ img.gdo-captcha-img {
 	margin-left: auto;
 }
 
-.gdo-form input[type=submit] {
-	padding: 6px;
-}
-
 .gdo-form input[type=text],
 .gdo-form input[type=number],
+.gdo-form input[type=email],
+.gdo-form input[type=date],
+.gdo-form input[type=datetime],
+.gdo-form input[type=datetime-local],
 .easy-autocomplete input,
 .gdo-form select,
 .gdo-form textarea {
@@ -481,6 +487,14 @@ img.gdo-captcha-img {
 	float: none;
 	padding: 6px 8px;
 	margin-bottom: 4px;
+	height: 28px;
+	line-height: 28px;
+	vertical-align: middle;
+}
+
+.gdo-form textarea {
+	height: auto;
+	line-height: 18px;
 }
 
 .gdo-form input[type=file] {
@@ -488,20 +502,13 @@ img.gdo-captcha-img {
 	padding: 4px;
 }
 
-.gdo-form input[type=text],
-.gdo-form input[type=number],
-.easy-autocomplete input,
-.gdo-form select {
-	height: 28px;
-	line-height: 28px;
-	vertical-align: middle;
-}
 .gdo-form select {
 	padding: 0px 4px;
 }
 
 .easy-autocomplete input {
-	padding: 0px 6px;
+	padding: 0px 7px;
+	width: 100%;
 }
 .gdo-form textarea {
 	width: 100%;
