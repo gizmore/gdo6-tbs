@@ -40,8 +40,8 @@ You can request your stats in the channel(s) using "!tbs",
 followed by the username.
 Similar commands exist for other challenge-sites too.
 Use !help to get more information.
-<br/><br/>
-<b class="b ce">Many thanks to Whiteboy and Cyon for this!</b>',
+<br/><br/><br/>
+<b class="ce">Many thanks to Whiteboy and Cyon for this!</b>',
 
     # Sidebar
     'link_tbs_home' => 'Home',
@@ -144,17 +144,17 @@ Use !help to get more information.
     ## Welcome PM
     'pm_welcome_title' => 'Welcome to %s',
     'pm_welcome_message' => "
-Hi gizmore3,<br/>
-<br/>
-TheBlacksheep and Erik welcome you on www.bright-shadows.net. Thank you for your registration! -_-<br/>
-<br/>
-:teach: Choose a strong password and ensure your email account is secure. Otherwise someone might be able to log into your account!<br/>
-You can edit your profile when you click on the link linkMyAccount in the menu. There you can also change your password.<br/>
-<br/>
-Be reminded that bruteforce attacks on the website are not allowed. Have a look at the linkFAQ for further information.<br/>
-Accounts of users will be locked if they don't follow the rules.<br/>
-<br/>
-We wish you a nice time on our site - fun, gaining experience, etc. If you have any comments, ideas, challenges or whatsoever, feel free to tell us what you think. You can send us a private message or an email (linkContact in the menu).<br/>
-<br/>
-Bye, TheBlacksheep and Erik :-)<br/>",
+Hi gizmore3,
+
+TheBlacksheep and Erik welcome you on www.bright-shadows.net. Thank you for your registration! -_-
+
+:teach: Choose a strong password and ensure your email account is secure. Otherwise someone might be able to log into your account!
+You can edit your profile when you click on the link linkMyAccount in the menu. There you can also change your password.
+
+Be reminded that bruteforce attacks on the website are not allowed. Have a look at the linkFAQ for further information.
+Accounts of users will be locked if they don't follow the rules.
+
+We wish you a nice time on our site - fun, gaining experience, etc. If you have any comments, ideas, challenges or whatsoever, feel free to tell us what you think. You can send us a private message or an email (linkContact in the menu).
+
+Bye, TheBlacksheep and Erik :-)",
 ];

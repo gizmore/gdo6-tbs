@@ -196,7 +196,12 @@ div.gdo-main {
 }
 
 .gdo-error p, .gdo-exception {
+	padding: 8px;
 	background: #d87;
+}
+
+.gdo-error p em, .gdo-exception em {
+	font-weight: bold;
 }
 
 /** Tables **/
@@ -404,9 +409,13 @@ ul.pagination li.page-selected {
 .gdo-form form .gdt-divider {
 	background: #AAA;
 	padding: 4px 8px;
-	margin: 0 -8px 4px;
+	margin: 4px -8px;
 	border-top: 1px solid #333;
 	border-bottom: 1px solid #333;
+}
+
+.gdo-form form .gdt-divider:first-child {
+	margin-top: -6px;
 }
 
 .gdo-form-error {
@@ -470,6 +479,7 @@ img.gdo-captcha-img {
 }
 
 .gdo-form input[type=text],
+.gdo-form input[type=search],
 .gdo-form input[type=number],
 .gdo-form input[type=email],
 .gdo-form input[type=date],
