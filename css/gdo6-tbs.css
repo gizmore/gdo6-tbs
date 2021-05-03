@@ -344,6 +344,12 @@ ul.pagination li.page-selected {
 	border-radius: 6px;
 }
 
+.gdt-card-avatar {
+	float: left;
+	vertical-align: middle;
+	line-height: 35px;
+	margin-right: 8px;
+}
 
 /** Forms **/
 .gdo-form div.gdo-form-inner {
@@ -462,6 +468,8 @@ img.gdo-captcha-img {
 }
 
 .gdo-form input[type=text],
+.gdo-form input[type=number],
+.easy-autocomplete input,
 .gdo-form select,
 .gdo-form textarea {
 	border-color: #ccc;
@@ -481,6 +489,8 @@ img.gdo-captcha-img {
 }
 
 .gdo-form input[type=text],
+.gdo-form input[type=number],
+.easy-autocomplete input,
 .gdo-form select {
 	height: 28px;
 	line-height: 28px;
@@ -769,3 +779,5 @@ div.content {
 	color: #060;
 	font-weight: bold;
 }
+
+.gdt-html { padding: 6px; }

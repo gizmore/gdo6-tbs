@@ -803,8 +803,8 @@ final class ImportTBS
     private function purify($message)
     {
         # Replace local images
-        $message = str_replace('/files/images/',
-            Module_TBS::instance()->wwwPath('images/'), $message);
+        $message = str_replace('/files/images',
+            Module_TBS::instance()->wwwPath('images'), $message);
         
         # Replace crazy php tags.
         $message = str_replace('<?php', '&lt;?php', $message);

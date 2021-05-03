@@ -2,7 +2,6 @@
 namespace GDO\TBS\Install;
 
 use GDO\Core\Module_Core;
-use GDO\Friends\Module_Friends;
 use GDO\PM\Module_PM;
 use GDO\Language\Module_Language;
 use GDO\Forum\Module_Forum;
