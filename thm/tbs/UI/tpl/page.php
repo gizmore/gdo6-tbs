@@ -1,11 +1,12 @@
 <?php
+use GDO\Core\Module_Core;
 use GDO\Core\Website;
 use GDO\TBS\GDT_TBS_Sidebar;
 use GDO\Util\Javascript;
-use GDO\Core\Module_Core;
 use GDO\UI\GDT_Page;
 use GDO\UI\GDT_Loading;
 use GDO\TBS\GDT_TBS_TopBar;
+use GDO\Javascript\Module_Javascript;
 
 /**
  * TBS page layout.
@@ -43,7 +44,7 @@ $page->loadSidebars();
 	
 	<?=GDT_Loading::make()->renderCell()?>
 	
-	<?=Javascript::displayJavascripts(Module_Core::instance()->cfgMinifyJS() === 'concat')?>
+	<?=Javascript::displayJavascripts(Module_Javascript::instance()->cfgMinifyJS() === 'concat')?>
 
   </body>
 </html>
