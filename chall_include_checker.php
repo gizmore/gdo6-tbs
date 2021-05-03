@@ -10,6 +10,7 @@ use GDO\Core\ModuleLoader;
 use GDO\DB\Database;
 use GDO\Core\Application;
 
+chdir($_SERVER['DOCUMENT_ROOT']);
 require 'GDO6.php';
 require 'protected/config.php';
 
