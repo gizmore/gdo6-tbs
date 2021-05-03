@@ -1,6 +1,7 @@
 <?php
 namespace GDO\TBS;
 
+use GDO\Contact\Method\Form;
 use GDO\Core\GDO_Module;
 use GDO\Classic\Module_Classic;
 use GDO\TBS\Install\InstallTBS;
@@ -18,6 +19,10 @@ use GDO\Vote\Module_Vote;
 use GDO\Core\GDT_Secret;
 use GDO\Core\GDT_Array;
 use GDO\Core\Application;
+use GDO\Core\Method;
+use GDO\Core\GDT_Template;
+use GDO\Core\GDT_Response;
+use GDO\Core\Website;
 
 /**
  * TBS website revival as gdo6 module.
@@ -196,6 +201,57 @@ final class Module_TBS extends GDO_Module
         $ignore->data[] = 'GDO/TBS/HIDDEN_EXAMPLE/**/*';
         $ignore->data[] = 'GDO/TBS/INPUT/**/*';
         $ignore->data[] = 'GDO/TBS/tutorials/**/*';
+        $ignore->data[] = 'GDO/TBS/downloads/**/*';
+        $ignore->data[] = 'GDO/TBS/scripts/**/*';
     }
-
+    
+    public function hookBeforeExecute(Method $method, GDT_Response $response)
+    {
+        if ($method instanceof Form)
+        {
+            $this->addContactCSS();
+            $response->addField(GDT_Template::make()->template('TBS', 'page/contact_before.php'));
+        }
+    }
+    
+    private function addContactCSS()
+    {
+        $css = <<<END
+        dt {
+          background-image: url('/files/images/backgrounds/headline2.png');
+          background-color: #911501;
+          color:#FFF;
+          font-family: "Georgia", "Times New Roman", serif;
+          font-size: 14px;
+          line-height: 14px;
+          font-weight: normal;
+          padding:1px 0px 2px 4px;
+          margin-top: 10px;
+          border-style:solid;
+          border-color:#000;
+          border-width:1px;
+        }
+        dd {
+          background-color: #CCB;
+          border-color: #000;
+          border-style: solid;
+          border-width: 0px 1px 1px 1px;
+          padding: 4px 8px 4px 4px;
+          font-family: "Verdana",sans-serif;
+          font-size: 12px;
+          line-height: 150%;
+          text-align: justify;
+        }
+        END;
+        Website::addInlineCSS($css);
+    }
+    
+    public function hookAfterExecute(Method $method, GDT_Response $response)
+    {
+        if ($method instanceof Form)
+        {
+            $response->addField(GDT_Template::make()->template('TBS', 'page/contact_after.php'));
+        }
+    }
+    
 }

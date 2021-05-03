@@ -1,0 +1,22 @@
+<?php
+/***********************************************/
+/*                                             */
+/*       http://www.bright-shadows.net         */
+/*                theblacksheep                */
+/*  create echo code file for remote include   */
+/*                                             */
+/***********************************************/
+
+$input_file = $_GET['input_file'];
+if(!isset($_GET['output_file'])){
+ $output_file = 'output.php';
+ }else{
+ $output_file = $_GET['output_file'];
+}
+$input_cont = file_get_contents($input_file);
+$input_cont = addcslashes($input_cont, "\\'");
+$hfile = fopen($output_file, "w");
+fwrite($hfile, "<?php echo '$input_cont'; ?>");
+fclose($hfile);
+echo "Done";
+?>

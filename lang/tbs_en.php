@@ -26,6 +26,15 @@ If you have any hints, opinions, suggestions, requests or whatever, please tell 
     # Tutorials
     'tbs_tutorials' => 'Tutorials',
     
+    # Links
+    'tbs_links' => 'Links',
+    
+    # Support
+    'tbs_support' => 'Support us',
+    
+    # Downloads
+    'tbs_downloads' => 'Downloads',
+    
     # Vulnerable Code
     
     # Settings

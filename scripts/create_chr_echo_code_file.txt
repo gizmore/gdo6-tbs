@@ -1,0 +1,29 @@
+<?php
+/***********************************************/
+/*                                             */
+/*       http://www.bright-shadows.net         */
+/*                theblacksheep                */
+/*          create chr echo code file          */
+/*  useful if you need non quote source code   */
+/***********************************************/
+
+$input_file = $_GET['input_file'];
+if(!isset($_GET['output_file'])){
+ $output_file = 'output.php';
+ }else{
+ $output_file = $_GET['output_file'];
+}
+$input_cont = file_get_contents($input_file);
+$input_cont = preg_replace("/ {1,}/"," ",$input_cont);
+$i = 0;
+$output = '';
+while($input_cont[$i]){
+ $output .= 'chr('.ord($input_cont[$i]).').';
+ $i++;
+}
+$output[strlen($output)-1] = ';';
+$hfile = fopen($output_file, "w");
+fwrite($hfile, "<?php echo '$output'; ?>");
+fclose($hfile);
+echo "Done";
+?>
