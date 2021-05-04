@@ -24,9 +24,11 @@ use GDO\Admin\Method\ClearCache;
 use GDO\TBS\GDT_TBS_ChallengeStatus;
 
 /**
- * Import TBS data from /INPUT/ folder.
+ * - Import TBS data from INPUT/ folder.
  * 
  * - Import some CSV from Xaav
+ * 
+ * - Import some HIDDEN/ files
  * 
  * Problems:
  * 
@@ -36,10 +38,11 @@ use GDO\TBS\GDT_TBS_ChallengeStatus;
  *  - Clarify how to merge challenges and solution forums nicely.
  *    In theory it already should be capable of repeated multi imports.
  *    Clarify for HIDDEN updates.
+ *    
+ *  - Challenge import status is not in an easily readable format.
  *  
- *  
- * @version 6.10
- * @since 6.10
+ * @version 6.10.1
+ * @since 6.10.0
  */
 final class ImportTBS
 {
@@ -160,7 +163,6 @@ final class ImportTBS
     
     private function convertChallengeURL($url)
     {
-//         $url = trim($url, '/');
         return $url;
     }
     
@@ -803,8 +805,8 @@ final class ImportTBS
     private function purify($message)
     {
         # Replace local images
-        $message = str_replace('/files/images',
-            Module_TBS::instance()->wwwPath('images'), $message);
+        $message = str_replace('/files/images/',
+            Module_TBS::instance()->wwwPath('images/'), $message);
         
         # Replace crazy php tags.
         $message = str_replace('<?php', '&lt;?php', $message);
