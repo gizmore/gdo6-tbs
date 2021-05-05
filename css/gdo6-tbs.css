@@ -155,7 +155,7 @@ div.gdo-main {
 .gdo-panel,
 .gdo-form,
 .gdt-card,
-.gdo-table,
+.gdt-table,
 .gdo-pagemenu {
 	border-style: solid;
 	border-width: 2px;
@@ -205,46 +205,46 @@ div.gdo-main {
 }
 
 /** Tables **/
-.gdo-tblorder a.sel span {
+.gdt-tblorder a.sel span {
 	color: gold;
 }
 
-.gdo-table {
+.gdt-table {
 	width: fit-content;
 }
 
-.gdo-table h3 {
+.gdt-table h3 {
 	background: url(../img/metall.jpg);
 }
-.gdo-table table {
+.gdt-table table {
 	margin: 0;
 	width: 100%;
 	border-collapse: collapse;
 }
 
-.gdo-table table tbody tr,
-.gdo-table table tbody a {
+.gdt-table table tbody tr,
+.gdt-table table tbody a {
 	background: #383850;
 	color: #FFAA00;
 	text-decoration: none;
 }
-.gdo-table table tbody tr:hover {
+.gdt-table table tbody tr:hover {
 	background: rgb(88, 88, 112);
 }
-.gdo-table table tbody a:hover {
+.gdt-table table tbody a:hover {
 	color: #fff;
 	text-decoration: underline;
 }
 
-.gdo-table table tbody .gdt-num {
+.gdt-table table tbody .gdt-num {
 	color: #fff;
 }
 
-.gdo-table table tbody td {
+.gdt-table table tbody td {
 	padding: 2px 4px;
 }
 
-.gdo-table table thead th {
+.gdt-table table thead th {
 	vertical-align: bottom;
 }
 
@@ -288,7 +288,7 @@ div.gdt-list-card > h3 {
 	width: 100%;
 }
 
-.gdt-list-item .gdo-gdt_createdat {
+.gdt-list-item .gdt_createdat {
 	float: right;
 }
 
@@ -364,7 +364,7 @@ ul.pagination li.page-selected {
 	grid-template-rows: auto;
 }
 
-.gdo-form .gdo-form-inner > .gdo-container {
+.gdo-form .gdo-form-inner > .gdt-container {
 	display: contents;
 }
 
@@ -382,7 +382,7 @@ ul.pagination li.page-selected {
 	max-width: 240px;
 }
 
-.gdo-form .gdo-form-inner .gdo-gdt_link {
+.gdo-form .gdo-form-inner .gdt_link {
 	height: 28px;
 	line-height: 28px;
 	vertical-align: middle;
@@ -398,9 +398,9 @@ ul.pagination li.page-selected {
 .gdo-form form .gdt-bar,
 .gdo-form form .gdt-divider,
 .gdo-form form .gdt-paragraph,
-.gdo-form form .gdo-gdt_link,
+.gdo-form form .gdt_link,
 .form-span-columns,
-.gdo-form form > .gdo-container .gdo-container,
+.gdo-form form > .gdt-container .gdt-container,
 .gdo-form form .gdo-tabs,
 .gdo-file-controls {
 	grid-column: 1 / 4;
@@ -524,7 +524,7 @@ img.gdo-captcha-img {
 	width: 100%;
 }
 
-.gdo-form form > .gdo-container:first-child > * {
+.gdo-form form > .gdt-container:first-child > * {
 	margin-top: 8px;
 }
 
@@ -617,7 +617,7 @@ img.gdo-captcha-img {
 	white-space: nowrap;
 }
 
-td.gdo-gdt_tbs_challengestatus span.gdo-icon {
+td.gdt_tbs_challengestatus span.gdo-icon {
 	color: inherit;
 }
  
@@ -817,6 +817,14 @@ ul.links a {
 	color: #048;
 	margin-left: 16px;
 }
+
+ul.links p a {
+	text-decoration: underline;
+	margin: 0px;
+	background-color: transparent;
+	color: #060;
+}
+
 /** MISC **/
 
 .gdo-setting-old {

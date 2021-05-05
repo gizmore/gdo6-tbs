@@ -40,6 +40,10 @@ If you have any hints, opinions, suggestions, requests or whatever, please tell 
     # Settings
     'tbs_ranked' => 'Ranked?',
     
+    # Heartbeat
+    'tbs_heartbeat' => 'Ping',
+
+    
     # Chat
     'tbs_chat_title' => 'IRCS: #tbs on irc.wechall.net:6666',
     'tbs_chat_text' => '

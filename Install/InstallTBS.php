@@ -7,6 +7,9 @@ use GDO\Language\Module_Language;
 use GDO\Forum\Module_Forum;
 use GDO\Mibbit\Module_Mibbit;
 use GDO\Register\Module_Register;
+use GDO\Favicon\Module_Favicon;
+use GDO\File\GDO_File;
+use GDO\TBS\Module_TBS;
 
 /**
  * Configure a few modules on install.
@@ -49,6 +52,12 @@ final class InstallTBS
         # Register
         Module_Register::instance()->saveConfigVar('right_bar', '0');
         Module_Register::instance()->saveConfigVar('signup_password_retype', '0');
+    
+        # TBS Favicon
+        $path = Module_TBS::instance()->filePath('Install/favicon.ico');
+        $file = GDO_File::fromPath('favicon.ico', $path)->insert()->copy();
+        Module_Favicon::instance()->saveConfigVar('favicon', $file->getID());
+        Module_Favicon::instance()->updateFavicon();
     }
     
 }

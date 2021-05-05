@@ -35,7 +35,7 @@
       Don't be lame or we have to inform your ISP! This specially refers to brute force attacks.
       They are usually not necessary and if they are, check if it can be done offline (example: password hashes).<br />
       A totally different aspect are security holes within the web site
-     (<a target="_blank" href="/tutorials/tbs_wiwa.txt" class="tbscode_standard_link" title="Visit this hyperlink! (Target: /tutorials/tbs_wiwa.txt)"><img src="/files/images/misc/tbsc_hyperlink.gif" width="16" height="16" class="tbscode_standard_link" alt="link" title="Visit this hyperlink! (Target: /tutorials/tbs_wiwa.txt)" />web-application</a>).
+     (<a target="_blank" href="GDO/TBS/tutorials/tbs_wiwa.txt" class="tbscode_standard_link" title="Visit this hyperlink! (Target: /tutorials/tbs_wiwa.txt)"><img src="GDO/TBS/images/misc/tbsc_hyperlink.gif" width="16" height="16" class="tbscode_standard_link" alt="link" title="Visit this hyperlink! (Target: /tutorials/tbs_wiwa.txt)" />web-application</a>).
       If you find one of those please report them to theblacksheep (there have been a couple XSS ones in the past).
       We won't get mad at you for those :-)
      </dd>
@@ -64,7 +64,7 @@
 
     <dt>Support/Donations/Challenges/Tutorials/etc</dt>
      <dd>
-      Please go to <a href="/support.php" class="tbscode_standard_link" title="Visit this hyperlink! (Target: /support.php)"><img src="/files/images/misc/tbsc_hyperlink.gif" width="16" height="16" class="tbscode_standard_link" alt="link" title="Visit this hyperlink! (Target: /support.php)" />Support Us</a>
+      Please go to <a href="index.php?mo=TBS&me=Support" class="tbscode_standard_link" title="Visit this hyperlink! (Target: /support.php)"><img src="GDO/TBS/images/misc/tbsc_hyperlink.gif" width="16" height="16" class="tbscode_standard_link" alt="link" title="Visit this hyperlink! (Target: /support.php)" />Support Us</a>
       in the menue for further information.
     </dd>
 
@@ -102,7 +102,7 @@
       Some user have written programs that connect to bright-shadows.net and collect information about
       their current rank, new challenges, new posts, new pms, etc.
       To save a little bandwidth and to optimize the process of data collection you can use the 
-      <a href="/userdata.php" class="tbscode_standard_link" title="Visit this hyperlink! (Target: /userdata.php)"><img src="/files/images/misc/tbsc_hyperlink.gif" width="16" height="16" class="tbscode_standard_link" alt="link" title="Visit this hyperlink! (Target: /userdata.php)" />userdata</a>
+      <a href="GDO/TBS/userdata.php" class="tbscode_standard_link" title="Visit this hyperlink! (Target: /userdata.php)"><img src="GDO/TBS/images/misc/tbsc_hyperlink.gif" width="16" height="16" class="tbscode_standard_link" alt="link" title="Visit this hyperlink! (Target: /userdata.php)" />userdata</a>
       script.<br />
       If you do not specify the username parameter it returns the following information about you:<br />
       USER:RANK:TOTAL USERS:CHALLS_SOLVED:TOTAL_CHALLS:UNREAD_NEWS:UNREAD_FORUM:UNREAD_PM<br />

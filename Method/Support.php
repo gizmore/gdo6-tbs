@@ -10,7 +10,7 @@ final class Support extends MethodPage
     
     public function init()
     {
-        $webroot = GWF_WEB_ROOT;
+        $webroot = GDO_WEB_ROOT;
         $css = <<<END
         p.contribs {
             margin: 5px 10px 0px 10px;

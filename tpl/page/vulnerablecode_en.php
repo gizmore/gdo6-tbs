@@ -2,7 +2,7 @@
 use GDO\Forum\GDO_ForumBoard;
 use GDO\UI\GDT_Link;
 
-$path = GWF_WEB_ROOT . 'GDO/TBS/vulnerable_code/';
+$path = GDO_WEB_ROOT . 'GDO/TBS/vulnerable_code/';
 $of = $path . 'overflows/';
 $sx = $path . 'scripts/';
 $href = GDO_ForumBoard::getBy('board_title', 'Vulnerable Code')->hrefView();
