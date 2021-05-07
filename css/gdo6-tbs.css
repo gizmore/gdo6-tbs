@@ -516,7 +516,11 @@ img.gdo-captcha-img {
 }
 
 .gdo-form select {
-	padding: 0px 4px;
+	padding: 5px 4px;
+}
+
+img.gdo-captcha-img {
+	grid-column: 3;
 }
 
 .easy-autocomplete input {
