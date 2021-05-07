@@ -394,7 +394,8 @@ ul.pagination li.page-selected {
 .gdo-form .gdt-headline,
 .gdo-form .gdo-form-head,
 .gdo-form form textarea,
-.gdo-form-error,
+.gdo-form form textarea,
+.gdo-form-inner > .gdo-panel,
 .gdo-form form .gdt-bar,
 .gdo-form form .gdt-divider,
 .gdo-form form .gdt-paragraph,
@@ -402,9 +403,11 @@ ul.pagination li.page-selected {
 .form-span-columns,
 .gdo-form form > .gdt-container .gdt-container,
 .gdo-form form .gdo-tabs,
+.gdo-form form .gdo-form-error,
 .gdo-file-controls {
 	grid-column: 1 / 4;
 }
+
 
 .gdo-form form .gdt-divider {
 	background: #AAA;
