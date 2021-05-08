@@ -189,6 +189,7 @@ div.gdo-main {
 	color: #D00000;
 	font-weight: bold;
 	font-size: 20px;
+	padding: 0 4px 6px;
 }
 
 .gdo-success p .gdt-icon {
@@ -369,7 +370,7 @@ ul.pagination li.page-selected {
 }
 
 .gdo-form .gdo-form-actions {
-	margin: 8px 0 0 2px;
+	margin: 8px 2px;
 }
 
 .gdo-form form .gdo-icon {
@@ -459,7 +460,7 @@ input[type=submit] {
 	font-family: 'Verdana', sans-serif;
 	font-size: 12px;
 	overflow: visible;
-	padding: 1px 4px;
+	padding: 3px 6px;
 	text-align: center;
 	text-decoration: none;
 	width: max-content;
@@ -482,6 +483,7 @@ img.gdo-captcha-img {
 }
 
 .gdo-form input[type=text],
+.gdo-form input[type=password],
 .gdo-form input[type=search],
 .gdo-form input[type=number],
 .gdo-form input[type=email],
@@ -534,7 +536,6 @@ img.gdo-captcha-img {
 .gdo-form form > .gdt-container:first-child > * {
 	margin-top: 8px;
 }
-
 
 /** Icons **/
 .gdo-icon {
@@ -730,6 +731,11 @@ td.gdt_tbs_challengestatus span.gdo-icon {
 	font-weight: bold;
 	font-family: 'Times New Roman',serif;
 	font-size: 20px;
+	padding: 0 4px 6px;
+}
+
+div.module dt:first-child {
+	margin-top: 0;
 }
 
 div.content {

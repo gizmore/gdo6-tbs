@@ -83,12 +83,14 @@ final class Module_TBS extends GDO_Module
             GDT_UInt::make('chall_solve_attempts')->initial('5'),
             GDT_Secret::make('chall_solver_user')->initial('gizmore3'),
             GDT_Secret::make('chall_solver_pass')->initial('11111111'),
+            GDT_Secret::make('tbs_xauth_key')->initial('you wanna know this key? :)'),
         ];
     }
     public function cfgSolveTimeout() { return $this->getConfigValue('chall_solve_timeout'); }
     public function cfgSolveAttempts() { return $this->getConfigVar('chall_solve_attempts'); }
     public function cfgSolveUser() { return $this->getConfigVar('chall_solver_user'); }
     public function cfgSolvePass() { return $this->getConfigVar('chall_solver_pass'); }
+    public function cfgXAuthKey() { return $this->getConfigVar('tbs_xauth_key'); }
     
     public function getUserSettings()
     {
@@ -205,6 +207,9 @@ final class Module_TBS extends GDO_Module
         $ignore->data[] = 'GDO/TBS/scripts/**/*';
     }
     
+    ##########################
+    ### Contact Form Hooks ###
+    ##########################
     public function hookBeforeExecute(Method $method, GDT_Response $response)
     {
         if ($method instanceof Form)

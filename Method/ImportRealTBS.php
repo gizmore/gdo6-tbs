@@ -43,9 +43,9 @@ final class ImportRealTBS extends MethodForm
     
     public function execute()
     {
-        if (GWF_DB_DEBUG)
+        if (GDO_DB_DEBUG)
         {
-            return $this->error('err_db_debug_level_too_high', [GWF_DB_DEBUG]);
+            return $this->error('err_db_debug_level_too_high', [GDO_DB_DEBUG]);
         }
         return parent::execute();
     }

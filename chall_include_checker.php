@@ -16,18 +16,18 @@ require 'protected/config.php';
 
 Database::init();
 new ModuleLoader(GDO_PATH . 'GDO/');
-GDO_Session::init(GWF_SESS_NAME, GWF_SESS_DOMAIN, GWF_SESS_TIME, !GWF_SESS_JS, GWF_SESS_HTTPS);
+GDO_Session::init(GDO_SESS_NAME, GDO_SESS_DOMAIN, GDO_SESS_TIME, !GDO_SESS_JS, GDO_SESS_HTTPS);
 new Application();
 ModuleLoader::instance()->loadModulesCache();
 
 # Bootstrap
-Trans::$ISO = GWF_LANGUAGE;
-Logger::init(null, GWF_ERROR_LEVEL); # 1st init as guest
+Trans::$ISO = GDO_LANGUAGE;
+Logger::init(null, GDO_ERROR_LEVEL); # 1st init as guest
 Debug::init();
 Debug::enableErrorHandler();
 Debug::enableExceptionHandler();
-Debug::setDieOnError(GWF_ERROR_DIE);
-Debug::setMailOnError(GWF_ERROR_MAIL);
+Debug::setDieOnError(GDO_ERROR_DIE);
+Debug::setMailOnError(GDO_ERROR_MAIL);
 GDO_Session::instance();
 
 ?>

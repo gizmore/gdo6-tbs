@@ -170,4 +170,18 @@ Accounts of users will be locked if they don't follow the rules.
 We wish you a nice time on our site - fun, gaining experience, etc. If you have any comments, ideas, challenges or whatsoever, feel free to tell us what you think. You can send us a private message or an email (linkContact in the menu).
 
 Bye, TheBlacksheep and Erik :-)",
+    
+    ## Migration
+    'tbs_migrate' => 'migrate',
+    'tbs_account_migration_title' => 'Migration',
+    'tbs_account_migration_text' => 'Your bright-shadows-net credentials will not work. You have to %s to recover your account.',
+    'tbs_migration_info' => 'Here you can try to recover or migrate your TBS account.<br/>Please fill out all fields correctly. Usernames are case sensitve.',
+    'tbs_username' => 'TBS username',
+    'wechall_email' => 'WeChall Email',
+    'wechall_username' => 'WeChall username',
+    'err_tbs_wc_migrate' => 'Migration failed: %s.',
+    'msg_tbs_migrate_mail_sent' => 'Your provided data is correct. We have sent an Email to your WeChall account.',
+    'err_tbs_migrate_token' => 'Your migration token is invalid.',
+    'msg_tbs_migrate_recovery' => 'You may now choose a password on tbs.wechall.net!',
+    'err_tbs_migrate_not_needed' => 'This account is already migrated and should work. If you need to change your password, try the recovery function.',
 ];
