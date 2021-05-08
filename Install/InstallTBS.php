@@ -26,7 +26,7 @@ final class InstallTBS
     {
         # TBS is not guest-friendly!
         Module_Core::instance()->saveConfigVar('allow_guests', '0');
-        Module_Core::instance()->saveConfigVar('load_sidebars', '0');
+//         Module_Core::instance()->saveConfigVar('load_sidebars', '0');
         
         # Disable Friends. We only need it for GDT_ACL
 //         if (module_enabled('Friends'))
