@@ -163,7 +163,7 @@ final class Module_TBS extends GDO_Module
     
     public function hookProfileTemplate(GDO_User $user)
     {
-        echo $this->templatePHP('profile.php', ['user' => $user]);
+        echo $this->php('profile.php', ['user' => $user]);
     }
     
     public function hookDecoratePostUser(GDT_Card $card, GDT_Container $cont, GDO_User $user)
