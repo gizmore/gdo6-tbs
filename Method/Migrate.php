@@ -131,7 +131,7 @@ final class Migrate extends MethodForm
                 return $this->message('msg_tbs_migrate_mail_sent');
                 
             default:
-                return $this->error('err_tbs_wc_migrate', [html($response)])->add($this->renderPage());
+                return $this->error('err_tbs_wc_migrate', [html($response)])->addField($this->renderPage());
         }
     }
     

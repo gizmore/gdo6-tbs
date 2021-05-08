@@ -32,7 +32,7 @@ final class ChallengeLists extends Method
         {
             $list = ChallengeList::make();
             $_REQUEST['category'] = $category;
-            $response->add($list->execute());
+            $response->addField($list->execute());
         }
         
         return $response;

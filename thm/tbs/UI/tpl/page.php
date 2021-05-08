@@ -33,17 +33,16 @@ $page->bottomNav->addField(GDT_PerfBar::make());
 	  <div class="gdo-body">
 	    <?=GDT_TBS_Sidebar::make()->render()?>
 	    <?=GDT_TBS_TopBar::make()->render()?>
-	  
 		<div class="gdo-main">
 		  <?=$page->topTabs->render()?>
-		  <?=Website::renderTopResponse()?>
+		  <?=Website::topResponse()->render()?>
 		  <?=$page->html?>
 		</div>
 	  </div>
 	  <div><?=$page->bottomNav->render()?></div>
 	</div>
 	
-	<?=GDT_Loading::make()->renderCell()?>
+	<?=GDT_Loading::make()->render()?>
 	
 	<?=Javascript::displayJavascripts(Module_Javascript::instance()->cfgMinifyJS() === 'concat')?>
 

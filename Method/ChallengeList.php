@@ -24,7 +24,6 @@ final class ChallengeList extends MethodTable
     public function isPaginated() { return false; }
     public function isFiltered() { return false; }
     public function isGuestAllowed() { return false; }
-//     public function fetchAs() { return GDO_User::table(); }
     
     public function getDefaultOrder() { return 'chall_order'; }
     
@@ -68,11 +67,6 @@ final class ChallengeList extends MethodTable
         return $this->gdoParameterVar('category');
     }
     
-//     public function getQuery()
-//     {
-//         return $this->gdoTable()->select()->where("chall_category='{$this->getCategory()}'");
-//     }
-
     public function getResult()
     {
         $cat = $this->getCategory();

@@ -17,6 +17,8 @@ use GDO\User\GDO_User;
  */
 final class Ranking extends MethodQueryTable
 {
+//     public function gdoCached() { return true; }
+    
     public function isOrdered() { return false; }
     public function isFiltered() { return false; }
     public function getDefaultOrder() { return 'user_level'; }
@@ -33,9 +35,10 @@ final class Ranking extends MethodQueryTable
     
     public function getQuery()
     {
-        return
-            parent::getQuery()->joinObject('csc_user')->
-            where('user_type="member"');
+        return $this->gdoTable()->select('*')->
+                joinObject('csc_user')->
+                where('user_type="member"')->
+                fetchTable(GDO_User::table());
     }
     
     public function gdoHeaders()
