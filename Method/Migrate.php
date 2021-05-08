@@ -57,20 +57,24 @@ final class Migrate extends MethodForm
             GDT_Email::make('wechall_mail')->label('wechall_email'),
             GDT_Username::make('wechall_name')->label('wechall_username'),
             GDT_Validator::make()->validator('tbs_user', [$this, 'validateAlreadyActive']),
-            GDT_Captcha::make(),
             GDT_AntiCSRF::make(),
         ]);
+        if (module_enabled('Captcha'))
+        {
+            $form->addField(GDT_Captcha::make());
+        }
+        
         $form->actions()->addField(GDT_Submit::make());
     }
     
     public function validateAlreadyActive(GDT_Form $form, GDT $field, $value)
     {
         /** @var $value GDO_User **/
-        if ($value->hasVar('user_password'))
+        if ($value && $value->getVar('user_password'))
         {
             return $field->error('err_tbs_migrate_not_needed');
         }
-        
+        return true;
     }
     
     ##############
@@ -84,7 +88,7 @@ final class Migrate extends MethodForm
      */
     public function getMigrationURL($tbs, $wechall, $email)
     {
-        $host = 'http://gwf3.giz.org';
+        $host = 'https://www.wechall.net';
         return sprintf(
             '%s/index.php?mo=WeChall&me=TBSMigration&tbs=%s&wc=%s&email=%s&token=%s&xauth=%s&host=%s',
             $host,
