@@ -1,21 +1,26 @@
 <?php
-use GDO\OnlineUsers\Method\ViewOnline;
 use GDO\Profile\GDT_ProfileLink;
+use GDO\TBS\Method\Heartbeat;
+use GDO\User\GDO_User;
 
-$result = ViewOnline::make()->getQuery()->exec();
+$users = Heartbeat::make()->getOnlineUsers();
 
 $guestcount = 0;
 $onlineUsers = '';
-while ($user = $result->fetchObject())
+
+$c = GDO_User::table()->cache;
+foreach ($users as $user)
 {
-    if ($user->isGuest())
+    $user = $c->getDummy()->setGDOVars($user);
+    if ($user->isAnon())
     {
         $guestcount++;
     }
     else
     {
         $profileLink = GDT_ProfileLink::make()->withNickname()->forUser($user);
-        $onlineUsers .= sprintf("<div>%s<span>%s</span></div>\n", $profileLink->renderCell(), $user->getVar('user_level'));
+        $onlineUsers .= sprintf("<div>%s<span>%s</span></div>\n",
+            $profileLink->renderCell(), $user->getVar('user_level'));
     }
 }
 ?>

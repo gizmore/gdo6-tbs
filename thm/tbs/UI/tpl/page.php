@@ -7,13 +7,14 @@ use GDO\UI\GDT_Page;
 use GDO\UI\GDT_Loading;
 use GDO\TBS\GDT_TBS_TopBar;
 use GDO\Javascript\Module_Javascript;
-
+use GDO\UI\GDT_Bar;
+use GDO\Perf\GDT_PerfBar;
 /**
  * TBS page layout.
  */
-
 /** @var $page GDT_Page **/
-$page->loadSidebars();
+$page->bottomNav = GDT_Bar::make('bottomNav')->horizontal();
+$page->bottomNav->addField(GDT_PerfBar::make());
 ?>
 <!DOCTYPE html>
 <html>

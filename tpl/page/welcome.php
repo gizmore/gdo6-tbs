@@ -14,6 +14,4 @@ $linkMigrate = GDT_Link::make('tbs_migrate')->href(href('TBS', 'Migrate'))->rend
 $panel2->text('tbs_account_migration_text', [$linkMigrate]);
 echo $panel2->render();
 
-
-$form = Form::make();
-echo $form->execute()->render();
+echo Form::make()->execute()->render();

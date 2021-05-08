@@ -5,7 +5,8 @@ use GDO\Core\GDT;
 use GDO\Core\GDT_Template;
 
 /**
- * The sidebar online users at the bottom.
+ * The sidebar online users at the bottom left.
+ * 
  * @author gizmore
  */
 final class GDT_TBS_Online extends GDT

@@ -20,6 +20,7 @@ use GDO\User\GDT_Permission;
 use GDO\User\GDT_Password;
 use GDO\Net\URL;
 use GDO\DB\GDT_Index;
+use GDO\DB\Cache;
 
 /**
  * A challenge on TBS.
@@ -102,18 +103,6 @@ final class GDO_TBS_Challenge extends GDO
     public function href_chall_questions() { return href('Forum', 'Boards', "&board={$this->getQuestionBoardID()}"); }
     public function href_chall_solutions() { return href('Forum', 'Boards', "&board={$this->getSolutionBoardID()}"); }
     
-    public function queryChallengeCount() { return $this->countWhere(); }
-
-    public function getChallengeCount()
-    {
-        static $count;
-        if (!isset($count))
-        {
-            $count = $this->queryChallengeCount();
-        }
-        return $count;
-    }
-    
     ###############
     ### Factory ###
     ###############
@@ -126,6 +115,23 @@ final class GDO_TBS_Challenge extends GDO
             where('chall_category='.quote($category))->
             where('chall_title='.quote($title))->
             first()->exec()->fetchObject();
+    }
+    
+    public static function getChallengeCount($category=null)
+    {
+        static $count = null;
+        $key = 'tbs_challenge_count';
+        $key = $category === null ? $key : $key . $category;
+        if ($count === null)
+        {
+            if (false === ($count = Cache::get($key)))
+            {
+                $where = $category === null ? true : "chall_category = " . (int)$category;
+                $count = self::table()->countWhere($where);
+                Cache::set($key, $count);
+            }
+        }
+        return $count;
     }
     
     /**
