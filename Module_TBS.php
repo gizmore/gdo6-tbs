@@ -191,7 +191,7 @@ final class Module_TBS extends GDO_Module
     
     public function hookUserActivated(GDO_User $user)
     {
-        # Craete scoring upon activation.
+        # Create scoring upon activation.
         GDO_TBS_ChallengeSolvedCategory::updateUser($user);
     }
     
@@ -257,7 +257,9 @@ final class Module_TBS extends GDO_Module
     {
         if ($method instanceof Form)
         {
-            $response->addField(GDT_Template::make()->template('TBS', 'page/contact_after.php'));
+            $response->addField(
+                GDT_Template::make()->
+                template('TBS', 'page/contact_after.php'));
         }
     }
     
