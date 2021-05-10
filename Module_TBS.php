@@ -215,7 +215,9 @@ final class Module_TBS extends GDO_Module
         if ($method instanceof Form)
         {
             $this->addContactCSS();
-            $response->addField(GDT_Template::make()->template('TBS', 'page/contact_before.php'));
+            $response->addField(
+                GDT_Template::make()->
+                template('TBS', 'page/contact_before.php'));
         }
     }
     
