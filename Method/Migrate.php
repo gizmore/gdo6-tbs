@@ -27,7 +27,8 @@ use GDO\Core\GDT;
  * 3. Change your password via Recovery module.
  * 
  * @author gizmore
- * @version 6.10.2
+ * @version 6.10.3
+ * @since 6.10.2
  */
 final class Migrate extends MethodForm
 {
@@ -54,8 +55,8 @@ final class Migrate extends MethodForm
         $form->info(t('tbs_migration_info'));
         $form->addFields([
             GDT_User::make('tbs_user')->notNull()->label('tbs_username'),
-            GDT_Email::make('wechall_mail')->label('wechall_email'),
-            GDT_Username::make('wechall_name')->label('wechall_username'),
+            GDT_Email::make('wechall_mail')->notNull()->label('wechall_email'),
+            GDT_Username::make('wechall_name')->notNull()->label('wechall_username'),
             GDT_Validator::make()->validator('tbs_user', [$this, 'validateAlreadyActive']),
             GDT_AntiCSRF::make(),
         ]);
