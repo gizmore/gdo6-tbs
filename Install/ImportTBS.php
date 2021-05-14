@@ -41,7 +41,7 @@ use GDO\TBS\GDT_TBS_ChallengeStatus;
  *    
  *  - Challenge import status is not in an easily readable format.
  *  
- * @version 6.10.1
+ * @version 6.10.3
  * @since 6.10.0
  */
 final class ImportTBS
@@ -564,6 +564,15 @@ final class ImportTBS
         $this->importForumFixes(); # Trashcan
         $this->importForumThreads();
         $this->importForumPosts();
+        $this->markLatestPostAsMailed();
+    }
+    
+    private function markLatestPostAsMailed()
+    {
+        $postId = GDO_ForumPost::table()->select('MAX(post_id)')->
+            first()->exec()->fetchValue();
+        Module_Forum::instance()->
+            saveConfigVar('forum_mail_sent_for_post', $postId);
     }
     
 //     public function nullDecoder($s)
