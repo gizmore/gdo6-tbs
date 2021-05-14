@@ -631,7 +631,7 @@ td.gdt_tbs_challengestatus span.gdo-icon {
 /** Challenge **/
 #challenge_iframe {
 	width: 100%;
-	height: inherit;
+	height: calc(100vh - 100px);
 }
 
 #challenge_bar span {
