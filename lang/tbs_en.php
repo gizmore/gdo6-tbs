@@ -135,6 +135,7 @@ Use !help to get more information.
     'msg_tbs_solved' => 'Very good, you solved this challenge. You gained %s points and now have %s.',
     
     ## Ranking
+    'mtitle_tbs_ranking' => 'Ranking',
     'table_tbs_ranking' => '%s Ranked Users',
     'rank' => 'Rank',
     'solved' => 'Solved',
