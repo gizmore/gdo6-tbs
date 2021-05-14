@@ -7,6 +7,7 @@ use GDO\User\GDO_User;
 use GDO\Util\Process;
 use GDO\Util\Strings;
 use GDO\Python\Module_Python;
+use GDO\TBS\Method\Ranking;
 
 /**
  * Logic for solution submission.
@@ -142,8 +143,13 @@ final class ChallSolveEngine
         # Mark solved
         GDO_TBS_ChallengeSolved::challengeSolved($this->challenge, $user);
         
-        # Response with gain.
+        # Calculate category stats
         list($before, $after) = GDO_TBS_ChallengeSolvedCategory::updateUser($user);
+
+        # Flush Ranking cache
+        Ranking::make()->fileUncache();
+        
+        # Response with gain.
         $gain = $after - $before;
         return $this->response('msg_tbs_solved', [$gain, $after]);
     }
