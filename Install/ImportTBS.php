@@ -425,7 +425,7 @@ final class ImportTBS
         $fileData = $this->enhanceFormsToUseSolutionChecking($fileData, $fullpath);
         
         # Fix URLs to /challenges/
-        $fileData = str_replace('/challenges/', $module->wwwPath('challenges/'), $fileData);
+        $fileData = str_replace('/challenges', $module->wwwPath('challenges/'), $fileData);
         
         # Save
         file_put_contents($outPath, $fileData);
