@@ -22,20 +22,38 @@ final class GDT_TBS_GroupmasterIcon extends GDT
     
     public function getPercent()
     {
+        $catID = GDT_TBS_ChallengeCategory::getCategoryID($this->category);
         $user = $this->getUser();
-        if (!$user->hasVar('csc_points'))
-        {
-            $vars = GDO_TBS_ChallengeSolvedCategory::get($user)->getGDOVars();
-        }
-        else
+        
+        $key_points = "csc_points_{$catID}";
+        $key_max_points = "csc_max_points_{$catID}";
+        
+        $update = false;
+        
+        if ($user->hasVar($key_points))
         {
             $vars = $user->getGDOVars();
         }
-        
-        $catID = GDT_TBS_ChallengeCategory::getCategoryID($this->category);
+        elseif (!$user->tempHas($key_points))
+        {
+            $vars = GDO_TBS_ChallengeSolvedCategory::get($user)->getGDOVars();
+            $update = true;
+        }
+        else
+        {
+            $vars = $user->temp;
+        }
        
-        $points = floatval($vars["csc_points_{$catID}"]);
-        $max = floatval($vars["csc_max_points_{$catID}"]);
+        $points = floatval($vars[$key_points]);
+        $max = floatval($vars[$key_max_points]);
+        
+        if ($update)
+        {
+            $user->tempSet($key_points, $points);
+            $user->tempSet($key_max_points, $max);
+            $user->recache();
+        }
+        
         return $max > 0 ? $points / $max * 100.0 : 0.0;
     }
     
@@ -46,6 +64,15 @@ final class GDT_TBS_GroupmasterIcon extends GDT
         return $this;
     }
     
+    public function renderCard()
+    {
+        return $this->renderCell();
+    }
+    
+    /**
+     * Render category badge.
+     * @TODO The formula is wrong. On original TBS the badges are given differently.
+     */
     public function renderCell()
     {
         $user = $this->getUser();

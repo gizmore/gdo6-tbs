@@ -1,17 +1,16 @@
 <?php
 namespace GDO\TBS;
 
-use GDO\DB\GDT_EnumNoI18n;
+use GDO\DB\GDT_Enum;
 
 /**
  * A challenge category implemented as enum.
- * Site, or at least cats, is/are english, so we do no i18n.
  * Order is defined by TBS and should stay the same.
  * @author gizmore
  * @version 6.10
  * @since 6.10
  */
-final class GDT_TBS_ChallengeCategory extends GDT_EnumNoI18n
+final class GDT_TBS_ChallengeCategory extends GDT_Enum
 {
     public static $CATS = [
         'JavaScript', # 0
@@ -45,6 +44,8 @@ final class GDT_TBS_ChallengeCategory extends GDT_EnumNoI18n
         '/dev/null' => '#00ffff',
     ];
     
+    public function defaultLabel() { return $this->label('category'); }
+    
     public function __construct()
     {
         parent::__construct();
@@ -60,5 +61,5 @@ final class GDT_TBS_ChallengeCategory extends GDT_EnumNoI18n
     {
         return array_keys(self::$CATS);
     }
-
+    
 }

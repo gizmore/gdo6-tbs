@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>JavaScript</title>
+<meta name="author" content="Tutorials">
+<meta name="generator" content="Ulli Meybohms HTML EDITOR">
+<link rel=stylesheet type="text/css" href="/css.css">
+<style type="text/css">
+  div.case {text-decoration:underline;font-weight:600;color:#00FF00;margin-top:3mm;}
+  div.indent {margin-left:2mm;}
+  a.example {text-decoration:none;color:#FFFFFF;font-weight:normal;}
+  a.example:hover {text-decoration:underline;color:#FF0000;font-weight:bold;}
+  div.code {font-family:monospace;font-size:10pt;background-color:#A0A0A0;color:#E5DE85;border-style:solid;border-color:#FFFFFF;border-width:2px;margin-top:2mm;padding:2mm;margin-bottom:2mm;}
+  span.code {font-family:monospace;font-size:10pt;background-color:#A0A0A0;color:#E5DE85;}
+</style>
+</head>
+<body style="padding:0px;margin:1cm;color:#FF9900;background-color:#D0D0D0;">
+<div style="width:100%;background-color:#707070;border-style:solid;border-width:2px;border-color:#000000;padding:3mm;margin:0px;">
+The great advantage (or disadvantage; that depends on your point of view) of JavaScript is that you can see the code since JavaScript is (like the name already says) a script (=interpreted) language. So if you have the source, it is a usually not so difficult to understand what happens.<br />
+So now we want to look at the ways of getting the JavaScript-code.<br /><br />
+<div class="case">1. Case: Script is simply embedded in the site <a class="example" href="eingebettet.html">[-&gt;example]</a></div>
+<div class="indent">
+Usually it is enough to press the right mouse button and to click on &quot;View source&quot;. But this can be blocked by JavaScript itself. For those cases it is possible to use Menu: View-&gt;View source. The problem here is that the site needs to be opened in an own browser-window. If you know the filename, this is no problem (just enter it in the address bar of your browser).<br />
+Tip: You can use Shift+Left-Click to force a link to open in a new window. 
+</div>
+<div class="case">2. Case: Script-activities block the site <a class="example" href="boxweiterleitung.html">[-&gt;example]</a></div>
+<div class="indent">
+The most common example for this case is a JavaScript MessageBox that is shown immediately after you open the site. When closing the box, those password-protections often redirect you to a different page so that you have no possibility to view the source (otherwise just close the box and get the source like in the first case <a class="example" href="messagebox.html">[-&gt;example]</a>). In these cases the best way to get the source is to deactivate JavaScript itself:<br /> 
+<ul style="padding-top:0px;padding-bottom:0px;margin-bottom:1mm;margin-top:1mm;">
+<li><b><u>Microsoft InternetExplorer</u></b><br />Menu: Extras -&gt;Internetsettings-&gt;Security-&gt;edit Level-&gt;scroll down to Scripting and Insert-Operations; deactivate both</li>
+<li><b><u>Netscape</u></b><br />Edit-&gt;Settings-&gt;Advanced; deactivate Javascript</li>
+</ul>
+If you reload the page now, JavaScript-Code isn't executed preventing the box from appearing. So you can get the source without problems.</div>
+<div class="case">3. Case: extern script-files <a class="example" href="ausgelagert.html">[-&gt;example]</a></div>
+<div class="indent">
+This can be combined with any of the other methods, since the JavaScript-code isn't in the site itself, but in an extern file which is included by the site.<br />Look at the source of the site and search for &lt;script src=&quot;...&quot;... Then you just need to view the file specified through src (enter it with the correct path in the addressbar of your browser).</div>
+<br />
+So now we have the code; we can start to solve the challenge. Of course you have to now something about JavaScript. If anyone understands German, I can advise him <a class="link" href="http://selfhtml.teamone.de/" target="_blank">SELFHTML</a>, which is the best German reference about everything dealing with the internet I found. For the others: just search with <a class="link" href="http://www.google.de/search?q=JavaScript%2Btutorial%2Breference&amp;ie=UTF-8&amp;oe=UTF-8&amp;hl=en&amp;btnG=Google-Suche&amp;meta=" target="_blank">Google</a>, you will find many sites about JavaScript with examples, references and tutorials (if someone finds a really good one please tell me).<br />
+But now we will look at maybe the most simple JavaScript-password protection that exists:
+<div class="code">
+&lt;!DOCTYPE&nbsp;HTML&nbsp;PUBLIC&nbsp;&quot;-//W3C//DTD&nbsp;HTML&nbsp;4.0&nbsp;Transitional//EN&quot;&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&lt;title&gt;JavaScript&nbsp;password-protection&lt;/title&gt;<br />
+&lt;script&nbsp;type=&quot;text/javascript&quot;&gt;<br />
+&nbsp;&nbsp;function&nbsp;check()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;input_user=document.formular.user.value;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(input_user==&quot;idiot&quot;)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window.location.href=input_user&nbsp;+&quot;.php&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(&quot;You&nbsp;are&nbsp;dull!&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;}<br />
+&lt;/script&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&nbsp;bgcolor=&quot;#D0D0D0&quot;&nbsp;text=&quot;#FF9900&quot;&gt;<br />
+&nbsp;&nbsp;&lt;form&nbsp;name=&quot;formular&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Enter&nbsp;your&nbsp;username:&nbsp;&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;user&quot;&nbsp;maxlength=&quot;20&quot;&nbsp;size=&quot;20&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type=&quot;button&quot;&nbsp;value=&quot;Check&quot;&nbsp;onClick=&quot;check()&quot;&gt;<br />
+&nbsp;&nbsp;&lt;/form&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+</div>
+Now let's look what's happening here.<br />
+First, you will see a form in the webpage with a text-input where you have to insert your username, and a &quot;Check&quot;-button. In this line:<br />
+<span class="code">&lt;input&nbsp;type=&quot;button&quot;&nbsp;value=&quot;Check&quot;&nbsp;onClick=&quot;check()&quot;&gt;</span> there is something important: the button executes a script when it is clicked (indicated through <span class="code">onClick=&quot;check()&quot;</span>). So you have to check what the function <span class="code">check()</span> is doing.<br />First, it takes the username you entered in the edit into the variable <span class="code">input_user</span>. If this variable equals &quot;idiot&quot;, you are redirected to another webpage (<span class="code">window.location.href=input_user&nbsp;+&quot;.php&quot;;</span>). Otherwise, you get a message box obviously telling you that you didn't enter the correct password.<br />
+So all in all it might be obvious, that &quot;idiot&quot; is the right password.<br /><br />
+Whenever you come across a JavaScript-challenge, you first have to get the code of it (look at the top of this tutorial). Then analyze what it does and what should happen (like in the <span class="code">if</span> above, it is obvious that you should get into this if because otherwise this message box appears). Well, and then you have to meet all conditions to get the script into this state.<br /><br />
+We hope that this tutorial helped you a little bit starting with JavaScript-challenges.
+</div>
+</body>
+</html>

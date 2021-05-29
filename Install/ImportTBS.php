@@ -21,22 +21,28 @@ use GDO\DB\Database;
 use GDO\UI\GDT_Message;
 use GDO\User\GDO_UserPermission;
 use GDO\Admin\Method\ClearCache;
+use GDO\TBS\GDT_TBS_ChallengeStatus;
 
 /**
- * Import TBS data from /INPUT/ folder.
+ * - Import TBS data from INPUT/ folder.
  * 
  * - Import some CSV from Xaav
- * - Copy GDO/TBS/challenges/ to /challenges. Rewrite some urls in all the files.
- * - Import forums from crawled forum files.
+ * 
+ * - Import some HIDDEN/ files
  * 
  * Problems:
  * 
- *  - Some post is very very long. I truncate at roughly 10MB now. You have to set max packet size in my.ini to 40MB for this.
- *  - Clarify how to merge challenges and solution forums nicely. In theory it already should be capable of repeated multi imports. Clarify for HIDDEN updates.
+ *  - Some post is very very long. I truncate at roughly 10MB now.
+ *    You have to set max packet size in my.ini to 40MB for this.
+ *    
+ *  - Clarify how to merge challenges and solution forums nicely.
+ *    In theory it already should be capable of repeated multi imports.
+ *    Clarify for HIDDEN updates.
+ *    
+ *  - Challenge import status is not in an easily readable format.
  *  
- *  
- * @version 6.10
- * @since 6.10
+ * @version 6.10.3
+ * @since 6.10.0
  */
 final class ImportTBS
 {
@@ -106,6 +112,14 @@ final class ImportTBS
     const CSV_FORUM_POST_EDITOR = 6;
     const CSV_FORUM_POST_EDITED = 7;
     
+    # Excludes from simple form solution checker
+    # Here we can place challenges that are excluded from simple solution checker
+    # @TODO: Complete the list of exceptional / non simple solution files.
+    private static $NO_SIMPLE_FORM = array(
+        '/challenges/exploit_long/index.php',
+        '/challenges/exploits/exploit_analyse1/index.php'
+    );
+    
     /**
      * @return Module_TBS
      */
@@ -149,7 +163,6 @@ final class ImportTBS
     
     private function convertChallengeURL($url)
     {
-        $url = trim($url, '/');
         return $url;
     }
     
@@ -210,7 +223,6 @@ final class ImportTBS
             GDO_ForumBoard::$BUILD_TREE_UPON_SAVE = false;
             $this->importForum();
             GDO_ForumBoard::$BUILD_TREE_UPON_SAVE = true;
-//             Repair::make()->repair();
         }
         
         if ($config['import_permissions'])
@@ -342,6 +354,12 @@ final class ImportTBS
             }
             else
             {
+                # Reset autochecker status
+                if ($chall->getStatus() === GDT_TBS_ChallengeStatus::NOT_TRIED)
+                {
+                    $data['chall_status'] = GDT_TBS_ChallengeStatus::NOT_CHECKED;
+                }
+                
                 $chall->saveVars($data);
             }
             
@@ -387,19 +405,91 @@ final class ImportTBS
         
         # Replace CSS path
         $fileData = str_replace('/styles.css', $module->wwwPath('css/tbs_challenge.css'), $fileData);
+
         # Replace Challenge Lists Link
         $fileData = str_replace('/hackchallenge.php', $module->href('ChallengeLists'), $fileData);
+
         # Replace Image paths
         $fileData = str_replace('/files/images/', $module->wwwPath('images/'), $fileData);
-        # Set parent target
-        $fileData = str_replace('<head>', "<head>\n<base target=\"_parent\">\n", $fileData);
-        # Remove chall meta
+
+//        # Set parent target (BAD IDEA?)
+//        $fileData = str_replace('<head>', "<head>\n<base target=\"_parent\">\n", $fileData);
+        
+        # Remove chall meta (intro that is not needed anymore?)
         $fileData = preg_replace('#<body([^>]*)>.*</table></td></tr></table></div>#s', '<body$1>', $fileData);
-        # Fix URLs
+
+//         # Fix windows.location (JS challs) (BAD IDEA?)
+//         $fileData = str_replace('window.location.href=', 'window.top.location.href=', $fileData);
+
+        # Replace answer forms with solution checker
+        $fileData = $this->enhanceFormsToUseSolutionChecking($fileData, $fullpath);
+        
+        # Fix URLs to /challenges/
         $fileData = str_replace('/challenges', $module->wwwPath('challenges/'), $fileData);
         
         # Save
         file_put_contents($outPath, $fileData);
+    }
+    
+    /**
+     * Enhance forms that submit to thyself.
+     * @param string $fileData
+     * @param string $fullpath
+     * @return string
+     */
+    private function enhanceFormsToUseSolutionChecking($fileData, $fullpath)
+    {
+        # Get relative path to self.
+        $self = Strings::substrFrom($fullpath, '/TBS/DUMP');
+        
+        # Skip by exclusion rule?
+        if (in_array($self, self::$NO_SIMPLE_FORM, true))
+        {
+            $challenge = GDO_TBS_Challenge::getByURL($self);
+            if ($challenge->getStatus() === GDT_TBS_ChallengeStatus::NOT_CHECKED)
+            {
+                $challenge->saveVar(
+                    'chall_status', GDT_TBS_ChallengeStatus::IN_PROGRESS);
+            }
+            return $fileData;
+        }
+        
+        # Replace form with checker + form
+        $count = 0;
+        $fileData = preg_replace_callback(
+            '#<form action="'.$self.'/index.php".*</form>#ms',
+            [$this, '_enhanceForms'], $fileData, 1, $count);
+        if (!$count)
+        {
+            $fileData = preg_replace_callback(
+                '#<form action="'.$self.'".*</form>#ms',
+                [$this, '_enhanceForms'], $fileData, 1, $count);
+        }
+
+        # On replace mark this challenge as not tried, if still not checked.
+        if ($count)
+        {
+            $challenge = GDO_TBS_Challenge::getByURL($self);
+            if ($challenge->getStatus() === GDT_TBS_ChallengeStatus::NOT_CHECKED)
+            {
+                $challenge->saveVar('chall_status', GDT_TBS_ChallengeStatus::NOT_TRIED);
+            }
+        }
+        
+        # Done
+        return $fileData;
+    }
+    
+    /**
+     * Prepend solution checker code to simple forms.
+     * @param array $matches
+     * @return string
+     */
+    public function _enhanceForms($matches)
+    {
+        $path = GDO_PATH . 'GDO/TBS/chall_include_checker.php';
+        $solutionCheckerCode = sprintf('<?php require "%s"; ?>', $path);
+        return $solutionCheckerCode . "\n" . $matches[0];
     }
     
     ####################
@@ -455,25 +545,44 @@ final class ImportTBS
     #############
     ### Forum ###
     #############
+    private $boardMapping = [];
+    private function boardMapped($tbsBoardId)
+    {
+        return $tbsBoardId; # Keep TBS mapping.
+//         return @$this->boardMapping[$tbsBoardId];
+    }
+    
     public function importForum()
     {
-        GDT_Message::$DECODER = [$this, 'nullDecoder'];
+        # Fix decoder to purify for now
+//         GDT_Message::$DECODER = [$this, 'nullDecoder']; # null decoder is a bad idea.
+        GDT_Message::$DECODER = [GDT_Message::class, 'DECODE']; # default purifier
+        
         $this->importForumRoots();
-        Module_Forum::instance()->saveConfigVar('forum_root', '13');
+        Module_Forum::instance()->saveConfigVar('forum_root', $this->boardMapped('13'));
         $this->importForumBoards();
         $this->importForumFixes(); # Trashcan
         $this->importForumThreads();
         $this->importForumPosts();
+        $this->markLatestPostAsMailed();
     }
     
-    public function nullDecoder($s)
+    private function markLatestPostAsMailed()
     {
-        $module = Module_TBS::instance();
-        # Fix smileys.
-        $s = str_replace('/files/images/', $module->wwwPath('files/images/'), $s);
-        # No other decoding happens
-        return $s;
+        $postId = GDO_ForumPost::table()->select('MAX(post_id)')->
+            first()->exec()->fetchValue();
+        Module_Forum::instance()->
+            saveConfigVar('forum_mail_sent_for_post', $postId);
     }
+    
+//     public function nullDecoder($s)
+//     {
+//         $module = Module_TBS::instance();
+//         # Fix smileys.
+//         $s = str_replace('/files/images/', $module->wwwPath('images/'), $s);
+//         # No other decoding happens
+//         return $s;
+//     }
     
     private $forumTrashcan;
     public function importForumFixes()
@@ -484,7 +593,7 @@ final class ImportTBS
                 'board_title' => 'Trashcan',
                 'board_description' => 'Posts that are subject to be deleted.',
                 'board_creator' => '1',
-                'board_parent' => '13',
+                'board_parent' => $this->boardMapped('13'),
             ]);
         }
         else
@@ -493,7 +602,7 @@ final class ImportTBS
                 'board_title' => 'Trashcan',
                 'board_description' => 'Posts that are subject to be deleted.',
                 'board_creator' => '1',
-                'board_parent' => '13',
+                'board_parent' => $this->boardMapped('13'),
             ]);
         }
         
@@ -508,13 +617,18 @@ final class ImportTBS
         $csv = new CSV($path);
         
         Database::instance()->disableForeignKeyCheck();
+       
+        Database::instance()->truncateTable(GDO_ForumPost::table());
+        Database::instance()->truncateTable(GDO_ForumThread::table());
+        Database::instance()->truncateTable(GDO_ForumBoard::table());
+        GDO_ForumBoard::table()->clearCache();
         
         $roots = $csv->all();
         
         foreach ($roots as $row)
         {
             $bid = $row[self::CSV_FORUM_ROOT_ID];
-            $board = GDO_ForumBoard::getById($bid);
+            $board = GDO_ForumBoard::getById($this->boardMapped($bid));
             if (!$board)
             {
                 $board = GDO_ForumBoard::blank([
@@ -525,14 +639,14 @@ final class ImportTBS
                 ]);
                 $board->save();
             }
+            $this->boardMapping[$bid] = $board->getID();
         }
         
         # Fix PID again because foreign keys
         foreach ($roots as $row)
         {
-            $bid = $row[self::CSV_FORUM_ROOT_ID];
-            $board = GDO_ForumBoard::getById($bid);
-            if ($pid = $row[self::CSV_FORUM_ROOT_PID])
+            $board = GDO_ForumBoard::getById($this->boardMapped($row[self::CSV_FORUM_ROOT_ID]));
+            if ($pid = $this->boardMapped($row[self::CSV_FORUM_ROOT_PID]))
             {
                 $board->saveVar('board_parent', $pid);
             }
@@ -540,7 +654,7 @@ final class ImportTBS
         
         GDO_ForumBoard::table()->clearCache();
         GDO_ForumBoard::table()->rebuildFullTree();
-         
+        
         Database::instance()->enableForeignKeyCheck();
     }
 
@@ -556,13 +670,13 @@ final class ImportTBS
         $csv->eachLine(function($row) {
             
             $bid = $row[self::CSV_FORUM_BOARD_ID];
-            $board = GDO_ForumBoard::getById($bid);
+            $board = GDO_ForumBoard::getById($this->boardMapped($bid));
             
             if (!$board)
             {
                 $board = GDO_ForumBoard::blank([
-                    'board_id' => $bid,
-                    'board_parent' => $row[self::CSV_FORUM_BOARD_PID],
+                    'board_id' => $this->boardMapped($bid),
+                    'board_parent' => $this->boardMapped($row[self::CSV_FORUM_BOARD_PID]),
                     'board_title' => $this->convertBoardTitle($row),
                     'board_description' => $row[self::CSV_FORUM_BOARD_DESCR],
                     'board_created' => Time::getDate(),
@@ -573,7 +687,7 @@ final class ImportTBS
             else
             {
                 $board->setVars([
-                    'board_parent' => $row[self::CSV_FORUM_BOARD_PID],
+                    'board_parent' => $this->boardMapped($row[self::CSV_FORUM_BOARD_PID]),
                     'board_title' => $this->convertBoardTitle($row),
                     'board_description' => $row[self::CSV_FORUM_BOARD_DESCR],
                     'board_created' => Time::getDate(),
@@ -590,6 +704,8 @@ final class ImportTBS
             }
                 
             $board->save();
+            
+            $this->boardMapping[$bid] = $board->getID();
 
             if ($row[self::CSV_FORUM_BOARD_CHALL_ID])
             {
@@ -637,7 +753,7 @@ final class ImportTBS
             {
                 $thread = GDO_ForumThread::blank([
                     'thread_id' => $tid,
-                    'thread_board' => $bid ? $bid : $this->forumTrashcan->getID(),
+                    'thread_board' => $bid ?  $this->boardMapped($bid) : $this->forumTrashcan->getID(),
                     'thread_title' => $this->convertThreadTitle($row),
                     'thread_creator' => '1',
                     'thread_lastposted' => Time::getDate(),
@@ -670,7 +786,7 @@ final class ImportTBS
                 $post = GDO_ForumPost::blank([
                     'post_id' => $postID,
                     'post_thread' => $row[self::CSV_FORUM_POST_TOPIC],
-                    'post_message' => $row[self::CSV_FORUM_POST_MESSAGE],
+                    'post_message' => $this->purify($row[self::CSV_FORUM_POST_MESSAGE]),
                     'post_created' => Time::getDate($row[self::CSV_FORUM_POST_DATE]),
                     'post_creator' => $this->convertUsernameToID($row[self::CSV_FORUM_POST_AUTHOR]),
                 ]);
@@ -686,6 +802,31 @@ final class ImportTBS
             
             $post->save();
         });
+    }
+    
+    /**
+     * TBS posts are crazy.
+     * Replace a few crazy things, then purify for safety.
+     * @TODO: Analyze more posts. Sadly this has to happen before purify. No idea yet.
+     * @param string $message
+     * @return string
+     */
+    private function purify($message)
+    {
+        # Replace local images
+        $message = str_replace('/files/images/',
+            Module_TBS::instance()->wwwPath('images/'), $message);
+        
+        # Replace crazy php tags.
+        $message = str_replace('<?php', '&lt;?php', $message);
+        $message = str_replace('?>', '?&gt;', $message);
+        
+        # Replace crazy html comments.
+        $message = str_replace('<!--', '&lt;!--', $message);
+        $message = str_replace('-->', '--&gt;', $message);
+        
+        # Purifier
+        return GDT_Message::getPurifier()->purify($message);
     }
 
     ###################

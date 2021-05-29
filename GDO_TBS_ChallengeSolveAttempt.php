@@ -3,11 +3,15 @@ namespace GDO\TBS;
 
 use GDO\Core\GDO;
 use GDO\Profile\GDT_User;
-use GDO\Date\GDT_DateTime;
 use GDO\User\GDO_User;
 use GDO\Date\Time;
 use GDO\Core\Application;
+use GDO\DB\GDT_CreatedAt;
 
+/**
+ * Record solving attempts to prevent bruteforce.
+ * @author gizmore
+ */
 final class GDO_TBS_ChallengeSolveAttempt extends GDO
 {
     public function gdoCached() { return false; }
@@ -16,7 +20,8 @@ final class GDO_TBS_ChallengeSolveAttempt extends GDO
     {
         return [
             GDT_User::make('csa_user'),
-            GDT_DateTime::make('csa_date'),
+            GDT_TBS_Challenge::make('csa_challenge'),
+            GDT_CreatedAt::make('csa_date'),
         ];
     }
     
@@ -36,6 +41,14 @@ final class GDO_TBS_ChallengeSolveAttempt extends GDO
         {
             return false;
         }
+    }
+    
+    public static function tried(GDO_User $user, GDO_TBS_Challenge $challenge)
+    {
+        return self::blank([
+            'csa_user' => $user->getID(),
+            'csa_challenge' => $challenge->getID(),
+        ])->insert();
     }
     
     ###############

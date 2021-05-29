@@ -50,14 +50,16 @@ The following gdo6 dependencies exist and can be cloned.
     git clone --recursive https://github.com/gizmore/gdo6-favicon Favicon
     git clone --recursive https://github.com/gizmore/gdo6-pm PM
     git clone --recursive https://github.com/gizmore/gdo6-load-on-click LoadOnClick
-    
+    git clone --recursive https://github.com/gizmore/gdo6-python Python
+    git clone --recursive https://github.com/gizmore/gdo6-statistics Statistics
     
 Install like any gdo6 site.
 
-    php gdo.php configure # create a config to edit manually
+    cd gdo6
+    php gdoadm.php configure # create a config to edit manually
     nano protected/config.php # make sure you use this theme: tbsbbcode,tbs,default
-    php gdo.php install TBS # install all required modules
-    php gdo.php admin gizmore password # create an admin
+    php gdoadm.php install TBS # install all required modules
+    php gdoadm.php admin gizmore password # create an admin
     
     
 or via webserver: Goto localhost/install/wizard.php

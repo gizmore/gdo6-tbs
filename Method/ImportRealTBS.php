@@ -1,6 +1,7 @@
 <?php
 namespace GDO\TBS\Method;
 
+use GDO\Core\Application;
 use GDO\Core\MethodAdmin;
 use GDO\TBS\Module_TBS;
 use GDO\TBS\Install\ImportTBS;
@@ -31,10 +32,22 @@ final class ImportRealTBS extends MethodForm
      */
     public function beforeExecute()
     {
-        $this->renderNavBar('TBS');
-        GDT_Page::$INSTANCE->topTabs->addField(
-            Module_TBS::instance()->barAdminTabs()
-        );
+        if (Application::instance()->isHTML())
+        {
+            $this->renderNavBar('TBS');
+            GDT_Page::$INSTANCE->topTabs->addField(
+                Module_TBS::instance()->barAdminTabs()
+            );
+        }
+    }
+    
+    public function execute()
+    {
+        if (GDO_DB_DEBUG)
+        {
+            return $this->error('err_db_debug_level_too_high', [GDO_DB_DEBUG]);
+        }
+        return parent::execute();
     }
     
     public function createForm(GDT_Form $form)
@@ -46,9 +59,9 @@ final class ImportRealTBS extends MethodForm
             GDT_Checkbox::make('import_chall_solved')->initial('0'),
             GDT_Checkbox::make('import_forum')->initial('0'),
             GDT_Checkbox::make('import_permissions')->initial('0'),
-            GDT_Submit::make(),
             GDT_AntiCSRF::make(),
         ]);
+        $form->actions()->addField(GDT_Submit::make());
     }
     
     function formValidated(GDT_Form $form)

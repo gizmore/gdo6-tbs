@@ -1,6 +1,7 @@
 <?php
 namespace GDO\TBS\Method;
 
+use GDO\Core\Application;
 use GDO\Core\Method;
 use GDO\Core\MethodAdmin;
 use GDO\TBS\Module_TBS;
@@ -16,10 +17,13 @@ final class Admin extends Method
      */
     public function beforeExecute()
     {
-        $this->renderNavBar('TBS');
-        GDT_Page::$INSTANCE->topTabs->addField(
-            Module_TBS::instance()->barAdminTabs()
-        );
+        if (Application::instance()->isHTML())
+        {
+            $this->renderNavBar('TBS');
+            GDT_Page::$INSTANCE->topTabs->addField(
+                Module_TBS::instance()->barAdminTabs()
+            );
+        }
     }
     
     public function execute()

@@ -19,17 +19,17 @@ final class ChallengeCompletion extends MethodCompletionSearch
     public function renderJSON(GDO $gdo)
     {
         /** @var $gdo GDO_TBS_Challenge **/
-        return array(
+        return [
             'id' => $gdo->getID(),
             'text' => $gdo->displayTitle(),
             'display' => $gdo->renderChoice(),
-        );
+        ];
     }
     
     public function gdoHeaderColumns()
     {
         return GDO_TBS_Challenge::table()->gdoColumnsExcept(
-            'chall_deleted', 'chall_deletor', 'chall_solution'
+            'chall_deleted', 'chall_deletor', 'chall_solution',
         );
     }
     

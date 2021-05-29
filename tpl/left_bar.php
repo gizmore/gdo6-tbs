@@ -2,8 +2,11 @@
 use GDO\TBS\Module_TBS;
 use GDO\TBS\GDT_TBS_Online;
 use GDO\User\GDO_User;
+use GDO\PM\GDO_PM;
+use GDO\Forum\GDO_ForumUnread;
 
 $mod = Module_TBS::instance();
+$user = GDO_User::current();
 ?>
 <div id="left_bar">
 
@@ -43,20 +46,36 @@ $mod = Module_TBS::instance();
   
   <div class="left_group">
   
+<?php if (module_enabled('Forum')) : ?>
     <div class="left_link">
       <img src="<?=$mod->wwwPath('img/sidebar/menu_forum.gif')?>" />
       ::[<a href="<?=href('Forum', 'Boards')?>"><?=t('link_tbs_forum')?></a>]
+      <?php $count = GDO_ForumUnread::countUnread($user); ?>
+      <?php if ($count > 0) : ?>
+      <div id="left-unread-forum" class="left-unread-count" <?=$count?'':'style="display:none;"'?>><a href="<?=href('Forum', 'UnreadThreads')?>"><?=$count?></a></div>
+      <?php else : ?>
+      <div id="left-unread-forum" class="left-unread-count" <?=$count?'':'style="display:none;"'?>><?=$count?></div>
+      <?php endif; ?>
     </div>
+<?php endif; ?>
 
     <div class="left_link">
       <img src="<?=$mod->wwwPath('img/sidebar/menu_chat.gif')?>" />
       ::[<a href="<?=href('TBS', 'Chat')?>"><?=t('link_tbs_chat')?></a>]
     </div>
 
+<?php if (module_enabled('PM')) : ?>
     <div class="left_link">
       <img src="<?=$mod->wwwPath('img/sidebar/menu_pm.gif')?>" />
       ::[<a href="<?=href('PM', 'Overview')?>"><?=t('link_tbs_pm')?></a>]
+      <?php $count = GDO_PM::countUnread($user); ?>
+      <?php if ($count > 0) : ?>
+      <div id="left-unread-pm" class="left-unread-count" <?=$count?'':'style="display:none;"'?>><a href="<?=href('PM', 'Overview')?>"><?=$count?></a></div>
+      <?php else : ?>
+      <div id="left-unread-pm" class="left-unread-count" <?=$count?'':'style="display:none;"'?>><?=$count?></div>
+      <?php endif; ?>
     </div>
+<?php endif; ?>
 
   </div>
   
@@ -64,7 +83,7 @@ $mod = Module_TBS::instance();
 
     <div class="left_link">
       <img src="<?=$mod->wwwPath('img/sidebar/menu_learn.gif')?>" />
-      ::[<a href="<?=href('TBS', 'VulnerableCode')?>"><?=t('link_tbs_learn')?></a>]
+      ::[<a href="<?=hrefSEO('Vulnerable Code', 'TBS', 'VulnerableCode')?>"><?=t('link_tbs_learn')?></a>]
     </div>
   
     <div class="left_link">

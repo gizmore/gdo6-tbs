@@ -731,6 +731,7 @@ div.challenge_div div.challenge_1, div.challenge_div p.challenge_1 {
 	background-color:#404850;
 	padding:1mm;
 	color:#FFAA00;
+	word-break: break-all;
 }
 div.challenge_div div.challenge_mono_1, div.challenge_div p.challenge_mono_1 {
 	text-align:justify;
@@ -902,4 +903,18 @@ ul.com_list1 a, div.content div.box .com_list1 a {
 ul.com_list1 a:hover, div.content div.box .com_list1 a:hover {
 	text-decoration: underline;
 	color: #44F;
+}
+
+/** GDO **/
+pre.gdo-exception {
+	padding: 4px;
+	text-align: left;
+	border: 1px solid #fff;
+	white-space: break-spaces;
+	word-break: break-all;
+}
+
+pre.gdo-exception em {
+	font-weight: bold;
+	color: red;
 }

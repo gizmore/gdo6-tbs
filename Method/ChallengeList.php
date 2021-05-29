@@ -4,8 +4,8 @@ namespace GDO\TBS\Method;
 use GDO\TBS\GDO_TBS_Challenge;
 use GDO\TBS\GDT_TBS_ChallengeCategory;
 use GDO\Profile\GDT_User;
-use GDO\Table\MethodQueryTable;
 use GDO\Table\GDT_Table;
+use GDO\Table\MethodTable;
 use GDO\TBS\GDT_TBS_ChallTitle;
 use GDO\TBS\Module_TBS;
 use GDO\UI\GDT_IconButton;
@@ -17,14 +17,13 @@ use GDO\TBS\GDT_TBS_GroupmasterIcon;
  * 
  * @author gizmore
  */
-final class ChallengeList extends MethodQueryTable
+final class ChallengeList extends MethodTable
 {
     public function gdoTable() { return GDO_TBS_Challenge::table(); }
 
     public function isPaginated() { return false; }
     public function isFiltered() { return false; }
     public function isGuestAllowed() { return false; }
-//     public function fetchAs() { return GDO_User::table(); }
     
     public function getDefaultOrder() { return 'chall_order'; }
     
@@ -49,6 +48,7 @@ final class ChallengeList extends MethodQueryTable
         $challs = GDO_TBS_Challenge::table();
         return [
             $challs->gdoColumn('chall_order'),
+            $challs->gdoColumn('chall_status'),
             GDT_TBS_ChallTitle::make('chall_title'),
             $challs->gdoColumn('chall_votes'),
             $challs->gdoColumn('chall_difficulty'),
@@ -67,9 +67,13 @@ final class ChallengeList extends MethodQueryTable
         return $this->gdoParameterVar('category');
     }
     
-    public function getQuery()
+    public function getResult()
     {
-        return $this->gdoTable()->select()->where("chall_category='{$this->getCategory()}'");
+        $cat = $this->getCategory();
+        $all = GDO_TBS_Challenge::table()->allCached('chall_order');
+        $all = array_filter($all, function(GDO_TBS_Challenge $chall) use ($cat) {
+            return $chall->getCategory() === $cat; });
+        return new \GDO\DB\ArrayResult($all, GDO_TBS_Challenge::table());
     }
     
     public function setupTitle(GDT_Table $table)

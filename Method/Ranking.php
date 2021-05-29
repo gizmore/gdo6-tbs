@@ -17,12 +17,22 @@ use GDO\User\GDO_User;
  */
 final class Ranking extends MethodQueryTable
 {
+    public function fileCached() { return true; }
+    
     public function isOrdered() { return false; }
     public function isFiltered() { return false; }
-    public function getDefaultOrder() { 'user_level'; }
+    public function getDefaultOrder() { return 'user_level'; }
     public function getDefaultOrderDir() { return false; }
     public function getDefaultIPP() { return 100; }
     public function fetchAs() { return GDO_User::table(); }
+    
+//     public function getTitleLangKey() { return 'table_tbs_ranking'; }
+    
+    public function getTitle()
+    {
+        return t('mtitle_tbs_ranking');
+    }
+    
     
     public function gdoTable()
     {
@@ -31,7 +41,10 @@ final class Ranking extends MethodQueryTable
     
     public function getQuery()
     {
-        return parent::getQuery()->joinObject('csc_user')->where('user_type="member"');
+        return $this->gdoTable()->select('*')->
+                joinObject('csc_user')->
+                where('user_type="member"')->
+                fetchTable(GDO_User::table());
     }
     
     public function gdoHeaders()
