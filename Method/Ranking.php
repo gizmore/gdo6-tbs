@@ -21,8 +21,7 @@ final class Ranking extends MethodQueryTable
     
     public function isOrdered() { return false; }
     public function isFiltered() { return false; }
-    public function getDefaultOrder() { return 'user_level'; }
-    public function getDefaultOrderDir() { return false; }
+    public function getDefaultOrder() { return 'user_level DESC'; }
     public function getDefaultIPP() { return 100; }
     public function fetchAs() { return GDO_User::table(); }
     
