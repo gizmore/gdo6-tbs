@@ -14,6 +14,17 @@ gdo6 is rather new, so there are a lot of bugs lurking.
 
 To see how to setup a gdo6 site, please consult https://github.com/gizmore/gdo6/blob/master/DOCS/INSTALL.md
 
+For CLI try this:
+
+    git clone --recursive https://github.com/gizmore/gdo6
+    cd gdo6
+    ./gdoadm.sh configure
+    ./gdoadm.sh provide TBS
+    ./gdoadm.sh install TBS
+    ./gdoadm.sh admin username password <email>
+    ./gdo_yarn.sh
+    ./gdo_bower.sh
+
 
 ### Dependencies
 
