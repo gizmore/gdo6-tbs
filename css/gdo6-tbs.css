@@ -289,7 +289,7 @@ div.gdt-list-card > h3 {
 	width: 100%;
 }
 
-.gdt-list-item .gdt_createdat {
+.gdt-list-item .gdt-createdat {
 	float: right;
 }
 
@@ -383,7 +383,7 @@ ul.pagination li.page-selected {
 	max-width: 240px;
 }
 
-.gdo-form .gdo-form-inner .gdt_link {
+.gdo-form .gdo-form-inner .gdt-link {
 	height: 28px;
 	line-height: 28px;
 	vertical-align: middle;
@@ -400,7 +400,7 @@ ul.pagination li.page-selected {
 .gdo-form form .gdt-bar,
 .gdo-form form .gdt-divider,
 .gdo-form form .gdt-paragraph,
-.gdo-form form .gdt_link,
+.gdo-form form .gdt-link,
 .form-span-columns,
 .gdo-form form > .gdt-container .gdt-container,
 .gdo-form form .gdo-tabs,
@@ -624,7 +624,7 @@ img.gdo-captcha-img {
 	white-space: nowrap;
 }
 
-td.gdt_tbs_challengestatus span.gdo-icon {
+td.gdt-tbs_challengestatus span.gdo-icon {
 	color: inherit;
 }
  
