@@ -22,7 +22,7 @@ $page->bottomNav->addField(GDT_PerfBar::make());
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title><?=Website::displayTitle()?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="generator" content="GDO v<?=Module_Core::$GDO_REVISION?>">
+	<meta name="generator" content="GDO v<?=Module_Core::GDO_REVISION?>">
 	<?=Website::displayMeta()?>
 	<?=Website::displayLink()?>
   </head>

@@ -83,7 +83,7 @@ $user = GDO_User::current();
 
     <div class="left_link">
       <img src="<?=$mod->wwwPath('img/sidebar/menu_learn.gif')?>" />
-      ::[<a href="<?=hrefSEO('Vulnerable Code', 'TBS', 'VulnerableCode')?>"><?=t('link_tbs_learn')?></a>]
+      ::[<a href="<?=href('TBS', 'VulnerableCode')?>"><?=t('link_tbs_learn')?></a>]
     </div>
   
     <div class="left_link">
