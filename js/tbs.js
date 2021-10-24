@@ -3,7 +3,7 @@ window.TBS = {
 		
 	heartbeat: function() {
 		
-		let url = GDO_WEB_ROOT + 'index.php?mo=TBS&me=Heartbeat&ajax=1&fmt=json';
+		let url = GDO_WEB_ROOT + 'index.php?mo=TBS&me=Heartbeat&_ajax=1&_fmt=json';
 		
 		$.get(url).then(function(result) {
 			
