@@ -2,7 +2,7 @@
 use GDO\Core\Module_Core;
 use GDO\Core\Website;
 use GDO\TBS\GDT_TBS_Sidebar;
-use GDO\Util\Javascript;
+use GDO\Javascript\Javascript;
 use GDO\UI\GDT_Page;
 use GDO\UI\GDT_Loading;
 use GDO\TBS\GDT_TBS_TopBar;
