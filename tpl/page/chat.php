@@ -9,7 +9,7 @@ echo $panel->render();
 
 $button = GDT_IconButton::make('chat_button');
 $button->href(href('Mibbit', 'Chat'));
-$icon = '<img src="GDO/TBS/img/sidebar/menu_chat.gif" />';
+$icon = '<img src="/GDO/TBS/img/sidebar/menu_chat.gif" />';
 $button->rawIcon($icon);
 $button->label('link_tbs_chat');
 echo $button->render();
