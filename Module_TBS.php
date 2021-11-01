@@ -117,9 +117,9 @@ final class Module_TBS extends GDO_Module
     {
         if (Application::instance()->hasTheme('tbs'))
         {
-            $this->addJavascript('js/tbs.js');
+            $this->addJS('js/tbs.js');
             $this->addCSS('css/gdo6-tbs.css');
-            Module_Classic::instance()->addJavascript('js/gdo6-classic.js');
+            Module_Classic::instance()->addJS('js/gdo6-classic.js');
         }
     }
 
