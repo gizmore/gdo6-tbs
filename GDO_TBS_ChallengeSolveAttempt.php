@@ -2,8 +2,8 @@
 namespace GDO\TBS;
 
 use GDO\Core\GDO;
-use GDO\Profile\GDT_User;
 use GDO\User\GDO_User;
+use GDO\User\GDT_User;
 use GDO\Date\Time;
 use GDO\Core\Application;
 use GDO\DB\GDT_CreatedAt;
@@ -61,7 +61,7 @@ final class GDO_TBS_ChallengeSolveAttempt extends GDO
     
     private static function getTimeCut()
     {
-        return Time::getDate(Application::$TIME - self::getTimeframe());
+        return Application::$TIME - self::getTimeframe();
     }
     
     private static function getMaxAttempts()
@@ -77,6 +77,10 @@ final class GDO_TBS_ChallengeSolveAttempt extends GDO
             exec()->fetchValue();
     }
     
+    /**
+     * @param GDO_User $user
+     * @return GDO_TBS_ChallengeSolveAttempt
+     */
     private static function getOldestAttemptInFrame(GDO_User $user)
     {
         return self::table()->select()->

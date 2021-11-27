@@ -80,7 +80,10 @@ final class GDT_TBS_ChallengeStatus extends GDT_Enum
         # If we can edit we return a link with icon as label.
         if (GDO_User::current()->isStaff())
         {
-            return $this->editLink->href($this->getChallenge()->hrefEdit())->labelRaw($icon)->render();
+        	if ($challenge = $this->getChallenge())
+        	{
+        		return $this->editLink->href($challenge->hrefEdit())->labelRaw($icon)->render();
+        	}
         }
         
         # Else just the icon.
