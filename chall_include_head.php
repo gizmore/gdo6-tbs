@@ -47,4 +47,3 @@ else
 {
     $chall = GDO_TBS_Challenge::getChallenge(TBS_CHALL_CATEGORY, TBS_CHALL_TITLE);
 }
-?>

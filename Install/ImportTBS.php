@@ -22,6 +22,7 @@ use GDO\UI\GDT_Message;
 use GDO\User\GDO_UserPermission;
 use GDO\Admin\Method\ClearCache;
 use GDO\TBS\GDT_TBS_ChallengeStatus;
+use GDO\Core\Website;
 
 /**
  * - Import TBS data from INPUT/ folder.
@@ -783,13 +784,21 @@ final class ImportTBS
             
             if (!($post = GDO_ForumPost::getById($postID)))
             {
-                $post = GDO_ForumPost::blank([
-                    'post_id' => $postID,
-                    'post_thread' => $row[self::CSV_FORUM_POST_TOPIC],
-                    'post_message' => $this->purify($row[self::CSV_FORUM_POST_MESSAGE]),
-                    'post_created' => Time::getDate($row[self::CSV_FORUM_POST_DATE]),
-                    'post_creator' => $this->convertUsernameToID($row[self::CSV_FORUM_POST_AUTHOR]),
-                ]);
+            	try
+            	{
+	                $post = GDO_ForumPost::blank([
+	                    'post_id' => $postID,
+	                    'post_thread' => $row[self::CSV_FORUM_POST_TOPIC],
+	                    'post_message' => $this->purify($row[self::CSV_FORUM_POST_MESSAGE]),
+	                    'post_created' => Time::getDate($row[self::CSV_FORUM_POST_DATE]),
+	                    'post_creator' => $this->convertUsernameToID($row[self::CSV_FORUM_POST_AUTHOR]),
+	                ]);
+            	}
+            	catch (Throwable)
+            	{
+            		$tid = $row[self::CSV_FORUM_POST_TOPIC];
+            		Website::$TOP_RESPONSE->addField(\GDO\Core\GDT_Error::make()->textRaw("Forum post ID:{$postID} cannot find it's thread ID:{$tid}"));
+            	}
             }
             
             if ($row[self::CSV_FORUM_POST_EDITED])

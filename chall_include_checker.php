@@ -29,7 +29,6 @@ Debug::enableExceptionHandler();
 Debug::setDieOnError(GDO_ERROR_DIE);
 Debug::setMailOnError(GDO_ERROR_MAIL);
 GDO_Session::instance();
-
 ?>
 <div>Solution checker active</div>
 <?php
