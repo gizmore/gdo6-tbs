@@ -8,7 +8,7 @@ final class Support extends MethodPage
 {
     public function getTitleLangKey() { return 'tbs_support'; }
     
-    public function init()
+    public function onInit()
     {
         $webroot = GDO_WEB_ROOT;
         $css = <<<END
