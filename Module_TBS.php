@@ -4,6 +4,7 @@ namespace GDO\TBS;
 use GDO\Contact\Method\Form;
 use GDO\Core\GDO_Module;
 use GDO\Classic\Module_Classic;
+use GDO\Register\GDO_UserActivation;
 use GDO\TBS\Install\InstallTBS;
 use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Link;
@@ -189,7 +190,7 @@ final class Module_TBS extends GDO_Module
         $query->join($join);
     }
     
-    public function hookUserActivated(GDO_User $user)
+    public function hookUserActivated(GDO_User $user, GDO_UserActivation $activation=null)
     {
         # Create scoring upon activation.
         GDO_TBS_ChallengeSolvedCategory::updateUser($user);
