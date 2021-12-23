@@ -448,7 +448,7 @@ ul.pagination li.page-selected {
 
 button,
 .gdt-button,
-.gdo-icon-button,
+.gdt-iconbutton,
 input[type=submit] {
 	color: #333;
 	cursor: pointer;
@@ -468,7 +468,7 @@ input[type=submit] {
 
 button:hover,
 .gdt-button:hover,
-.gdo-icon-button:hover,
+.gdt-iconbutton:hover,
 input[type=submit]:hover {
 	border: 1px inset #fff;
 }
