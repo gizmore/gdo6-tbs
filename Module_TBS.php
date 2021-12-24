@@ -60,7 +60,7 @@ final class Module_TBS extends GDO_Module
             'JQuery', 'JQueryAutocomplete',
             'TBSBBMessage', 'LoadOnClick',
             'Perf', 'Statistics', 'Python',
-            'Forum', 'LoginAs',
+            'Forum', 'LoginAs', 'File',
         ];
     }
     
